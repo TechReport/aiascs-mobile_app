@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:aiascs_mobile/core/services/notification_service/socket_setup.dart';
 import 'package:aiascs_mobile/modules/authentication/login/Login_Page.dart';
-import 'package:aiascs_mobile/modules/authentication/login/auth_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
