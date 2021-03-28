@@ -22,7 +22,7 @@ dependencies:
   qrscan: ^0.2.22
   socket_io_client: ^0.9.12
   fluttertoast: ^7.0.4
-
+  adhara_socket_io: ^0.4.2+1
 
 dev_dependencies:
   flutter_test:

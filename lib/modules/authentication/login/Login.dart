@@ -1,4 +1,5 @@
 import 'package:aiascs_mobile/core/components/auth_button.dart';
+import 'package:aiascs_mobile/modules/home/home.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -77,7 +78,7 @@ class _LoginState extends State<Login> {
                         focusColor: Colors.yellow,
                       ),
                       validator: (value) {
-                        if (value.length < 9) {
+                        if (value.length < 2) {
                           return "password should contain atleast 8 character";
                         }
                       },
@@ -99,7 +100,11 @@ class _LoginState extends State<Login> {
                   label: "Log in",
                   labelColor:  Color(0xFF9FB9CC),
                   buttonColor:                   Color(0xFFFFFFFF),
-                  onPressButton: (){},
+                  onPressButton: (){
+                      Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => Home()));
+  
+                  },
                 )
             ],
           )
