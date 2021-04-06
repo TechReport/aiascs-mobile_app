@@ -67,19 +67,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-
-  Widget _title() {
+  Widget _title(BuildContext context) {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'AIASCS',
-          style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.display1,
-            fontSize: 30,
-            fontWeight: FontWeight.w700,
-            color: Color(0xFF9FB9CC),
-          ),
-          ),
+        text: 'AIASCS',
+        style: GoogleFonts.portLligatSans(
+          textStyle: Theme.of(context).textTheme.display1,
+          fontSize: 30,
+          fontWeight: FontWeight.w700,
+          color: Color(0xFF9FB9CC),
+        ),
+      ),
     );
   }
 
@@ -112,11 +111,14 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(height: height * .2),
-                  _title(),
+                  _title(context),
                   SizedBox(height: 50),
                   _emailPasswordWidget(),
                   SizedBox(height: 20),
-                  _submitButton(),
+                  GestureDetector(
+                    child: _submitButton(context),
+                    onTap: () => toLogin(context),
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     alignment: Alignment.centerRight,
