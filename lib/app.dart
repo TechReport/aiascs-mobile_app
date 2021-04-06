@@ -13,6 +13,8 @@ class App extends StatelessWidget {
     return  MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => InitState()),
+           ChangeNotifierProvider(create: (_) => AppBarTitleState()),
+           ChangeNotifierProvider(create: (_) => ScanQrCodeState()),
         ],
         child:
     MaterialApp(
