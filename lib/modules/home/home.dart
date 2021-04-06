@@ -1,5 +1,11 @@
+import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
+import 'package:aiascs_mobile/core/components/pop_up_menu_component.dart';
+import 'package:aiascs_mobile/core/utils/app_util.dart';
 import 'package:aiascs_mobile/modules/home/components/bottom_navigation_bar_options.dart';
+import 'package:aiascs_mobile/modules/scan_qr_code/scan_Qr_Code.dart';
+import 'package:aiascs_mobile/modules/services_module/Service_Home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -7,10 +13,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  static String label = "Home";
-
   // index of the current page
-  int _selectedindex = 1;
+  int _selectedindex = 0;
 
   // update the currrent page
   // ignore: non_constant_identifier_names
@@ -18,50 +22,83 @@ class _HomeState extends State<Home> {
     setState(() {
       _selectedindex = value;
     });
-  }
 
-  // list of bottom bar options
-  List<String> _bottomBarList = ["Library", "AudioBook", "PodCast", "Search"];
+    switch (_selectedindex) {
+      case 3:
+       Provider.of<AppBarTitleState>(context, listen: false)
+            .setCurrentAppBarTitle("Searching");
+      Provider.of<AppBarTitleState>(context,listen: false)
+      .setCurrentSelectedBottomBarIndex(3);
+  
+        break;
+      case 1:
+       Provider.of<AppBarTitleState>(context, listen: false)
+            .setCurrentAppBarTitle("Scan QR code");
+             Provider.of<AppBarTitleState>(context,listen: false)
+      .setCurrentSelectedBottomBarIndex(1);
+        break;
+      case 2:
+       Provider.of<AppBarTitleState>(context, listen: false)
+            .setCurrentAppBarTitle("UnAouthirised Product");
+             Provider.of<AppBarTitleState>(context,listen: false)
+      .setCurrentSelectedBottomBarIndex(2);
+        break;
+      default:
+        Provider.of<AppBarTitleState>(context, listen: false)
+            .setCurrentAppBarTitle("Home");
+             Provider.of<AppBarTitleState>(context,listen: false)
+      .setCurrentSelectedBottomBarIndex(0);
+    }
+  }
 
   // modules to display
   List<Widget> _widgetOptions = [
-    Text("1"),
-    Text("2"),
+    ServiceHome(),
+    ScanQrCode(),
     Text("3"),
     Text("4"),
   ];
 
+  void onOpenMoreMenu()async{
+   var response = await  AppUtil.showPopUpModal(context, PopUpMenuComponent(), false);
+   print (response);
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Current bottom bar label
-    String label = _bottomBarList[_selectedindex];
-
     return Scaffold(
-       appBar: AppBar(title: Text("Home")) ,
-        body: _widgetOptions.elementAt(_selectedindex),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor:  Color(0xFF9FB9CC),
-          selectedIconTheme: IconThemeData(
-            color: Color(0xfff2f2f2),
-          ),
-          unselectedIconTheme: IconThemeData(
-            color: Colors.white
-          ),
-          selectedLabelStyle: TextStyle(
-            color: Colors.white,
-          ),
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          unselectedLabelStyle: TextStyle(
-            color:  Color(0xfff2f2f2).withOpacity(0.5)
-                
-          ),
-          // fixedColor: Colors.blue,
-          type: BottomNavigationBarType.fixed,
-          items: BottomNavigationOptions.navigationOptions,
-          currentIndex: _selectedindex,
-          onTap: _update_page,
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(
+            Provider.of<AppBarTitleState>(context, listen: false).appBarTitle),
+        backgroundColor: Color(0xFF9FB9CC),
+        actions: [
+          GestureDetector(
+            child: Icon(Icons.more_vert),
+            onTap:() => onOpenMoreMenu() ,
+          )
+        ],
+      ),
+      body: _widgetOptions.elementAt(_selectedindex),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xFF9FB9CC),
+        selectedIconTheme: IconThemeData(
+          color: Color(0xfff2f2f2),
         ),
-      );
+        unselectedIconTheme: IconThemeData(color: Colors.white),
+        selectedLabelStyle: TextStyle(
+          color: Colors.white,
+        ),
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        unselectedLabelStyle:
+            TextStyle(color: Color(0xfff2f2f2).withOpacity(0.5)),
+        fixedColor: Colors.yellow,
+        type: BottomNavigationBarType.fixed,
+        items: BottomNavigationOptions.navigationOptions,
+        currentIndex: _selectedindex,
+        onTap: _update_page,
+      ),
+    );
   }
 }

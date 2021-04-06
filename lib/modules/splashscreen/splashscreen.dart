@@ -18,14 +18,15 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigationPage() async {
      await SocketSetup().socketConfig();
     Navigator.push(
-        context, new MaterialPageRoute(builder: (context) => new LoginPage()));
+        context, new MaterialPageRoute
+        
+        (builder: (context) => new LoginPage()));
   
   }
 
   @override
   void initState() {
-    super.initState();
-    
+    super.initState();    
     startTime();
   }
 
