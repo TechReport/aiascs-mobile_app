@@ -1,7 +1,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class AppUtil {
@@ -42,8 +41,7 @@ class AppUtil {
                                 margin: EdgeInsets.all(10),
                                 height: 22,
                                 width: 22,
-                                child: SvgPicture.asset(
-                                    'assets/icons/close_icon.svg'),
+                                child: Icon(Icons.close_fullscreen_sharp),
                               ),
                             )
                           ],
