@@ -1,5 +1,7 @@
 
 import 'package:aiascs_mobile/app_state/Init_state.dart';
+import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
+import 'package:aiascs_mobile/app_state/scan_qr_code_state.dart';
 import 'package:aiascs_mobile/modules/splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
