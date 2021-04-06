@@ -1,4 +1,5 @@
 import 'package:aiascs_mobile/modules/authentication/components/bezierContainer.dart';
+import 'package:aiascs_mobile/modules/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,7 +13,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
- 
+  void toLogin(BuildContext context) {
+    Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => new Home()));
+  }
 
   Widget _entryField(String title, {bool isPassword = false}) {
     return Container(
@@ -38,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _submitButton() {
+  Widget _submitButton(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(vertical: 15),
