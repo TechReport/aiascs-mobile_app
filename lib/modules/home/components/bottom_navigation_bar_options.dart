@@ -5,23 +5,23 @@ class BottomNavigationOptions {
 
   static final List<BottomNavigationBarItem> navigationOptions = [
     BottomNavigationBarItem(
-      icon: Icon(Icons.deck),
-      activeIcon: Icon(Icons.deck),
+      icon: Icon(Icons.sensor_window_sharp),
+      activeIcon: Icon(Icons.sensor_window_sharp),
       label: "Services",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.headset),
-      activeIcon: Icon(Icons.headset_outlined),
-      label: "AudioBook",
+      icon: Icon(Icons.qr_code_scanner_rounded),
+      activeIcon: Icon(Icons.qr_code_scanner_rounded),
+      label: "QrScan",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.mic),
-      activeIcon: Icon(Icons.mic_outlined),
-      label: "PodCast",
+      icon: Icon(Icons.camera_alt),
+      activeIcon: Icon(Icons.camera_alt),
+      label: "UnAuthorized Product",
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.search),
-      activeIcon: Icon(Icons.search_outlined),
+      activeIcon: Icon(Icons.search),
       label: "Search",
     ),
   ];
