@@ -23,6 +23,8 @@ dependencies:
   socket_io_client: ^0.9.12
   fluttertoast: ^7.0.4
   adhara_socket_io: ^0.4.2+1
+  badges: ^1.2.0
+  pie_chart: ^5.0.0
 
 dev_dependencies:
   flutter_test:
