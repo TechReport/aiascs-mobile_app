@@ -1,5 +1,6 @@
 
 import 'package:aiascs_mobile/app_state/Init_state.dart';
+import 'package:aiascs_mobile/app_state/Login_state.dart';
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/app_state/scan_qr_code_state.dart';
 import 'package:aiascs_mobile/modules/splashscreen/splashscreen.dart';
@@ -15,6 +16,8 @@ class App extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => InitState()),
            ChangeNotifierProvider(create: (_) => AppBarTitleState()),
            ChangeNotifierProvider(create: (_) => ScanQrCodeState()),
+             ChangeNotifierProvider(create: (_) => LoginState()),
+           //LoginState
         ],
         child:
     MaterialApp(

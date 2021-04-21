@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'package:aiascs_mobile/app_state/Login_state.dart';
 import 'package:aiascs_mobile/core/services/notification_service/socket_setup.dart';
 import 'package:aiascs_mobile/modules/authentication/login/Login_Page.dart';
+import 'package:aiascs_mobile/modules/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -12,21 +15,26 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
     var _duration = new Duration(seconds: 7);
+    Provider.of<LoginState>(context, listen: false).checkAuth();
     return new Timer(_duration, navigationPage);
   }
 
   void navigationPage() async {
-     await SocketSetup().socketConfig();
-    Navigator.push(
-        context, new MaterialPageRoute
-        
-        (builder: (context) => new LoginPage()));
-  
+    await SocketSetup().socketConfig();
+    if(  Provider.of<LoginState>(context, listen: false).isAuth)
+    {
+     Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => new Home()));
+    }
+ else{
+      Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => new LoginPage()));
+ }
   }
 
   @override
   void initState() {
-    super.initState();    
+    super.initState();
     startTime();
   }
 
@@ -49,10 +57,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 width: 80,
               ),
             ),
-                        SizedBox(
+            SizedBox(
               height: MediaQuery.of(context).size.height / 32,
             ),
-            Text("AIASCS Mobile",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,))
+            Text("AIASCS Mobile",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ))
           ],
         ),
       ),

@@ -15,30 +15,58 @@ class ScanProductReport extends StatefulWidget {
 }
 
 class _ScanProductReportState extends State<ScanProductReport> {
+  int _selectedindex;
+
   @override
   void initState() {
     super.initState();
     Provider.of<AppBarTitleState>(context, listen: false)
         .setCurrentSelectedBottomBarIndex(1);
+    _selectedindex = Provider.of<AppBarTitleState>(context, listen: false)
+        .currentSelectedBottomBar;
   }
-
-  List<Widget> _widgetOptions = [
-    ServiceHome(),
-    ScanQrCode(),
-    Text("3"),
-    Text("4"),
-  ];
 
   @override
   Widget build(BuildContext context) {
-    int _selectedindex = Provider.of<AppBarTitleState>(context, listen: false)
-        .currentSelectedBottomBar;
-
     void _update_page(int value) {
       setState(() {
         _selectedindex = value;
       });
+
+      switch (_selectedindex) {
+        case 3:
+          Provider.of<AppBarTitleState>(context, listen: false)
+              .setCurrentAppBarTitle("Searching");
+          Provider.of<AppBarTitleState>(context, listen: false)
+              .setCurrentSelectedBottomBarIndex(3);
+
+          break;
+        case 1:
+          Provider.of<AppBarTitleState>(context, listen: false)
+              .setCurrentAppBarTitle("Scan QR code");
+          Provider.of<AppBarTitleState>(context, listen: false)
+              .setCurrentSelectedBottomBarIndex(1);
+          break;
+        case 2:
+          Provider.of<AppBarTitleState>(context, listen: false)
+              .setCurrentAppBarTitle("UnAouthirised Product");
+          Provider.of<AppBarTitleState>(context, listen: false)
+              .setCurrentSelectedBottomBarIndex(2);
+          break;
+        default:
+          Provider.of<AppBarTitleState>(context, listen: false)
+              .setCurrentAppBarTitle("Home");
+          Provider.of<AppBarTitleState>(context, listen: false)
+              .setCurrentSelectedBottomBarIndex(0);
+      }
     }
+
+    List<Widget> _widgetOptions = [
+      ServiceHome(),
+      ScanQrCode(),
+      Text("3"),
+      Text("4"),
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -55,7 +83,7 @@ class _ScanProductReportState extends State<ScanProductReport> {
         ),
       ),
       body: SingleChildScrollView(
-              child: ExpansionTile(
+        child: ExpansionTile(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -77,62 +105,60 @@ class _ScanProductReportState extends State<ScanProductReport> {
           children: [
             QRCodeHeader(),
             SingleChildScrollView(
-                        child: Container(
+              child: Container(
                 padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
-                height: MediaQuery.of(context).size.height/2+1,
+                height: MediaQuery.of(context).size.height / 2 + 1,
                 width: MediaQuery.of(context).size.width,
-                child:
-                    ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-                        itemCount:ScanProductProfile.defaultProductProfileData().length,
-                        itemBuilder: (context, int profileIndex) {
-                         
-                          return Container(
-                            color: Colors.grey[100],
-                            padding: EdgeInsets.symmetric(vertical: 6),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Expanded(
-                                  flex: 4,
-                                  child: Text(
-                                    ScanProductProfile.defaultProductProfileData()[
-                                            profileIndex]
-                                        .profileTitle,
-                                    style: TextStyle().copyWith(
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Text(
-                                    ":",
-                                    style: TextStyle().copyWith(
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 4,
-                                  child: Text(
-                                    ScanProductProfile.defaultProductProfileData()[
-                                            profileIndex]
-                                        .profileValue,
-                                    style: TextStyle().copyWith(
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                    itemCount:
+                        ScanProductProfile.defaultProductProfileData().length,
+                    itemBuilder: (context, int profileIndex) {
+                      return Container(
+                        color: Colors.grey[100],
+                        padding: EdgeInsets.symmetric(vertical: 6),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                                ScanProductProfile.defaultProductProfileData()[
+                                        profileIndex]
+                                    .profileTitle,
+                                style: TextStyle().copyWith(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
                             ),
-                          );
-                        }),
-                  
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                ":",
+                                style: TextStyle().copyWith(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                                ScanProductProfile.defaultProductProfileData()[
+                                        profileIndex]
+                                    .profileValue,
+                                style: TextStyle().copyWith(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
               ),
             ),
             SpacerComponent(height: MediaQuery.of(context).size.height / 53),

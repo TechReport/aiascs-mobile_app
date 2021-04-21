@@ -1,7 +1,11 @@
+import 'package:aiascs_mobile/app_state/Login_state.dart';
+import 'package:aiascs_mobile/core/services/auth/Login_service.dart';
 import 'package:aiascs_mobile/modules/authentication/components/bezierContainer.dart';
+import 'package:aiascs_mobile/modules/authentication/components/submit_button.dart';
 import 'package:aiascs_mobile/modules/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -13,7 +17,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  void toLogin(BuildContext context) {
+  final _loginFormKey = GlobalKey();
+  TextEditingController _emailController = new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
+
+  void toLogin(BuildContext context, GlobalKey loginFormKeyStatus) async {
+    if (loginFormKeyStatus.currentState.mounted) {
+      Provider.of<LoginService>(context, listen: false)
+          .login(_emailController.text, _passwordController.text);
+    }
     Navigator.push(
         context, new MaterialPageRoute(builder: (context) => new Home()));
   }
@@ -32,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 10,
           ),
           TextField(
+              controller: isPassword ? _passwordController : _emailController,
               obscureText: isPassword,
               decoration: InputDecoration(
                   border: InputBorder.none,
@@ -42,30 +55,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _submitButton(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Color(0xFF9FB9CC), Color(0xFF9FB9CC)])),
-      child: Text(
-        'Login',
-        style: TextStyle(fontSize: 20, color: Colors.white),
-      ),
-    );
-  }
 
   Widget _title(BuildContext context) {
     return RichText(
@@ -94,44 +83,62 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-        body: Container(
-      height: height,
-      child: Stack(
-        children: <Widget>[
-          Positioned(
-              top: -height * .15,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer()),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: height * .2),
-                  _title(context),
-                  SizedBox(height: 50),
-                  _emailPasswordWidget(),
-                  SizedBox(height: 20),
-                  GestureDetector(
-                    child: _submitButton(context),
-                    onTap: () => toLogin(context),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    alignment: Alignment.centerRight,
-                    child: Text('Forgot Password ?',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500)),
-                  ),
-                ],
+    return Consumer<LoginState>(builder: (BuildContext context, loginState, child) {
+      return Scaffold(
+          body: Container(
+        height: height,
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+                top: -height * .15,
+                right: -MediaQuery.of(context).size.width * .4,
+                child: BezierContainer()),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SingleChildScrollView(
+                child: Form(
+                    key: _loginFormKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(height: height * .2),
+                        _title(context),
+                        SizedBox(height: 50),
+                        _emailPasswordWidget(),
+                        SizedBox(height: 20),
+                        GestureDetector(
+                          child: SubmitButton(),
+                          onTap: () {
+                            if (true) {
+                              print(
+                                  "${_emailController.text},   ${_passwordController.text}");
+                              loginState.setLogin(_emailController.text,
+                                  _passwordController.text);
+                            }
+                         if(!loginState.isLogin)
+                         {
+                              Navigator.push(
+                                context,
+                                new MaterialPageRoute(
+                                    builder: (context) => new Home()));
+                         }
+                          },
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          alignment: Alignment.centerRight,
+                          child: Text('Forgot Password ?',
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w500)),
+                        ),
+                      ],
+                    )),
               ),
             ),
-          ),
-        ],
-      ),
-    ));
+          ],
+        ),
+      ));
+    });
   }
 }

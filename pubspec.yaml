@@ -25,6 +25,7 @@ dependencies:
   adhara_socket_io: ^0.4.2+1
   badges: ^1.2.0
   pie_chart: ^5.0.0
+  connectivity: ^0.4.2
 
 dev_dependencies:
   flutter_test:

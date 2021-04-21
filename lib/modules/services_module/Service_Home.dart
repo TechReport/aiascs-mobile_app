@@ -1,4 +1,5 @@
 import 'package:aiascs_mobile/models/transaction_service_card_model.dart';
+import 'package:aiascs_mobile/modules/reports_module.dart';
 import 'package:aiascs_mobile/modules/services_module/component/info_top_bar.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,30 @@ class ServiceHome extends StatefulWidget {
 }
 
 class _ServiceHomeState extends State<ServiceHome> {
+  void onReport() {
+    Navigator.push(context,
+        new MaterialPageRoute(builder: (context) => new ReportModule()));
+  }
+
+  void onFeedBack() {
+    print("on feedback");
+  }
+
+  void onAdd() {
+    print("on Add");
+  }
+
+  void onNotificatin() {
+    print("on Notification");
+  }
+
+  void onChainStatus() {
+    print("on ChainStatus");
+  }
+
+  void onAssigns() {
+    print("on Assigns");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,55 +166,57 @@ class _ServiceHomeState extends State<ServiceHome> {
                     fontSize: 16,
                     fontWeight: FontWeight.bold)),
           ]),
-           Divider(
-             height: MediaQuery.of(context).size.height/15,
-           ),
-Container(
-  width: MediaQuery.of(context).size.width,
-  height: MediaQuery.of(context).size.height/10,
-  color: Colors.transparent,
-  child:    
-          ListView.builder(
-            shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemExtent: 90,
-             // padding: EdgeInsets.all(3),
-              itemCount:
-                  TransactionServiceCardModel.defaultInvetoryData().length,
-              itemBuilder: (BuildContext context, int invetoryPostion) {
-                List<TransactionServiceCardModel> inveteryDetails =
-                    TransactionServiceCardModel.defaultInvetoryData();
-                return Container(
-                  margin: EdgeInsets.only(left: 20),
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Icon(
-                        inveteryDetails[invetoryPostion].iconPath,
-                        color: Colors.grey[400],
+          Divider(
+            height: MediaQuery.of(context).size.height / 15,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 10,
+            color: Colors.transparent,
+            child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemExtent: 90,
+                // padding: EdgeInsets.all(3),
+                itemCount:
+                    TransactionServiceCardModel.defaultInvetoryData().length,
+                itemBuilder: (BuildContext context, int invetoryPostion) {
+                  List<TransactionServiceCardModel> inveteryDetails =
+                      TransactionServiceCardModel.defaultInvetoryData();
+                  return GestureDetector(
+                    //            Navigator.push(
+                    // context, new MaterialPageRoute
+
+                    // (builder: (context) => new LoginPage()));
+                    onTap: onReport,
+                    child: Container(
+                      margin: EdgeInsets.only(left: 20),
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Icon(
+                            inveteryDetails[invetoryPostion].iconPath,
+                            color: Colors.grey[400],
+                          ),
+                          Text(
+                            inveteryDetails[invetoryPostion].title,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        inveteryDetails[invetoryPostion].title,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12)),
-    
-          );}),
-)
-     
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12)),
+                    ),
+                  );
+                }),
+          )
         ],
       ),
     );
   }
 }
-
-
-            

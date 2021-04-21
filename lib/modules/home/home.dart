@@ -29,7 +29,6 @@ class _HomeState extends State<Home> {
             .setCurrentAppBarTitle("Searching");
       Provider.of<AppBarTitleState>(context,listen: false)
       .setCurrentSelectedBottomBarIndex(3);
-  
         break;
       case 1:
        Provider.of<AppBarTitleState>(context, listen: false)
