@@ -11,18 +11,28 @@ class HttpService {
 
   Future<http.Response> httpGet(String url, {String token = ""}) async {
     var httpUrl = Uri.parse(basicUrl + url);
-        headers["Authorization"] = "Bearer  "+token;
-    http.Response response =
-        await http.get(httpUrl, headers: headers);
+    headers["Authorization"] = "Bearer  " + token;
+    http.Response response = await http.get(httpUrl, headers: headers);
     return response;
   }
 
-  Future<http.Response> httpPost(
-      String url, Map<String, dynamic> postData ,{String token = ""}) async {
+  Future<http.Response> httpPost(String url, Map<String, dynamic> postData,
+      {String token = ""}) async {
     var httpUrl = Uri.parse(basicUrl + url);
-       headers["Authorization"] = "Bearer  "+token;
+    headers["Authorization"] = "Bearer  " + token;
     http.Response response =
         await http.post(httpUrl, headers: headers, body: json.encode(postData));
+    return response;
+  }
+
+  Future<http.Response> htthPatch(String url, Map<String, dynamic> postData,
+      {String token = ""}) async {
+    var httpUrl = Uri.parse(basicUrl + url);
+    headers["Authorization"] = "Bearer " + token;
+    print("headers");
+    print(headers.toString() );
+    http.Response response = await http.patch(httpUrl,
+        headers: headers, body: json.encode(postData));
     return response;
   }
 }
