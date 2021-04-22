@@ -12,7 +12,7 @@ class PopUpMenuComponent extends StatelessWidget {
                   .map((ServicePopUpMenu popUpMenu) => Container(
                           child: Visibility(                       
                         child: GestureDetector(
-                          onTap: () => {Navigator.pop(context, popUpMenu)},
+                          onTap: () => {Navigator.pop(context, popUpMenu.id)},
                           child: Column(
                             children: [
                               Row(
