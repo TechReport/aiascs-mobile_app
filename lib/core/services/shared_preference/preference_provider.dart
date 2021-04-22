@@ -12,4 +12,10 @@ class PreferenceProvider {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     return _prefs.getString(preferenceKey) ?? null;
   }
+
+  static Future<bool> clearPreferences() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    _prefs.clear();
+    return true;
+  }
 }

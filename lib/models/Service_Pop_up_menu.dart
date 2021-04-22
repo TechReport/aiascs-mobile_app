@@ -23,11 +23,13 @@ class ServicePopUpMenu {
       getDefaultServicePopUpMenus() {
     return [
       ServicePopUpMenu(id: 'logout', name: 'Logout'),
+      ServicePopUpMenu(id: 'password', name: 'Change Password'),
       ServicePopUpMenu(id: 'sync', name: 'Sync'),
       ServicePopUpMenu(id: 'language_setting', name: 'Language Settings'),
       ServicePopUpMenu(id: 'settings', name: 'Settings'),
       ServicePopUpMenu(id: 'report', name: 'Report'),
       ServicePopUpMenu(id: 'profile', name: 'Profiles'),
+      ServicePopUpMenu(id: 'password', name: 'Change Password'),
     ];
   }
 

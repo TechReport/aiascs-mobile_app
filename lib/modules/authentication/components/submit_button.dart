@@ -25,7 +25,7 @@ class SubmitButton extends StatelessWidget {
                 end: Alignment.centerRight,
                 colors: [Color(0xFF9FB9CC), Color(0xFF9FB9CC)])),
         child: Text(
-         loginState.isLogin ? 'Loading ...': 'Login',
+         loginState.isLoading ? 'Loading ...': 'Login',
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       );

@@ -1,5 +1,7 @@
 import 'package:aiascs_mobile/app_state/Login_state.dart';
+import 'package:aiascs_mobile/app_state/User_state.dart';
 import 'package:aiascs_mobile/core/services/auth/Login_service.dart';
+import 'package:aiascs_mobile/core/services/shared_preference/preference_provider.dart';
 import 'package:aiascs_mobile/modules/authentication/components/bezierContainer.dart';
 import 'package:aiascs_mobile/modules/authentication/components/submit_button.dart';
 import 'package:aiascs_mobile/modules/home/home.dart';
@@ -28,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
     }
     Navigator.push(
         context, new MaterialPageRoute(builder: (context) => new Home()));
+  
   }
 
   Widget _entryField(String title, {bool isPassword = false}) {
@@ -108,16 +111,19 @@ class _LoginPageState extends State<LoginPage> {
                         _emailPasswordWidget(),
                         SizedBox(height: 20),
                         GestureDetector(
-                          child: SubmitButton(),
-                          onTap: () {
+                          child:loginState.isLoading ? CircularProgressIndicator(
+                            backgroundColor: Color(0xFF9FB9CC),
+                          ) : SubmitButton(),
+                          onTap: ()async {
                             if (true) {
                               print(
                                   "${_emailController.text},   ${_passwordController.text}");
                               loginState.setLogin(_emailController.text,
                                   _passwordController.text);
                             }
-                         if(!loginState.isLogin)
+                         if(loginState.isLogin)
                          {
+                             Provider.of<UserState>(context, listen: false).setCurrentUser(await PreferenceProvider.getPreferenceValue("userId"));
                               Navigator.push(
                                 context,
                                 new MaterialPageRoute(
