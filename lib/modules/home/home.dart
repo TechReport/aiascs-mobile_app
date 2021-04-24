@@ -11,22 +11,24 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
+  int selectedIndex;
+  Home({this.selectedIndex});
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   // index of the current page
-  int _selectedindex = 0;
+  //int _selectedindex = 0;
 
   // update the currrent page
   // ignore: non_constant_identifier_names
   void _update_page(int value) {
     setState(() {
-      _selectedindex = value;
+      widget.selectedIndex = value;
     });
 
-    switch (_selectedindex) {
+    switch (   widget.selectedIndex ) {
       case 3:
         Provider.of<AppBarTitleState>(context, listen: false)
             .setCurrentAppBarTitle("Searching");
@@ -70,7 +72,10 @@ class _HomeState extends State<Home> {
         Provider.of<LoginState>(context, listen: false).logout();
         Navigator.push(
             context, new MaterialPageRoute(builder: (context) => new Home()));
-        Navigator.pushAndRemoveUntil(context,new MaterialPageRoute(builder: (context) => new SplashScreen()) , (route) => false);
+        Navigator.pushAndRemoveUntil(
+            context,
+            new MaterialPageRoute(builder: (context) => new SplashScreen()),
+            (route) => false);
         break;
       case "password":
         Navigator.push(context,
@@ -84,10 +89,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoginState>(
-        builder: (BuildContext context, loginState, child) {
-      return Scaffold(
+    return Scaffold(
         appBar: AppBar(
+          leading: Text(""),
           elevation: 0,
           title: Text(Provider.of<AppBarTitleState>(context, listen: false)
               .appBarTitle),
@@ -99,13 +103,13 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-        body: loginState.isLoading
+        body: false
             ? Center(
                 child: Container(
                   child: CircularProgressIndicator(),
                 ),
               )
-            : _widgetOptions.elementAt(_selectedindex),
+            : _widgetOptions.elementAt(   widget.selectedIndex ),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Color(0xFF9FB9CC),
           selectedIconTheme: IconThemeData(
@@ -122,10 +126,10 @@ class _HomeState extends State<Home> {
           fixedColor: Colors.yellow,
           type: BottomNavigationBarType.fixed,
           items: BottomNavigationOptions.navigationOptions,
-          currentIndex: _selectedindex,
+          currentIndex:    widget.selectedIndex ,
           onTap: _update_page,
         ),
-      );
-    });
+      
+    );
   }
 }

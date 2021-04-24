@@ -13,8 +13,6 @@ class InfoTopHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<UserState>(
         builder: (BuildContext context, userState, child) {
-      print("on home login");
-      print(userState.currentUser.firstname);
      User user = userState.currentUser ;
       return Material(
         type: MaterialType.card,

@@ -1,5 +1,6 @@
 import 'package:aiascs_mobile/app_state/Login_state.dart';
 import 'package:aiascs_mobile/app_state/User_state.dart';
+import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/core/services/auth/Login_service.dart';
 import 'package:aiascs_mobile/core/services/shared_preference/preference_provider.dart';
 import 'package:aiascs_mobile/modules/authentication/components/bezierContainer.dart';
@@ -29,7 +30,9 @@ class _LoginPageState extends State<LoginPage> {
           .login(_emailController.text, _passwordController.text);
     }
     Navigator.push(
-        context, new MaterialPageRoute(builder: (context) => new Home()));
+        context, new MaterialPageRoute(builder: (context) => new Home(
+          selectedIndex: Provider.of<AppBarTitleState>(context,listen: false).currentSelectedBottomBar
+        )));
   
   }
 

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:aiascs_mobile/app_state/Login_state.dart';
 import 'package:aiascs_mobile/app_state/User_state.dart';
+import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/core/services/notification_service/socket_setup.dart';
 import 'package:aiascs_mobile/core/services/shared_preference/preference_provider.dart';
 import 'package:aiascs_mobile/modules/authentication/login/Login_Page.dart';
@@ -23,16 +24,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void navigationPage() async {
     await SocketSetup().socketConfig();
-    if (Provider.of<LoginState>(context, listen: false).isAuth) {
-  
+    if (Provider.of<LoginState>(context, listen: false).isAuth) {  
       Provider.of<UserState>(context, listen: false).setCurrentUser(await PreferenceProvider.getPreferenceValue("userId"));
-
-      Navigator.push(
-          context, new MaterialPageRoute(builder: (context) => new Home()));
+    Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => new Home(
+          selectedIndex: Provider.of<AppBarTitleState>(context,listen: false).currentSelectedBottomBar
+        )));
     } else {
       Navigator.push(context,
-          new MaterialPageRoute(builder: (context) => new LoginPage()));
-    }
+          new MaterialPageRoute(builder: (context) => new LoginPage())); }
   }
 
   @override

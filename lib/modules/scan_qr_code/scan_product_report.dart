@@ -3,6 +3,7 @@ import 'package:aiascs_mobile/core/components/enter_token_button.dart';
 import 'package:aiascs_mobile/core/components/spacer_component.dart';
 import 'package:aiascs_mobile/models/scan_product_profile.dart';
 import 'package:aiascs_mobile/modules/home/components/bottom_navigation_bar_options.dart';
+import 'package:aiascs_mobile/modules/home/home.dart';
 import 'package:aiascs_mobile/modules/scan_qr_code/components/qr_code_header.dart';
 import 'package:aiascs_mobile/modules/scan_qr_code/scan_Qr_Code.dart';
 import 'package:aiascs_mobile/modules/services_module/Service_Home.dart';
@@ -15,7 +16,7 @@ class ScanProductReport extends StatefulWidget {
 }
 
 class _ScanProductReportState extends State<ScanProductReport> {
-  int _selectedindex;
+  int _selectedindex = 0;
 
   @override
   void initState() {
@@ -32,41 +33,16 @@ class _ScanProductReportState extends State<ScanProductReport> {
       setState(() {
         _selectedindex = value;
       });
+        Provider.of<AppBarTitleState>(context, listen: false)
+              .setCurrentSelectedBottomBarIndex(_selectedindex);
+          Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => new Home(
+          selectedIndex:  Provider.of<AppBarTitleState>(context, listen: false)
+              .currentSelectedBottomBar
+        )));
 
-      switch (_selectedindex) {
-        case 3:
-          Provider.of<AppBarTitleState>(context, listen: false)
-              .setCurrentAppBarTitle("Searching");
-          Provider.of<AppBarTitleState>(context, listen: false)
-              .setCurrentSelectedBottomBarIndex(3);
-
-          break;
-        case 1:
-          Provider.of<AppBarTitleState>(context, listen: false)
-              .setCurrentAppBarTitle("Scan QR code");
-          Provider.of<AppBarTitleState>(context, listen: false)
-              .setCurrentSelectedBottomBarIndex(1);
-          break;
-        case 2:
-          Provider.of<AppBarTitleState>(context, listen: false)
-              .setCurrentAppBarTitle("UnAouthirised Product");
-          Provider.of<AppBarTitleState>(context, listen: false)
-              .setCurrentSelectedBottomBarIndex(2);
-          break;
-        default:
-          Provider.of<AppBarTitleState>(context, listen: false)
-              .setCurrentAppBarTitle("Home");
-          Provider.of<AppBarTitleState>(context, listen: false)
-              .setCurrentSelectedBottomBarIndex(0);
-      }
+  
     }
-
-    List<Widget> _widgetOptions = [
-      ServiceHome(),
-      ScanQrCode(),
-      Text("3"),
-      Text("4"),
-    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -75,10 +51,11 @@ class _ScanProductReportState extends State<ScanProductReport> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Color(0xFF9FB9CC)),
           onPressed: () {
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => new ScanQrCode()),
-                (route) => false);
+             Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => new Home(
+          selectedIndex:  Provider.of<AppBarTitleState>(context, listen: false)
+              .currentSelectedBottomBar
+        )));
           },
         ),
       ),
