@@ -1,8 +1,10 @@
+import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/models/transaction_service_card_model.dart';
-import 'package:aiascs_mobile/modules/reports_module.dart';
+import 'package:aiascs_mobile/modules/services_module/reports/reports_module.dart';
 import 'package:aiascs_mobile/modules/services_module/component/info_top_bar.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ServiceHome extends StatefulWidget {
   @override
@@ -10,29 +12,82 @@ class ServiceHome extends StatefulWidget {
 }
 
 class _ServiceHomeState extends State<ServiceHome> {
+  void onTransaction(String id) {
+    switch (id) {
+      case "report":
+        onReport();
+        break;
+      case "feedback":
+        onNotificatin();
+        break;
+      case "assign":
+        onAssigns();
+        break;
+      case "chainstatus":
+        onChainStatus();
+        break;
+      case "notification":
+        onNotificatin();
+        break;
+      case "monitor":
+        onMonitor();
+
+        break;
+      case "product":
+        onProduct();
+        break;
+      default:
+        print("Here are default settings");
+    }
+  }
+
   void onReport() {
+    Provider.of<AppBarTitleState>(context, listen: false)
+        .setCurrentAppBarTitle("Report");
     Navigator.push(context,
         new MaterialPageRoute(builder: (context) => new ReportModule()));
   }
 
   void onFeedBack() {
+      Provider.of<AppBarTitleState>(context, listen: false)
+        .setCurrentAppBarTitle("Report");
     print("on feedback");
   }
 
   void onAdd() {
+      Provider.of<AppBarTitleState>(context, listen: false)
+        .setCurrentAppBarTitle("Report");
     print("on Add");
   }
 
   void onNotificatin() {
+      Provider.of<AppBarTitleState>(context, listen: false)
+        .setCurrentAppBarTitle("Report");
     print("on Notification");
   }
 
   void onChainStatus() {
+      Provider.of<AppBarTitleState>(context, listen: false)
+        .setCurrentAppBarTitle("Report");
     print("on ChainStatus");
   }
 
   void onAssigns() {
+      Provider.of<AppBarTitleState>(context, listen: false)
+        .setCurrentAppBarTitle("Report");
     print("on Assigns");
+  }
+
+  void onMonitor() {
+      Provider.of<AppBarTitleState>(context, listen: false)
+        .setCurrentAppBarTitle("Report");
+    print("on monitor");
+  }
+
+  void onProduct() {
+      Provider.of<AppBarTitleState>(context, listen: false)
+        .setCurrentAppBarTitle("Report");
+    print("on monitor");
   }
 
   @override
@@ -100,60 +155,68 @@ class _ServiceHomeState extends State<ServiceHome> {
                         TransactionServiceCardModel.defaultData();
                     if (cartDetails[transactionCardPosition].title ==
                         "Notification") {
-                      return Badge(
-                        elevation: 3,
-                        badgeContent: Text(
-                          "3",
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                        animationDuration: Duration(microseconds: 30),
-                        badgeColor: Colors.yellow,
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Icon(
-                                cartDetails[transactionCardPosition].iconPath,
-                                color: Colors.grey[400],
-                              ),
-                              Text(
-                                cartDetails[transactionCardPosition].title,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ],
+                      return GestureDetector(
+                        onTap: () => onNotificatin(),
+                        child: Badge(
+                          elevation: 3,
+                          badgeContent: Text(
+                            "3",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12)),
+                          animationDuration: Duration(microseconds: 30),
+                          badgeColor: Colors.yellow,
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Icon(
+                                  cartDetails[transactionCardPosition].iconPath,
+                                  color: Colors.grey[400],
+                                ),
+                                Text(
+                                  cartDetails[transactionCardPosition].title,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12)),
+                          ),
                         ),
                       );
                     }
-                    return Container(
-                      alignment: Alignment.center,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Icon(
-                            cartDetails[transactionCardPosition].iconPath,
-                            color: Colors.grey[400],
-                          ),
-                          Text(
-                            cartDetails[transactionCardPosition].title,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
+                    return GestureDetector(
+                      onTap: () => onTransaction(
+                          cartDetails[transactionCardPosition].id),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Icon(
+                              cartDetails[transactionCardPosition].iconPath,
+                              color: Colors.grey[400],
                             ),
-                          ),
-                        ],
+                            Text(
+                              cartDetails[transactionCardPosition].title,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 10,
+                              ),
+                            ),
+                          ],
+                        ),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12)),
                       ),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12)),
                     );
                   }),
             ),
@@ -184,11 +247,8 @@ class _ServiceHomeState extends State<ServiceHome> {
                   List<TransactionServiceCardModel> inveteryDetails =
                       TransactionServiceCardModel.defaultInvetoryData();
                   return GestureDetector(
-                    //            Navigator.push(
-                    // context, new MaterialPageRoute
-
-                    // (builder: (context) => new LoginPage()));
-                    onTap: onReport,
+                    onTap: () =>
+                        onTransaction(inveteryDetails[invetoryPostion].id),
                     child: Container(
                       margin: EdgeInsets.only(left: 20),
                       alignment: Alignment.center,
