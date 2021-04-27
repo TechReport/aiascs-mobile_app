@@ -1,6 +1,7 @@
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/modules/home/components/bottom_navigation_bar_options.dart';
 import 'package:aiascs_mobile/modules/home/home.dart';
+import 'package:aiascs_mobile/modules/services_module/reports/All_Reports/AllReports.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -82,7 +83,7 @@ class _ReportModuleState extends State<ReportModule>
     ),  
     body:TabBarView(  
             children: [  
-              Text("1"),  
+              AllReports(),  
               Text("2"),  
               Text("3"), 
               Text("4"), 
