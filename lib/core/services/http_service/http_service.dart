@@ -30,9 +30,22 @@ class HttpService {
     var httpUrl = Uri.parse(basicUrl + url);
     headers["Authorization"] = "Bearer " + token;
     print("headers");
-    print(headers.toString() );
+    print(headers.toString());
     http.Response response = await http.patch(httpUrl,
         headers: headers, body: json.encode(postData));
+    return response;
+  }
+
+  Future<http.Response> httpPost1() async {
+    print("in data");
+    var httpUrl1 = Uri.parse("");
+    Map<String, dynamic> postData = {
+      "username": "e@gmail.com",
+      "password": "1234"
+    };
+    http.Response response = await http.post(httpUrl1,
+        headers: headers, body: json.encode(postData));
+    print(response.body);
     return response;
   }
 }

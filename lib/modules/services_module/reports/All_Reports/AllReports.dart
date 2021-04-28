@@ -13,6 +13,7 @@ class _AllReportsState extends State<AllReports> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ReportSelectinTopBar(
             isClicked: isSelected,
@@ -27,7 +28,18 @@ class _AllReportsState extends State<AllReports> {
                });
             },
           ),
-         VisualisationGraph()
+         VisualisationGraph(),
+         Container(
+           padding: EdgeInsets.symmetric(
+             horizontal: 20,
+             vertical: 20
+           ),
+           child: Text("Analysing",style: TextStyle(
+             color: Colors.black26,
+             fontWeight: FontWeight.bold,
+             fontSize: 17
+           ),),
+         )
         ],
       ),
     );

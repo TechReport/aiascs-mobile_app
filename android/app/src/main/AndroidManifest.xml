@@ -2,6 +2,7 @@
     package="com.example.aiascs_mobile">
    <application
         android:label="aiascs_mobile"
+        android:usesCleartextTraffic="true" 
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
