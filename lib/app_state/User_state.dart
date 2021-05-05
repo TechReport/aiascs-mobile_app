@@ -12,7 +12,7 @@ class UserState extends ChangeNotifier {
 
 // reducer
 
-  void setCurrentUser(String userId) async {
+  Future<void> setCurrentUser(String userId) async {
     User user = await UserService.onRetrieveUserFromOffline(userId);
     _currentUser = user;
     notifyListeners();
