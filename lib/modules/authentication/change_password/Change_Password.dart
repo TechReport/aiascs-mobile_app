@@ -67,7 +67,7 @@ class _ChangePassword extends State<ChangePassword> {
                           FocusScope.of(context).nextFocus(),
                       style: TextStyle(fontSize: 12.0),
                       keyboardType: TextInputType.text,
-                      cursorColor: Color(0xFF9FB9CC),
+                      cursorColor: Color(0xFF264653),
                       decoration: InputDecoration(
                           contentPadding:
                               new EdgeInsets.only(left: 16, right: 16),
@@ -126,7 +126,7 @@ class _ChangePassword extends State<ChangePassword> {
                   child: RaisedButton(
                     color:loginState.isLoading ? Colors.white:Color(0xFF9FB9CC),
                     child:loginState.isLoading ? CircularProgressIndicator(
-                            backgroundColor: Color(0xFF9FB9CC),
+                            backgroundColor: Color(0xFF264653),
                           ) : Text(
                       'Submit',
                       style:

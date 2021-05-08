@@ -23,7 +23,7 @@ class SubmitButton extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
-                colors: [Color(0xFF9FB9CC), Color(0xFF9FB9CC)])),
+                colors: [Color(0xFF264653), Color(0xFF264653)])),
         child: Text(
          loginState.isLoading ? 'Loading ...': 'Login',
           style: TextStyle(fontSize: 20, color: Colors.white),

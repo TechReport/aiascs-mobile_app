@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
           textStyle: Theme.of(context).textTheme.display1,
           fontSize: 30,
           fontWeight: FontWeight.w700,
-          color: Color(0xFF9FB9CC),
+          color: Color(0xFF264653),
         ),
       ),
     );
