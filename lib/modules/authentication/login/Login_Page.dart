@@ -115,22 +115,20 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(height: 20),
                         GestureDetector(
                           child:loginState.isLoading ? CircularProgressIndicator(
-                            backgroundColor: Color(0xFF9FB9CC),
+                            backgroundColor: Color(0xFF264653),
                           ) : SubmitButton(),
                           onTap: ()async {
-                            if (true) {
-                              print(
-                                  "${_emailController.text},   ${_passwordController.text}");
-                              loginState.setLogin(_emailController.text,
+                         
+                           await   loginState.setLogin(_emailController.text,
                                   _passwordController.text);
-                            }
+                        
                          if(loginState.isLogin)
                          {
-                             Provider.of<UserState>(context, listen: false).setCurrentUser(await PreferenceProvider.getPreferenceValue("userId"));
+                            await  Provider.of<UserState>(context, listen: false).setCurrentUser(await PreferenceProvider.getPreferenceValue("userId"));
                               Navigator.push(
                                 context,
                                 new MaterialPageRoute(
-                                    builder: (context) => new Home()));
+                                    builder: (context) => new Home(selectedIndex: 1,)));
                          }
                           },
                         ),
