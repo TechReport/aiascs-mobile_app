@@ -112,7 +112,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
             children: <Widget>[
               CircleAvatar(
                 radius: 65,
-                backgroundColor:  Color(0xFF9FB9CC).withOpacity(0.5),
+                backgroundColor:  Color(0xFF264653).withOpacity(0.5),
                 child: ClipOval(
                   child: SizedBox(
                     width: 170,
@@ -134,7 +134,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                 right: 0,
                 child: FloatingActionButton(
                     backgroundColor: Colors.white,
-                    child: Icon(Icons.camera_alt,color:  Color(0xFF9FB9CC),),
+                    child: Icon(Icons.camera_alt,color:  Color(0xFF264653),),
                     mini: true,
                     onPressed: _onCameraClick),
               )
@@ -164,7 +164,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             borderSide: BorderSide(
-                                color:  Color(0xFF9FB9CC), width: 2.0)),
+                                color:  Color(0xFF264653), width: 2.0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ))))),
@@ -191,7 +191,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             borderSide: BorderSide(
-                                color:  Color(0xFF9FB9CC), width: 2.0)),
+                                color:  Color(0xFF264653), width: 2.0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ))))),
@@ -219,7 +219,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             borderSide: BorderSide(
-                                color:  Color(0xFF9FB9CC), width: 2.0)),
+                                color:  Color(0xFF264653), width: 2.0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ))))),
@@ -249,7 +249,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             borderSide: BorderSide(
-                                color:  Color(0xFF9FB9CC), width: 2.0)),
+                                color:  Color(0xFF264653), width: 2.0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ))))),
@@ -259,7 +259,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
           child: ConstrainedBox(
             constraints: const BoxConstraints(minWidth: double.infinity),
             child: RaisedButton(
-              color:  Color(0xFF9FB9CC),
+              color:  Color(0xFF264653),
               child: Text(
                 'Submit',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
