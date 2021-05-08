@@ -1,5 +1,12 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+//
+// Name: Danford Kija David
+// Email: kijadanford@gmail.com,
+// phoneNo: +255620419226
+//  
+// => "GROWING WITH AGILE"
+//
 class PreferenceProvider {
   static setPreferenceValue(String preferenceKey, String value) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
