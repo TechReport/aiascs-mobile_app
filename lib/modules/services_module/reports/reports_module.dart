@@ -56,7 +56,7 @@ class _ReportModuleState extends State<ReportModule>
         elevation: 0,
        title:  Text(Provider.of<AppBarTitleState>(context, listen: false)
               .appBarTitle),
-        backgroundColor: Color(0xFF9FB9CC),
+        backgroundColor: Color(0xFF264653),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () {

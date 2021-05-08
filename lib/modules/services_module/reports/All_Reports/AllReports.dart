@@ -39,7 +39,8 @@ class _AllReportsState extends State<AllReports> {
              fontWeight: FontWeight.bold,
              fontSize: 17
            ),),
-         )
+         ),
+      // VisualisationAnallysingReport()
         ],
       ),
     );
