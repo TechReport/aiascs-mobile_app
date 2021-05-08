@@ -2,11 +2,10 @@ import 'dart:async';
 import 'package:aiascs_mobile/app_state/Login_state.dart';
 import 'package:aiascs_mobile/app_state/User_state.dart';
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
-import 'package:aiascs_mobile/core/services/http_service/http_service.dart';
-import 'package:aiascs_mobile/core/services/notification_service/socket_setup.dart';
 import 'package:aiascs_mobile/core/services/shared_preference/preference_provider.dart';
 import 'package:aiascs_mobile/modules/authentication/login/Login_Page.dart';
 import 'package:aiascs_mobile/modules/home/home.dart';
+// import 'package:aiascs_mobile/modules/splashscreen/Scan_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -24,10 +23,15 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() async {
-    await SocketSetup().socketConfig();
+  ///  await SocketSetup().socketConfig();
     if (Provider.of<LoginState>(context, listen: false).isAuth) {
       Provider.of<UserState>(context, listen: false).setCurrentUser(
           await PreferenceProvider.getPreferenceValue("userId"));
+          //
+      // Navigator.push(
+      //     context,
+      //     new MaterialPageRoute(
+      //         builder: (context) => new  HomePage()));
       Navigator.push(
           context,
           new MaterialPageRoute(
@@ -50,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF9FB9CC),
+      backgroundColor: Color(0xFF264653),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
