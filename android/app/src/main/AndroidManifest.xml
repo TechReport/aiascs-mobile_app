@@ -4,6 +4,7 @@
         android:label="aiascs_mobile"
         android:usesCleartextTraffic="true" 
         android:icon="@mipmap/ic_launcher">
+        <!-- <activity android:name="com.apptreesoftware.barcodescan.BarcodeScannerActivity"/> -->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
