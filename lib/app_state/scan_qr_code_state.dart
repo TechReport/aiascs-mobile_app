@@ -1,15 +1,47 @@
+import 'package:aiascs_mobile/core/services/scan_service.dart/Scan_service.dart';
+import 'package:aiascs_mobile/models/Product.dart';
 import 'package:flutter/foundation.dart';
 
 class ScanQrCodeState extends ChangeNotifier {
 //initiate state
-  bool _isLoading ;
-
+  bool _isLoading;
+  Product _currentProduct;
+//
 // selector
   bool get isLoading => _isLoading ?? false;
+  Product get currentProduct => _currentProduct;
 
 // reducers
 
-  void setIsLoading(bool loadingValue) {
-    _isLoading = loadingValue;
+  Future scanQrCode({String qrInfo}) async {
+    _isLoading = true;
+    notifyListeners();
+    Product product = await ScanService().scan(productTokenID: qrInfo);
+    if (product != null) {
+      _currentProduct = product;
+      _isLoading = false;
+      notifyListeners();
+    } else {
+      _isLoading = true;
+      notifyListeners();
+    }
+  }
+
+  Future revokeProduct(String productId) async {
+    _isLoading = true;
+    notifyListeners();
+    Product product = await ScanService().onRevokeProduct(productId);
+    if (product != null) {
+      _currentProduct = product;
+      _isLoading = false;
+      notifyListeners();
+    } else {
+      _isLoading = true;
+      notifyListeners();
+    }
+  }
+
+  void clear() {
+    _isLoading = false;
   }
 }
