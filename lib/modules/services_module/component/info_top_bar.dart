@@ -17,7 +17,7 @@ class InfoTopHeader extends StatelessWidget {
       return Material(
         type: MaterialType.card,
         elevation: 1.0,
-        child: Container(
+        child: user.email == null ? CircularProgressIndicator() :Container(
             margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             child: Column(
               children: [
@@ -43,12 +43,25 @@ class InfoTopHeader extends StatelessWidget {
                           alignment: Alignment.centerRight,
                           margin: EdgeInsets.symmetric(
                               horizontal: 10.0, vertical: 5.0),
-                          child: Text(
-                          user.firstname ?? "" +" "+ user.lastname ?? ""  ,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                        
+                              Text(
+                          user.firstname ,
                             style: TextStyle().copyWith(
                                 color: Color(0xFF1A3518),
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w700),
+                          ),
+                          Text(
+                           user.lastname   ,
+                            style: TextStyle().copyWith(
+                                color: Color(0xFF1A3518),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w700),
+                          )
+                            ],
                           ),
                         ),
                       ),
