@@ -1,6 +1,14 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+//
+// Name: Danford Kija David
+// Email: kijadanford@gmail.com,
+// phoneNo: +255620419226
+//  
+// => "GROWING WITH AGILE"
+//
+
 class HttpService {
   Map<String, String> headers = {
     "Content-Type": "application/json",

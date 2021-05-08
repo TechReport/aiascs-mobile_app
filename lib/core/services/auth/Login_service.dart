@@ -68,6 +68,8 @@ class LoginService {
 
     Response response = await HttpService().httpPost(loginUrl.trim(), loginData,
         token: await PreferenceProvider.getPreferenceValue("token"));
+            await PreferenceProvider.clearPreferences();
+               return true;
     if (response.statusCode == 200) {
       var responseData = json.decode(response.body);
       print(responseData);
