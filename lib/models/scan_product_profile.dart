@@ -30,17 +30,17 @@ class ScanProductProfile {
     this.profileValue = map[''];
   }
 
- static List<ScanProductProfile> defaultProductProfileData() {
+ static List<ScanProductProfile> defaultProductProfileData(Product product) {
     return [
-      ScanProductProfile(productId: 1,profileTitle: "Product Name",profileValue:" HDGTV-DAJFAK" ),
-       ScanProductProfile(productId: 2,profileTitle: "Product Id",profileValue: "yifoad-4098-vdfj-jdlkf"),
-        ScanProductProfile(productId: 3,profileTitle: "Manufacture Name",profileValue: "Seedco Company Limited"),
+      ScanProductProfile(productId: 1,profileTitle: "Product Name",profileValue:" "+product.name ),
+       ScanProductProfile(productId: 2,profileTitle: "Product Id",profileValue: product.id),
+        ScanProductProfile(productId: 3,profileTitle: "Manufacture Name",profileValue: product.companyName),
          ScanProductProfile(productId: 4,profileTitle: "Manufacture Date",profileValue: "12-06-2005"),
-          ScanProductProfile(productId: 5,profileTitle: "Expire Date",profileValue: "15-06-2027"),
-           ScanProductProfile(productId: 6,profileTitle: "isRevoked",profileValue: "true"),
+          ScanProductProfile(productId: 5,profileTitle: "Expire Date",profileValue: product.expiryDate),
+           ScanProductProfile(productId: 6,profileTitle: "isRevoked",profileValue: product.isRevoked),
             ScanProductProfile(productId: 7,profileTitle: "Country",profileValue: "Tanzania"),
-             ScanProductProfile(productId: 8,profileTitle: "State",profileValue: "Dar es salaam"),
-              ScanProductProfile(productId: 9,profileTitle: "support",profileValue: "GEN-profile"),
+             ScanProductProfile(productId: 8,profileTitle: "Manufacture No",profileValue: product.companyPhoneNo),
+              ScanProductProfile(productId: 9,profileTitle: "Manufacture RegNo",profileValue: product.companyRegNo),
     ];
   }
 }
