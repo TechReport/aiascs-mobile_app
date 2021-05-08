@@ -7,12 +7,12 @@ class User {
    String gender;
 
   User(
-      {this.id ,
-      this.firstname,
-      this.lastname,
-      this.email,
-      this.phonenumber,
-      this.gender});
+      {this.id =" " ,
+      this.firstname = "",
+      this.lastname= "",
+      this.email ="",
+      this.phonenumber ="",
+      this.gender = ""});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(

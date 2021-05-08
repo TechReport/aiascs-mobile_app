@@ -1,3 +1,4 @@
+import 'package:aiascs_mobile/models/Product.dart';
 import 'package:flutter/foundation.dart';
 
 class ScanProductProfile {
