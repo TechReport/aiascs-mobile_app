@@ -1,13 +1,20 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+//
+// Name: Danford Kija David
+// Email: kijadanford@gmail.com,
+// phoneNo: +255620419226
+//  
+// => "GROWING WITH AGILE"
+//
 class OfflineDbProvider {
   final String databaseName = "aiascs_database";
   Database _db;
   // Script for migrations as well as intialization of tables
   final List<String> initialQuery = [
     "CREATE TABLE IF NOT EXISTS user (id TEXT PRIMARY KEY, firstName TEXT,lastName TEXT,email TEXT,phoneNumber TEXT,gender TEXT)",
-  
+    "CREATE TABLE IF NOT EXISTS product (id TEXT PRIMARY KEY, isRevoked TEXT,token TEXT,name TEXT,expiryDate TEXT,companyId TEXT,companyRegNo TEXT,companyName TEXT,companyPhoneNo TEXT,companyEmail TEXT)",
   ];
 
   final List<String> migrationQuery = [];

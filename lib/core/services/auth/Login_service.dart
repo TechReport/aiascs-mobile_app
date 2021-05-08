@@ -6,6 +6,13 @@ import 'package:aiascs_mobile/core/services/user/User_service.dart';
 import 'package:aiascs_mobile/models/User.dart';
 import 'package:http/http.dart';
 
+//
+// Name: Danford Kija David
+// Email: kijadanford@gmail.com,
+// phoneNo: +255620419226
+//  
+// => "GROWING WITH AGILE"
+//
 class LoginService {
   Future<bool> login(String email, String password) async {
     final String loginUrl = "/api/v1/user/login";
@@ -16,10 +23,11 @@ class LoginService {
     Response response =
         await HttpService().httpPost(loginUrl.trim(), loginData);
     if (response.statusCode == 200) {
+      print(response.body);
       var responseData = json.decode(response.body);
       PreferenceProvider.setPreferenceValue(
-          "token", responseData['data']['user']['authToken']);
-      userFromServer(responseData['data']['user']);
+          "token", responseData['user']['token']);
+      userFromServer(responseData['user']);
       return true;
     }
     print(response.body);
@@ -39,6 +47,7 @@ class LoginService {
     Response response = await HttpService().htthPatch(
         loginUrl.trim(), loginData,
         token: await PreferenceProvider.getPreferenceValue("token"));
+  
     if (response.statusCode == 200) {
       var responseData = json.decode(response.body);
       print(responseData);
