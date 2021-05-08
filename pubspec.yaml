@@ -27,6 +27,7 @@ dependencies:
   pie_chart: ^5.0.0
   connectivity: ^0.4.2
   image_picker: ^0.7.4
+  # barcode_scan: ^1.0.0
 
 dev_dependencies:
   flutter_test:
