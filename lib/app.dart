@@ -19,7 +19,6 @@ class App extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ScanQrCodeState()),
           ChangeNotifierProvider(create: (_) => LoginState()),
           ChangeNotifierProvider(create: (_) => UserState()),
-
         ],
         child:
     MaterialApp(

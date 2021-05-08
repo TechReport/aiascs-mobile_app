@@ -15,7 +15,7 @@ class LoginState extends ChangeNotifier {
   bool get isLoading => _isLoading ?? false;
   bool get isLogout => _isLogout ?? false;
 
-  void setLogin(String email, String password) async {
+  Future<void> setLogin(String email, String password) async {
     _isLoading = true;
     notifyListeners();
     bool loginStatus = await LoginService().login(email, password);
