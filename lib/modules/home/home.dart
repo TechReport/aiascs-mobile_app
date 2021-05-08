@@ -3,10 +3,10 @@ import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/core/components/pop_up_menu_component.dart';
 import 'package:aiascs_mobile/core/utils/app_util.dart';
 import 'package:aiascs_mobile/modules/authentication/change_password/Change_Password.dart';
+import 'package:aiascs_mobile/modules/authentication/login/Login_Page.dart';
 import 'package:aiascs_mobile/modules/home/components/bottom_navigation_bar_options.dart';
 import 'package:aiascs_mobile/modules/scan_qr_code/scan_Qr_Code.dart';
 import 'package:aiascs_mobile/modules/services_module/Service_Home.dart';
-import 'package:aiascs_mobile/modules/splashscreen/splashscreen.dart';
 import 'package:aiascs_mobile/modules/unauthenticated_product/Unauthenticated_Product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -71,12 +71,9 @@ class _HomeState extends State<Home> {
       case "logout":
         Provider.of<LoginState>(context, listen: false).clearStates();
         Provider.of<LoginState>(context, listen: false).logout();
-        Navigator.push(
-            context, new MaterialPageRoute(builder: (context) => new Home()));
-        Navigator.pushAndRemoveUntil(
+        Navigator.pushReplacement(
             context,
-            new MaterialPageRoute(builder: (context) => new SplashScreen()),
-            (route) => false);
+            new MaterialPageRoute(builder: (context) => new LoginPage()));
         break;
       case "password":
         Navigator.push(context,
@@ -96,7 +93,7 @@ class _HomeState extends State<Home> {
           elevation: 0,
           title: Text(Provider.of<AppBarTitleState>(context, listen: false)
               .appBarTitle),
-          backgroundColor: Color(0xFF9FB9CC),
+          backgroundColor: Color(0xFF264653),
           actions: [
             GestureDetector(
               child: Icon(Icons.more_vert),
@@ -104,15 +101,9 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-        body: false
-            ? Center(
-                child: Container(
-                  child: CircularProgressIndicator(),
-                ),
-              )
-            : _widgetOptions.elementAt(   widget.selectedIndex ),
+        body:  _widgetOptions.elementAt(   widget.selectedIndex ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color(0xFF9FB9CC),
+          backgroundColor: Color(0xFF264653),
           selectedIconTheme: IconThemeData(
             color: Color(0xfff2f2f2),
           ),

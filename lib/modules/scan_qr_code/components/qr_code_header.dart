@@ -9,7 +9,7 @@ class QRCodeHeader extends StatelessWidget {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
         padding: EdgeInsets.symmetric(vertical: 0),
-        color:  Color(0xFF9FB9CC),
+        color:  Color(0xFF264653),
         child: Column(
           children: [
             LineSeperator(

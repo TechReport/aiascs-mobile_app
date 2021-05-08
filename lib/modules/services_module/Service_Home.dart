@@ -97,7 +97,7 @@ class _ServiceHomeState extends State<ServiceHome> {
         children: [
           InfoTopHeader(),
           Container(
-              color: Color(0xFF9FB9CC),
+              color: Color(0xFF264653),
               height: MediaQuery.of(context).size.width / 9,
               width: MediaQuery.of(context).size.width,
               child: Row(
