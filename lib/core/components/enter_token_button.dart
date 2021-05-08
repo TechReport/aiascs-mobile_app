@@ -19,7 +19,7 @@ final Function onPressButton;
           height: height,
           width: width,
           child: RaisedButton(
-            color: Color(0xFF9FB9CC),
+            color: Color(0xFF264653),
             onPressed:onPressButton,
             child: Text(
               '$title',
