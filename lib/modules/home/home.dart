@@ -77,8 +77,7 @@ class _HomeState extends State<Home> {
       case "logout":
         Provider.of<LoginState>(context, listen: false).clearStates();
         Provider.of<LoginState>(context, listen: false).logout();
-        Navigator.pushReplacement(
-            context,
+        Navigator.pushReplacement(context,
             new MaterialPageRoute(builder: (context) => new LoginPage()));
         break;
       case "password":
@@ -91,23 +90,61 @@ class _HomeState extends State<Home> {
     }
   }
 
+  TextEditingController _searchController;
+  bool isSearch = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<SearchingState>(
+        builder: (BuildContext context, searchingState, child) {
+      return Scaffold(
         appBar: AppBar(
           leading: Text(""),
           elevation: 0,
-          title: Text(Provider.of<AppBarTitleState>(context, listen: false)
-              .appBarTitle),
+          title: searchingState.isSearch
+              ? Container(
+                  margin: EdgeInsets.only(top: 0),
+                  height: MediaQuery.of(context).size.height / 16,
+                  width: MediaQuery.of(context).size.width / 2 + 900,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFF8F4FF),
+                    borderRadius: new BorderRadius.circular(10.0),
+                  ),
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 20, right: 15, top: 5),
+                      child: TextFormField(
+                          onChanged: (enteredValue) {
+                            searchingState.getSearchingField(enteredValue);
+                          },
+                          autofocus: true,
+                          cursorColor: Color(0xFF264653),
+                          keyboardAppearance: Brightness.light,
+                          keyboardType: TextInputType.text,
+                          controller: _searchController,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            labelText: 'Enter search',
+                          ))))
+              : Text(Provider.of<AppBarTitleState>(context, listen: false)
+                  .appBarTitle),
           backgroundColor: Color(0xFF264653),
           actions: [
+            Provider.of<AppBarTitleState>(context, listen: false).appBarTitle ==
+                    "Searching"
+                ? GestureDetector(
+                    onTap: () {
+                      searchingState.searchStatus(true);
+                    },
+                    child: Icon(Icons.search),
+                  )
+                : Text(""),
             GestureDetector(
               child: Icon(Icons.more_vert),
               onTap: () => onOpenMoreMenu(),
             )
           ],
         ),
-        body:  _widgetOptions.elementAt(   widget.selectedIndex ),
+        body: _widgetOptions.elementAt(widget.selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Color(0xFF264653),
           selectedIconTheme: IconThemeData(
@@ -124,10 +161,10 @@ class _HomeState extends State<Home> {
           fixedColor: Colors.yellow,
           type: BottomNavigationBarType.fixed,
           items: BottomNavigationOptions.navigationOptions,
-          currentIndex:    widget.selectedIndex ,
+          currentIndex: widget.selectedIndex,
           onTap: _update_page,
         ),
-      
-    );
+      );
+    });
   }
 }
