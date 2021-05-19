@@ -255,6 +255,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
     if (response.file != null) {
       setState(() {
         _image = File(response.file.path);
+        _photoController.text = response.file.path;
       });
     }
   }
@@ -276,6 +277,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
             if (image != null)
               setState(() {
                 _image = File(image.path);
+                 _photoController.text = image.path;
               });
           },
         ),
