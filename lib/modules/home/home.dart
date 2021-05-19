@@ -1,11 +1,13 @@
 import 'package:aiascs_mobile/app_state/Login_state.dart';
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
+import 'package:aiascs_mobile/app_state/searching_state.dart';
 import 'package:aiascs_mobile/core/components/pop_up_menu_component.dart';
 import 'package:aiascs_mobile/core/utils/app_util.dart';
 import 'package:aiascs_mobile/modules/authentication/change_password/Change_Password.dart';
 import 'package:aiascs_mobile/modules/authentication/login/Login_Page.dart';
 import 'package:aiascs_mobile/modules/home/components/bottom_navigation_bar_options.dart';
 import 'package:aiascs_mobile/modules/scan_qr_code/scan_Qr_Code.dart';
+import 'package:aiascs_mobile/modules/searching/search.dart';
 import 'package:aiascs_mobile/modules/services_module/Service_Home.dart';
 import 'package:aiascs_mobile/modules/unauthenticated_product/Unauthenticated_Product.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +31,7 @@ class _HomeState extends State<Home> {
       widget.selectedIndex = value;
     });
 
-    switch (   widget.selectedIndex ) {
+    switch (widget.selectedIndex) {
       case 3:
         Provider.of<AppBarTitleState>(context, listen: false)
             .setCurrentAppBarTitle("Searching");
@@ -37,18 +39,22 @@ class _HomeState extends State<Home> {
             .setCurrentSelectedBottomBarIndex(3);
         break;
       case 1:
+        Provider.of<SearchingState>(context, listen: false).searchStatus(false);
         Provider.of<AppBarTitleState>(context, listen: false)
             .setCurrentAppBarTitle("Scan QR code");
         Provider.of<AppBarTitleState>(context, listen: false)
             .setCurrentSelectedBottomBarIndex(1);
         break;
       case 2:
+         Provider.of<SearchingState>(context, listen: false).searchStatus(false);
         Provider.of<AppBarTitleState>(context, listen: false)
             .setCurrentAppBarTitle("UnAouthirised Product");
         Provider.of<AppBarTitleState>(context, listen: false)
             .setCurrentSelectedBottomBarIndex(2);
         break;
       default:
+              Provider.of<SearchingState>(context, listen: false).searchStatus(false);
+
         Provider.of<AppBarTitleState>(context, listen: false)
             .setCurrentAppBarTitle("Home");
         Provider.of<AppBarTitleState>(context, listen: false)
@@ -61,7 +67,7 @@ class _HomeState extends State<Home> {
     ServiceHome(),
     ScanQrCode(),
     UnAuthenticatedProduct(),
-    Text("4"),
+    Search(),
   ];
 
   void onOpenMoreMenu() async {
