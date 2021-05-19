@@ -27,7 +27,7 @@ class ScanQrCodeState extends ChangeNotifier {
     }
   }
 
-  Future revokeProduct(String productId) async {
+  Future<bool> revokeProduct(String productId) async {
     _isLoading = true;
     notifyListeners();
     Product product = await ScanService().onRevokeProduct(productId);
@@ -35,9 +35,11 @@ class ScanQrCodeState extends ChangeNotifier {
       _currentProduct = product;
       _isLoading = false;
       notifyListeners();
+      return true;
     } else {
       _isLoading = true;
       notifyListeners();
+      return false;
     }
   }
 
