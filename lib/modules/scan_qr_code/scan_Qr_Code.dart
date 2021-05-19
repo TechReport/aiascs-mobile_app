@@ -26,6 +26,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
   void onViewProductScanReport() {
     Navigator.push(context,
         new MaterialPageRoute(builder: (context) => new ScanProductReport()));
+  
   }
 
   void onStartScanQrCoe() async {
@@ -147,7 +148,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                                       title: "Validate",
                                       onPressButton: () async{
                                      await   onValidateToken(
-                                            "cc8bb08d-f246-4124-8fa2-7c1b2407b39a");
+                                            "ff5e05e0-b061-41e9-8a21-a186c31890d2");
 
                                         showDialog(
                                             barrierDismissible: false,
