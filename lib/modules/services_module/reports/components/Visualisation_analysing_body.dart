@@ -1,4 +1,3 @@
-import 'package:aiascs_mobile/core/components/Line_separator.dart';
 import 'package:flutter/material.dart';
 
 class VisualisationAnalysingBody extends StatelessWidget {
@@ -10,9 +9,10 @@ class VisualisationAnalysingBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 8,
-      padding: EdgeInsets.only(bottom: 10),
+      height: MediaQuery.of(context).size.height / 10,
+      padding: EdgeInsets.symmetric(vertical: 10),
       margin: EdgeInsets.symmetric(vertical: 5),
       child: Column(
         children: [
@@ -22,12 +22,11 @@ class VisualisationAnalysingBody extends StatelessWidget {
               Expanded(
                   flex: 2,
                   child: Text("    $title",
-                      style: TextStyle(color: Colors.grey, fontSize: 12))),
-              Expanded(flex: 2, child: visualIcon),
-              Expanded(child: Text("$visualValue"))
+                      style: TextStyle(color: Colors.grey, fontSize: 16))),
+              Expanded(flex: 2, child: visualIcon,),
+              Expanded(child: Text("$visualValue", style: TextStyle(color: Colors.grey, fontSize: 16)))
             ],
           ),
-          LineSeperator(color: Colors.grey[100])
         ],
       ),
     );

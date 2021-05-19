@@ -28,7 +28,7 @@ class ReportSelectinTopBar extends StatelessWidget {
                 child: TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor:
-                        !isClicked ?  Color(0xFF9FB9CC) : Colors.transparent,
+                        !isClicked ?  Color(0xFF264653) : Colors.transparent,
                     padding: EdgeInsets.symmetric(
                       vertical: 5.0,
                       horizontal: 5.0,
@@ -49,7 +49,7 @@ class ReportSelectinTopBar extends StatelessWidget {
                 child: TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor:
-                        isClicked ?  Color(0xFF9FB9CC) : Colors.transparent,
+                        isClicked ?  Color(0xFF264653) : Colors.transparent,
                     padding: EdgeInsets.symmetric(
                       vertical: 5.0,
                       horizontal: 5.0,
