@@ -1,5 +1,9 @@
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
+import 'package:aiascs_mobile/app_state/language_state.dart';
+import 'package:aiascs_mobile/app_state/product_state.dart';
 import 'package:aiascs_mobile/models/transaction_service_card_model.dart';
+import 'package:aiascs_mobile/modules/services_module/feedback/feedback.dart';
+import 'package:aiascs_mobile/modules/services_module/product_module/product_invetory_service.dart';
 import 'package:aiascs_mobile/modules/services_module/reports/reports_module.dart';
 import 'package:aiascs_mobile/modules/services_module/component/info_top_bar.dart';
 import 'package:badges/badges.dart';
@@ -16,18 +20,23 @@ class _ServiceHomeState extends State<ServiceHome> {
     switch (id) {
       case "report":
         onReport();
+
         break;
       case "feedback":
-        onNotificatin();
+        onFeedBack();
+
         break;
       case "assign":
         onAssigns();
+
         break;
       case "chainstatus":
         onChainStatus();
+
         break;
       case "notification":
         onNotificatin();
+
         break;
       case "monitor":
         onMonitor();

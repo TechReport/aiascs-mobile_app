@@ -109,76 +109,105 @@ class _ScanProductReportState extends State<ScanProductReport> {
                   ),
             children: [
               QRCodeHeader(),
-              SingleChildScrollView(
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
-                  height: MediaQuery.of(context).size.height / 2 + 1,
-                  width: MediaQuery.of(context).size.width,
-                  child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-                      itemCount:
-                          ScanProductProfile.defaultProductProfileData(product)
-                              .length,
-                      itemBuilder: (context, int profileIndex) {
-                        return Container(
-                          color: Colors.grey[100],
-                          padding: EdgeInsets.symmetric(vertical: 6),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Text(
-                                  ScanProductProfile.defaultProductProfileData(
-                                          product)[profileIndex]
-                                      .profileTitle,
-                                  style: TextStyle().copyWith(
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Text(
-                                  ":",
-                                  style: TextStyle().copyWith(
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 4,
-                                child: Text(
-                                  ScanProductProfile.defaultProductProfileData(
-                                          product)[profileIndex]
-                                      .profileValue,
-                                  style: TextStyle().copyWith(
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
+                height: MediaQuery.of(context).size.height / 2 + 1,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                    itemCount:
+                        ScanProductProfile.defaultProductProfileData(product)
+                            .length,
+                    itemBuilder: (context, int profileIndex) {
+                      return Container(
+                        color: Colors.grey[100],
+                        padding: EdgeInsets.symmetric(vertical: 6),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                                ScanProductProfile.defaultProductProfileData(
+                                        product)[profileIndex]
+                                    .profileTitle,
+                                style: TextStyle().copyWith(
                                     fontSize: 14.0,
                                     fontWeight: FontWeight.w500,
-                                  ),
+                                    color: Colors.black),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                ":",
+                                style: TextStyle().copyWith(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.normal,
                                 ),
                               ),
-                            ],
-                          ),
-                        );
-                      }),
-                ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                                ScanProductProfile.defaultProductProfileData(
+                                        product)[profileIndex]
+                                    .profileValue,
+                                style: TextStyle().copyWith(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
               ),
-              SpacerComponent(height: MediaQuery.of(context).size.height / 53),
-            scanQrCode.isLoading ? CircularProgressIndicator():  EnterTokenButton(
-                width: MediaQuery.of(context).size.width / 2,
-                height: MediaQuery.of(context).size.height / 16,
-                title: "Revoke Product",
-                onPressButton: () async {
-                  scanQrCode.clear();
-                  await scanQrCode.revokeProduct(product.id);
-                },
-              )
+            ),
+            SpacerComponent(height: MediaQuery.of(context).size.height / 53),
+           scanQrCode.isLoading
+                ? CircularProgressIndicator()
+                :                
+                 EnterTokenButton(
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: MediaQuery.of(context).size.height / 16,
+                    title:  product.isRevoked == "false" ? "Revoke Product" :"View Full Report",
+                    onPressButton: () async {
+                      scanQrCode.clear();
+               if(product.isRevoked == 'false'){
+                   if(await scanQrCode.revokeProduct(product.id))
+                 {
+
+
+ Navigator.push(
+          context,
+          new MaterialPageRoute(
+              builder: (context) => new Home(
+                // product: product,
+                // isReport: true,
+              )));
+ 
+                 }
+               }else{
+     
+               Provider.of<AppBarTitleState>(context, listen: false)
+        .setCurrentAppBarTitle("Report");
+               Provider.of<ProductState>(context, listen: false).clearState();
+
+        Provider.of<ProductState>(context, listen: false).getProductList();
+    Navigator.push(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => new ProductInvetoryService()));
+
+    print("on monitor");
+ }
+              
+                    },
+                  ) 
             ],
           ),
         ),
