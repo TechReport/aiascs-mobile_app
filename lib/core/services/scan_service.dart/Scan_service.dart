@@ -4,6 +4,7 @@ import 'package:aiascs_mobile/core/offline_db/product/product_offline_provider.d
 import 'package:aiascs_mobile/core/services/http_service/http_service.dart';
 import 'package:aiascs_mobile/core/services/shared_preference/preference_provider.dart';
 import 'package:aiascs_mobile/models/Product.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 
 //
@@ -51,11 +52,14 @@ class ScanService {
   Future<Product> onRevokeProduct(String productId) async {
     final String scanUrl = "/api/v1/products/revoke/$productId";
     String token = await PreferenceProvider.getPreferenceValue("token");
-    Map<String, dynamic> postData = {};
+    // Map<String, dynamic> postData = {
+    //   "isRevoked":true
+    // };
     Response response =
-        await HttpService().htthPatch(scanUrl.trim(), postData, token: token);
+        await HttpService().httpGet(scanUrl.trim(), token: token);
     if (response.statusCode == 200) {
       var responseData = json.decode(response.body);
+
       Product product = Product.fromJson(responseData);
       onSaveProductToOffline(product);
       return product;
