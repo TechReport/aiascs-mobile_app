@@ -36,7 +36,7 @@ class UnAuthorizedProductService {
       // onSaveProductToOffline(product);
       return true;
     }
-    print(response.body);
+    print(response.statusCode);
     return null;
   }
 
