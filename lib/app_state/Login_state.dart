@@ -60,5 +60,6 @@ class LoginState extends ChangeNotifier {
 
   void clearStates() {
     _isLoading = false;
+    notifyListeners();
   }
 }
