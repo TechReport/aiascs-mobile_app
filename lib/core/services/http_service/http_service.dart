@@ -28,7 +28,6 @@ class HttpService {
       {String token = ""}) async {
     var httpUrl = Uri.parse(basicUrl + url);
     headers["Authorization"] = "Bearer " + token;
-    print(headers);
     http.Response response =
         await http.post(httpUrl, headers: headers, body: json.encode(postData));
     return response;
