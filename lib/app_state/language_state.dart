@@ -10,7 +10,8 @@ class LanguageState extends ChangeNotifier {
   String get currentLanguage => _currentLanguage ?? "";
 
   //reducer
-  void setCurrentLanguage({@required String language}) {
+  // ignore: missing_return
+  Future setCurrentLanguage({@required String language}) {
     PreferenceProvider.setPreferenceValue(lugha, language);
   }
 
