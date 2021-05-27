@@ -1,12 +1,15 @@
+import 'package:aiascs_mobile/app_state/language_state.dart';
 import 'package:aiascs_mobile/app_state/scan_qr_code_state.dart';
 import 'package:aiascs_mobile/core/components/enter_token_button.dart';
 import 'package:aiascs_mobile/core/components/spacer_component.dart';
+import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
 import 'package:aiascs_mobile/modules/scan_qr_code/components/qr_code_validate.dart';
 import 'package:aiascs_mobile/modules/scan_qr_code/scan_product_report.dart';
 import 'package:provider/provider.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class ScanQrCode extends StatefulWidget {
   @override
@@ -15,9 +18,9 @@ class ScanQrCode extends StatefulWidget {
 
 class _ScanQrCodeState extends State<ScanQrCode> {
   String result = '';
-  Future<void> onValidateToken(String tokenValue)async {
+  Future<void> onValidateToken(String tokenValue) async {
     print("on search token validate");
-  await  Provider.of<ScanQrCodeState>(context, listen: false)
+    await Provider.of<ScanQrCodeState>(context, listen: false)
         .scanQrCode(qrInfo: tokenValue);
 
 // Provider.of<ScanQrCodeState>(context, listen: false).setIsLoading(false);
@@ -26,12 +29,11 @@ class _ScanQrCodeState extends State<ScanQrCode> {
   void onViewProductScanReport() {
     Navigator.push(context,
         new MaterialPageRoute(builder: (context) => new ScanProductReport()));
-  
   }
 
   void onStartScanQrCoe() async {
     // Provider.of<ScanQrCodeState>(context, listen: false).setIsLoading(true);
-
+    // await Permission.camera.request();
     String cameraScanResult = await scanner.scan();
     print("searchScanResult");
     print(cameraScanResult);
