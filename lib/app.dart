@@ -12,6 +12,13 @@ import 'package:aiascs_mobile/modules/splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//
+// Name: Danford Kija David
+// Email: kijadanford@gmail.com,
+// phoneNo: +255620419226
+//  
+// => "GROWING WITH AGILE"
+//
 class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
