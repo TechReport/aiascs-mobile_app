@@ -1,6 +1,7 @@
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/app_state/language_state.dart';
 import 'package:aiascs_mobile/app_state/product_state.dart';
+import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
 import 'package:aiascs_mobile/models/transaction_service_card_model.dart';
 import 'package:aiascs_mobile/modules/services_module/feedback/feedback.dart';
 import 'package:aiascs_mobile/modules/services_module/product_module/product_invetory_service.dart';
@@ -132,7 +133,7 @@ class _ServiceHomeState extends State<ServiceHome> {
                 child: Row(
                   children: [
                     Text(
-                      "Last Sync     ",
+                   languageState.currentLanguage == LanguageContant().english ?   "Last Sync     " : " Kutuma Data",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -147,7 +148,7 @@ class _ServiceHomeState extends State<ServiceHome> {
                           fontWeight: FontWeight.normal),
                     ),
                     Text(
-                      "       Logs(3)",
+                     languageState.currentLanguage == LanguageContant().english ?     "       Logs(3)" : "  taarifa(3)",
                       style: TextStyle(
                           color: Colors.white,
                           wordSpacing: 4,
@@ -158,7 +159,7 @@ class _ServiceHomeState extends State<ServiceHome> {
                 )),
             Divider(),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Text("     Transactions",
+              Text(   languageState.currentLanguage == LanguageContant().english ? "     Transactions":"     Miamala",
                   style: TextStyle(
                       color: Colors.grey[400],
                       fontSize: 16,

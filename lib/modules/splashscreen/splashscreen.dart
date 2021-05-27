@@ -20,9 +20,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
     var _duration = new Duration(seconds: 7);
-    Provider.of<LanguageState>(context, listen: false)
+   await Provider.of<LanguageState>(context, listen: false)
         .setCurrentLanguage(language: LanguageContant().english);
-    ;
+          Provider.of<LanguageState>(context, listen: false).getCurrentLanguage();
     Provider.of<LoginState>(context, listen: false).checkAuth();
     return new Timer(_duration, navigationPage);
   }
