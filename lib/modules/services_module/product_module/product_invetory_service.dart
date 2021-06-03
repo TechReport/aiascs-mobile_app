@@ -27,7 +27,12 @@ class _ProductInvetoryServiceState extends State<ProductInvetoryService> {
         .setCurrentSelectedBottomBarIndex(0);
     _selectedindex = Provider.of<AppBarTitleState>(context, listen: false)
         .currentSelectedBottomBar;
-   
+    onGetData();
+  }
+
+  onGetData() async {
+    await Provider.of<UnAuthorizedProductState>(context, listen: false)
+        .onRetrieveUnAuthroduct();
   }
 
   @override
