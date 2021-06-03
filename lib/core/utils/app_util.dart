@@ -16,6 +16,65 @@ class AppUtil {
         backgroundColor: Color(0xFF656565));
   }
 
+  static onShowLanguageProfile(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 16,
+                color: Color(0xFF264653),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                        Provider.of<LanguageState>(context, listen: false)
+                                    .currentLanguage ==
+                                LanguageContant().english
+                            ? "Language Profile"
+                            : "Chagua Lugha",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold))
+                  ],
+                ),
+              ),
+              Divider(),
+              ListTile(
+                leading: new Icon(Icons.photo),
+                title: new Text('Swahili'),
+                onTap: () async {
+                  await Provider.of<LanguageState>(context, listen: false)
+                      .setCurrentLanguage(language: LanguageContant().swahili);
+
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) => new Home(
+                        selectedIndex:  Provider.of<AppBarTitleState>(context, listen: false)
+            .currentSelectedBottomBar,
+                      )));
+                },
+              ),
+              ListTile(
+                leading: new Icon(Icons.music_note),
+                title: new Text('English'),
+                onTap: () async {
+                  await Provider.of<LanguageState>(context, listen: false)
+                      .setCurrentLanguage(language: LanguageContant().english);
+
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) => new Home(   selectedIndex:  Provider.of<AppBarTitleState>(context, listen: false)
+            .currentSelectedBottomBar,)));
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   static showPopUpModal(
       BuildContext context, Widget modal, bool diablePadding) {
     return showDialog(
