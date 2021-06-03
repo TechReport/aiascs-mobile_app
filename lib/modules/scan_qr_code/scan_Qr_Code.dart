@@ -226,7 +226,9 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                         CircleAvatar(
                           backgroundColor: Color(0xFFF8F4FF),
                           radius: MediaQuery.of(context).size.height / 8,
-                          child: Icon(
+                          child: scanQrCode.isQRLoading ? CircularProgressIndicator(
+                            backgroundColor:  Color(0xFF264653),
+                          ):Icon(
                             Icons.qr_code_scanner,
                             size: 130,
                             color: Colors.grey[400],

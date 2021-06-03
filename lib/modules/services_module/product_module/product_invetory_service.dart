@@ -1,8 +1,12 @@
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/app_state/product_state.dart';
+import 'package:aiascs_mobile/app_state/unAuthorizedProduct_State.dart';
 import 'package:aiascs_mobile/core/components/product_authorized_profile.dart';
 import 'package:aiascs_mobile/core/components/product_invetory_service_report_card.dart';
+import 'package:aiascs_mobile/core/components/unAuth_product_card.dart';
+import 'package:aiascs_mobile/core/components/unAuthorizedProductProfile.dart';
 import 'package:aiascs_mobile/models/Product.dart';
+import 'package:aiascs_mobile/models/UnAuthorized_Product.dart';
 import 'package:aiascs_mobile/modules/home/components/bottom_navigation_bar_options.dart';
 import 'package:aiascs_mobile/modules/home/home.dart';
 import 'package:flutter/material.dart';
