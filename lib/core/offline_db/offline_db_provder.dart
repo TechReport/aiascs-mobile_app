@@ -15,6 +15,7 @@ class OfflineDbProvider {
   final List<String> initialQuery = [
     "CREATE TABLE IF NOT EXISTS user (id TEXT PRIMARY KEY, firstName TEXT,lastName TEXT,email TEXT,phoneNumber TEXT,gender TEXT)",
     "CREATE TABLE IF NOT EXISTS product (id TEXT PRIMARY KEY, isRevoked TEXT,token TEXT,name TEXT,expiryDate TEXT,companyId TEXT,companyRegNo TEXT,companyName TEXT,companyPhoneNo TEXT,companyEmail TEXT)",
+    "CREATE TABLE IF NOT EXISTS unAuthorizedProduct (id TEXT PRIMARY KEY, isRevoked TEXT,name TEXT,companyName TEXT,descriptions  TEXT,photoUrl TEXT)",
   ];
 
   final List<String> migrationQuery = [];
