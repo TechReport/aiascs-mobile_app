@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
+import 'package:dio/dio.dart';
 
 //
 // Name: Danford Kija David
@@ -30,6 +33,7 @@ class HttpService {
     headers["Authorization"] = "Bearer " + token;
     http.Response response =
         await http.post(httpUrl, headers: headers, body: json.encode(postData));
+
     return response;
   }
 
@@ -41,5 +45,44 @@ class HttpService {
     http.Response response = await http.patch(httpUrl,
         headers: headers, body: json.encode(postData));
     return response;
+  }
+
+  Future fileData(String filename, Map<String, String> postData, String url,
+      {String token = ""}) async {
+    var httpUrl = Uri.parse(basicUrl + url);
+    headers["Authorization"] = "Bearer " + token;
+    var request = http.MultipartRequest('POST', httpUrl);
+    request.headers.addAll(headers);
+    request.files.add(http.MultipartFile('photo',
+        File(filename).readAsBytes().asStream(), File(filename).lengthSync(),
+        filename: filename.split("/").last));
+    request.fields.addAll(postData);
+    var res = await request.send().then((response) {
+      print(response.statusCode);
+    });
+  }
+
+  Future<Map<String,dynamic>> postData(Map<String, dynamic> body, String filePath, String url,
+      {String token = ""}) async {
+    var dio = Dio();
+    var httpUrl = basicUrl + url;
+    headers["Authorization"] = "Bearer " + token;
+    // body.addAll();
+
+    headers["Authorization"] = "Bearer " + token;
+    dio.options.headers = headers;
+
+    body.addAll({
+      "photo": await MultipartFile.fromFile(
+        filePath,
+        filename: "upload_file",
+      ),
+    });
+    FormData formData = new FormData.fromMap(body);
+    var response = await dio.post(
+      httpUrl,
+      data: formData,
+    );
+    return response.data;
   }
 }
