@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:aiascs_mobile/core/offline_db/product/product_offline_provider.dart';
+import 'package:aiascs_mobile/core/offline_db/product/unAuthorized_product_offline_provider.dart';
 import 'package:aiascs_mobile/core/services/http_service/http_service.dart';
 import 'package:aiascs_mobile/core/services/shared_preference/preference_provider.dart';
 import 'package:aiascs_mobile/models/Product.dart';
+import 'package:aiascs_mobile/models/UnAuthorized_Product.dart';
 import 'package:http/http.dart';
 
 //
@@ -20,24 +22,21 @@ class UnAuthorizedProductService {
     final String scanUrl = "/api/v1/products/report";
     String token = await PreferenceProvider.getPreferenceValue("token");
     Map<String, dynamic> postData = {
-      "photo": photo,
       "name": productName,
       "companyName": companyName,
       "descriptions": description,
     };
 
     print(postData);
-    Response response =
-        await HttpService().httpPost(scanUrl.trim(), postData, token: token);
-    if (response.statusCode == 200) {
-      var responseData = json.decode(response.body);
-      print(responseData);
-      // Product product = Product.fromJson(responseData);
-      // onSaveProductToOffline(product);
-      return true;
-    }
-    print(response.statusCode);
-    return null;
+    Map<String, dynamic> response = await HttpService().postData(
+      postData,
+      photo,
+      scanUrl,
+      token: token,
+    );
+    UnAuthorizedProduct unAuthorizedProduct =
+        UnAuthorizedProduct.fromJson(response);
+    onSaveUnAuthProductToOffline(unAuthorizedProduct);
   }
 
   Future<Product> onRetrieveProductFromOffline(String productId) async {
