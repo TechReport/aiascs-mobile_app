@@ -70,4 +70,12 @@ class UnAuthorizedProductService {
     print(response.body);
     return null;
   }
+
+  void onSaveUnAuthProductToOffline(UnAuthorizedProduct product) async {
+    UnAuthorizedProductOfflineProvider().addOrUpdateProduct(product);
+  }
+
+   Future<List<UnAuthorizedProduct>> onRetrieveUnAuthPrdoctListOffline() async {
+    return await UnAuthorizedProductOfflineProvider().getProducts();
+  }
 }
