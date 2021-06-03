@@ -83,6 +83,9 @@ class _HomeState extends State<Home> {
             new MaterialPageRoute(builder: (context) => new LoginPage()),
             (route) => false);
         break;
+      case "language_setting":
+        AppUtil.onShowLanguageProfile(context);
+        break;
       case "password":
         Navigator.push(context,
             new MaterialPageRoute(builder: (context) => new ChangePassword()));

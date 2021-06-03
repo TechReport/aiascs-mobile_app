@@ -2,6 +2,7 @@ import 'package:aiascs_mobile/app_state/language_state.dart';
 import 'package:aiascs_mobile/app_state/scan_qr_code_state.dart';
 import 'package:aiascs_mobile/core/components/enter_token_button.dart';
 import 'package:aiascs_mobile/core/components/spacer_component.dart';
+import 'package:aiascs_mobile/core/components/unAuth_product_card.dart';
 import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
 import 'package:aiascs_mobile/modules/scan_qr_code/components/qr_code_validate.dart';
 import 'package:aiascs_mobile/modules/scan_qr_code/scan_product_report.dart';
