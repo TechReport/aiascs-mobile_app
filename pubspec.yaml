@@ -28,6 +28,8 @@ dependencies:
   connectivity: ^0.4.2
   qr_utils: ^0.1.5
   image_picker: ^0.7.4
+  dependencies:
+  dio: ^4.0.0
   # flutter_barcode_scanner: ^0.1.7
 
 dev_dependencies:
