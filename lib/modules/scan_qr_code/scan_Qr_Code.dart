@@ -38,8 +38,10 @@ class _ScanQrCodeState extends State<ScanQrCode> {
     String cameraScanResult = await scanner.scan();
     print("searchScanResult");
     print(cameraScanResult);
-    if (Provider.of<ScanQrCodeState>(context, listen: false).isLoading) {
-      showDialog(
+     await Provider.of<ScanQrCodeState>(context, listen: false)
+        .scanQrCode2(qrInfo: cameraScanResult);
+    // Provider.of<ScanQrCodeState>(context, listen: false).isLoading
+     return  showDialog(
           barrierDismissible: false,
           builder: (context) => new AlertDialog(
                 title: new Text(
@@ -71,7 +73,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
               ),
           context: context);
 // Provider.of<ScanQrCodeState>(context, listen: false).setIsLoading(false);
-    }
+    
     if (QrCodeValidate.validateQrcode(cameraScanResult)) {
       print("the authenticated messsage is" + cameraScanResult);
     } else {}
@@ -130,7 +132,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                                       prefixIcon: Icon(Icons.qr_code_rounded),
                                       border: InputBorder.none,
                                       labelText:
-                                          'cc8bb08d-f246-4124-8fa2-7c1b2407b39a',
+                                          'token here',
                                     ))))),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -152,8 +154,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                                     : EnterTokenButton(
                                         title: "Validate",
                                         onPressButton: () async {
-                                          await onValidateToken(
-                                              "ff5e05e0-b061-41e9-8a21-a186c31890d2");
+                                          await onValidateToken(_searchController.text);
 
                                           showDialog(
                                               barrierDismissible: false,
@@ -205,6 +206,8 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                 ))),
             body: ListView(
               children: [
+                                             
+
                 Container(
                   color: Colors.white,
                   padding: EdgeInsets.all(10),
