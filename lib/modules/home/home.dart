@@ -10,7 +10,6 @@ import 'package:aiascs_mobile/modules/home/components/bottom_navigation_bar_opti
 import 'package:aiascs_mobile/modules/scan_qr_code/scan_Qr_Code.dart';
 import 'package:aiascs_mobile/modules/searching/search.dart';
 import 'package:aiascs_mobile/modules/services_module/Service_Home.dart';
-import 'package:aiascs_mobile/modules/splashscreen/splashscreen.dart';
 import 'package:aiascs_mobile/modules/unauthenticated_product/Unauthenticated_Product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

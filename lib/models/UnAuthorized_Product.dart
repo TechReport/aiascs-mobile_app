@@ -1,97 +1,50 @@
 class UnAuthorizedProduct {
   String id;
   String isRevoked;
-  String token;
   String name;
-  String expiryDate;
-  String companyId;
-  String companyRegNo;
   String companyName;
-  String companyPhoneNo;
-  String companyEmail;
+  String descriptions;
+  String photoUrl;
 
   UnAuthorizedProduct(
       {this.id = '',
       this.isRevoked = '',
-      this.token = '',
       this.name = '',
-      this.expiryDate = '',
-      this.companyId = '',
-      this.companyRegNo = '',
       this.companyName = '',
-      this.companyPhoneNo = '',
-      this.companyEmail});
+      this.descriptions = '',
+      this.photoUrl});
 
   factory UnAuthorizedProduct.fromJson(Map<String, dynamic> json) {
     return UnAuthorizedProduct(
-        id: json['_id'],
-        isRevoked: json['isRevoked'].toString(),
-        token: json['token'],
-        name: json['name'],
-        expiryDate: json['expiry'],
-        companyId: json['companyId']['_id'],
-        companyRegNo: json['companyId']['regno'],
-        companyName: json['companyId']['name'],
-        companyEmail: json['companyId']['email'],
-        companyPhoneNo: json['companyId']['phonenumber'].toString());
+        id: json['data']['_id'] ?? "",
+        isRevoked: json['data']['isRevoked'].toString() ?? " ",
+        name: json['data']['name'] ?? "",
+        companyName: json['data']['name'] ?? "",
+        descriptions: json['data']['descriptions'] ?? "",
+        photoUrl: json['data']['photo'][0]['url'].toString() ?? "",
+        );
   }
 
   Map toOffline(UnAuthorizedProduct UnAuthorizedProduct) {
     var map = Map<String, dynamic>();
     map['id'] = UnAuthorizedProduct.id;
     map['isRevoked'] = UnAuthorizedProduct.isRevoked;
-    map['token'] = UnAuthorizedProduct.token;
+    map['descriptions'] = UnAuthorizedProduct.descriptions;
     map['name'] = UnAuthorizedProduct.name;
-    map["expiryDate"] = UnAuthorizedProduct.expiryDate;
-    map["companyId"] = UnAuthorizedProduct.companyId;
-    map["companyRegNo"] = UnAuthorizedProduct.companyRegNo;
-    map["companyName"] = UnAuthorizedProduct.companyName;
-    map["companyEmail"] = UnAuthorizedProduct.companyEmail;
-    map["companyPhoneNo"] = UnAuthorizedProduct.companyPhoneNo;
-
+    map['companyName'] = UnAuthorizedProduct.companyName;
+    map['photoUrl'] = UnAuthorizedProduct.photoUrl;
     return map;
   }
 
   UnAuthorizedProduct.fromOffline(Map<String, dynamic> map) {
     this.id = map['id'];
     this.isRevoked = map['isRevoked'];
-    this.token = map['token'];
+    this.descriptions = map['descriptions'];
     this.name = map['name'];
-    this.expiryDate =map['expiryDate'].split('T')[0].trim();
-    this.companyId = map['companyId'];
-    this.companyRegNo = map['companyRegNo'];
     this.companyName = map['companyName'];
-    this.companyEmail = map['companyEmail'];
-    this.companyPhoneNo = map['companyPhoneNo'];
-  }
-
-    static DateTime getDateIntoDateTimeFormat(String date) {
-    return DateTime.parse(date);
-  }
-
- static String formattedDateTimeIntoString(DateTime date) {
-    return date.toIso8601String().split('T')[0].trim();
+    this.photoUrl = map['photoUrl'];
   }
 
 
-  static int getAgeInYear(String dateOfBirth) {
-    int age = 0;
-    try {
-      DateTime currentDate = DateTime.now();
-      DateTime birthDate = dateOfBirth != null && dateOfBirth != ''
-          ? getDateIntoDateTimeFormat(dateOfBirth)
-          : getDateIntoDateTimeFormat(formattedDateTimeIntoString(currentDate));
-      age = currentDate.year - birthDate.year;
-      if (birthDate.month > currentDate.month) {
-        age--;
-      } else if (birthDate.month == currentDate.month) {
-        if (birthDate.day > currentDate.day) {
-          age--;
-        }
-      }
-    } catch (e) {}
-    return age;
-  }
-
-  bool checkExpiration(String date, bool isRevoked) {}
+ 
 }
