@@ -1,15 +1,10 @@
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/app_state/product_state.dart';
 import 'package:aiascs_mobile/app_state/scan_qr_code_state.dart';
-import 'package:aiascs_mobile/core/components/enter_token_button.dart';
-import 'package:aiascs_mobile/core/components/product_report_header.dart';
 import 'package:aiascs_mobile/core/components/spacer_component.dart';
-import 'package:aiascs_mobile/models/Product.dart';
 import 'package:aiascs_mobile/models/UnAuthorized_Product.dart';
-import 'package:aiascs_mobile/models/scan_product_profile.dart';
 import 'package:aiascs_mobile/modules/home/components/bottom_navigation_bar_options.dart';
 import 'package:aiascs_mobile/modules/home/home.dart';
-import 'package:aiascs_mobile/modules/scan_qr_code/components/qr_code_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -128,43 +123,7 @@ class _ProductAuthorizedProfileState extends State<UnAuthorizedProductAuthorized
                             ),
                           ],
                         ),
-                        Divider(),
-                           Row(
-                          children: [
-                            Expanded(
-                              flex: 4,
-                              child: Text(
-                              "Status",
-                                style: TextStyle().copyWith(
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black),
-                              ),
-
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                ":",
-                                style: TextStyle().copyWith(
-                                  fontSize: 12.0,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 4,
-                              child: Text(
-                            "FAKE",
-                                style: TextStyle().copyWith(
-                                  fontSize: 18.0,
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        
                           Divider(),
                            Row(
                           children: [
@@ -202,7 +161,80 @@ class _ProductAuthorizedProfileState extends State<UnAuthorizedProductAuthorized
                             ),
                           ],
                         ),
-                        
+                          Divider(),
+                           Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                              "Descriptions ",
+                                style: TextStyle().copyWith(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
+
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                ":",
+                                style: TextStyle().copyWith(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                            widget.product.descriptions,
+                                style: TextStyle().copyWith(
+                                  fontSize: 14.0,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(),
+                           Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                              "Status",
+                                style: TextStyle().copyWith(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
+
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                ":",
+                                style: TextStyle().copyWith(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                            "FAKE",
+                                style: TextStyle().copyWith(
+                                  fontSize: 24.0,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       
                   ],
                 )

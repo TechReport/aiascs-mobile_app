@@ -8,7 +8,6 @@ class UnAuthProductInvetoryServiceReportCard extends StatelessWidget {
       {@required this.product, @required this.productIndex});
   @override
   Widget build(BuildContext context) {
-    print("in data");
     return Container(
       height: MediaQuery.of(context).size.height / 2 - 30,
       width: MediaQuery.of(context).size.width,
@@ -52,12 +51,12 @@ class UnAuthProductInvetoryServiceReportCard extends StatelessWidget {
               margin: EdgeInsets.only(top: 2),
               padding: EdgeInsets.all(10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("name                  : "),
+                  Text("name                         : "),
                   Expanded(
                     child: Text(
-                      product.name ??"No name",
+                     product.name??  "No name",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       textDirection: TextDirection.rtl,
@@ -73,10 +72,10 @@ class UnAuthProductInvetoryServiceReportCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("Company Name                          : "),
+                  Text("Company Name     :"),
                   Expanded(
                     child: Text(
-                      product.companyName ??"No company Name",
+                      product.companyName??"No company Name",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       textDirection: TextDirection.rtl,
@@ -92,9 +91,9 @@ class UnAuthProductInvetoryServiceReportCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("Identifier                  : "),
+                  Text("Identifier                :         "),
                   Text(
-                    product.id??"NO value",
+                    product.id??"                    NO value",
                   )
                 ],
               ),
