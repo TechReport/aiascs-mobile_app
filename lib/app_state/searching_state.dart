@@ -28,6 +28,21 @@ class SearchingState extends ProductState  {
     notifyListeners();
   }
 
+  void getSearchingFieldFromUnAuthorizedProduct(String value) {
+    onRetrieveUnAuthroduct();
+    listUnAuthProduct;   
+     List<UnAuthorizedProduct> searchArray = [];
+    for (UnAuthorizedProduct product in listUnAuthProduct) {  
+      if (product.name.contains(value) ||
+          product.companyName.contains(value) ||
+          product.isRevoked.contains(value) ){
+        searchArray.add(product);
+      }
+    }
+    // _searchedProduct = searchArray;
+    notifyListeners();
+  }
+
   void searchStatus(bool searchStatus) {
     _isSearch = searchStatus;
     notifyListeners();
