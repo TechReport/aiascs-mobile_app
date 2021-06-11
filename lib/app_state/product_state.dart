@@ -1,3 +1,4 @@
+import 'package:aiascs_mobile/app_state/unAuthorizedProduct_State.dart';
 import 'package:aiascs_mobile/core/services/scan_service.dart/Scan_service.dart';
 import 'package:aiascs_mobile/models/Product.dart';
 import 'package:flutter/foundation.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/foundation.dart';
 // => "GROWING WITH AGILE"
 //
 
-class ProductState extends ChangeNotifier {
+class ProductState extends UnAuthorizedProductState {
   List<Product> _productLists;
   bool _isLoading;
   double _countFakeProduct = 0;
