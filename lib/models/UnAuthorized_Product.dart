@@ -25,14 +25,14 @@ class UnAuthorizedProduct {
         );
   }
 
-  Map toOffline(UnAuthorizedProduct UnAuthorizedProduct) {
+  Map toOffline(UnAuthorizedProduct unAuthorizedProduct) {
     var map = Map<String, dynamic>();
-    map['id'] = UnAuthorizedProduct.id;
-    map['isRevoked'] = UnAuthorizedProduct.isRevoked;
-    map['descriptions'] = UnAuthorizedProduct.descriptions;
-    map['name'] = UnAuthorizedProduct.name;
-    map['companyName'] = UnAuthorizedProduct.companyName;
-    map['photoUrl'] = UnAuthorizedProduct.photoUrl;
+    map['id'] = unAuthorizedProduct.id;
+    map['isRevoked'] = unAuthorizedProduct.isRevoked;
+    map['descriptions'] = unAuthorizedProduct.descriptions;
+    map['name'] = unAuthorizedProduct.name;
+    map['companyName'] = unAuthorizedProduct.companyName;
+    map['photoUrl'] = unAuthorizedProduct.photoUrl;
     return map;
   }
 
