@@ -332,12 +332,13 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
   _onCameraClick() {
     final action = CupertinoActionSheet(
       message: Text(
-       true ? "Add profile picture" : "Weka Picha ya Bidhaa",
+        true ? "Add profile picture" : "Weka Picha ya Bidhaa",
         style: TextStyle(fontSize: 15.0),
       ),
       actions: <Widget>[
         CupertinoActionSheetAction(
-          child: Text(  true ? "Choose from gallery" :"Chagua kutoka kwa picha zingine"),
+          child: Text(
+              true ? "Choose from gallery" : "Chagua kutoka kwa picha zingine"),
           isDefaultAction: false,
           onPressed: () async {
             Navigator.pop(context);
@@ -351,7 +352,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
           },
         ),
         CupertinoActionSheetAction(
-          child: Text(   true ? "Take a picture" :"Piga picha"),
+          child: Text(true ? "Take a picture" : "Piga picha"),
           isDestructiveAction: false,
           onPressed: () async {
             Navigator.pop(context);
@@ -365,7 +366,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
         )
       ],
       cancelButton: CupertinoActionSheetAction(
-        child: Text(   true ? "Cancel" : "Acha"),
+        child: Text(true ? "Cancel" : "Acha"),
         onPressed: () {
           Navigator.pop(context);
         },
