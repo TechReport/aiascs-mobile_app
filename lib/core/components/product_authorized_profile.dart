@@ -8,7 +8,6 @@ import 'package:aiascs_mobile/models/Product.dart';
 import 'package:aiascs_mobile/models/scan_product_profile.dart';
 import 'package:aiascs_mobile/modules/home/components/bottom_navigation_bar_options.dart';
 import 'package:aiascs_mobile/modules/home/home.dart';
-import 'package:aiascs_mobile/modules/scan_qr_code/components/qr_code_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

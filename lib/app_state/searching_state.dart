@@ -1,8 +1,6 @@
 import 'package:aiascs_mobile/app_state/product_state.dart';
-import 'package:aiascs_mobile/app_state/unAuthorizedProduct_State.dart';
 import 'package:aiascs_mobile/models/Product.dart';
 import 'package:aiascs_mobile/models/UnAuthorized_Product.dart';
-import 'package:aiascs_mobile/modules/unauthenticated_product/Unauthenticated_Product.dart';
 
 class SearchingState extends ProductState  {
   List<Product> _searchedProduct;
