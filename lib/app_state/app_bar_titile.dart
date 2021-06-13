@@ -5,7 +5,7 @@ class AppBarTitleState extends ChangeNotifier {
   String _appBarTitle;
   int _currenntSelectedBottomBar;
 
-  String get appBarTitle => _appBarTitle ?? "Home";
+  String get appBarTitle => _appBarTitle ??  "Home";
   int get currentSelectedBottomBar => _currenntSelectedBottomBar ?? 1;
 
 //reducer
