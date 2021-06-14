@@ -1,5 +1,8 @@
+import 'package:aiascs_mobile/app_state/language_state.dart';
+import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
 import 'package:aiascs_mobile/models/UnAuthorized_Product.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UnAuthProductInvetoryServiceReportCard extends StatelessWidget {
   final UnAuthorizedProduct product;

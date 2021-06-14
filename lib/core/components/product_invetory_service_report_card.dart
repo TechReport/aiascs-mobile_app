@@ -82,7 +82,9 @@ final int productIndex;
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("ExpireDate                  : "),
+                  Text(
+                    
+                    "ExpireDate                  : "),
                   Text(product.expiryDate,)
                 ],
               ),
