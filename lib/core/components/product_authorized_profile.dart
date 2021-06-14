@@ -1,9 +1,11 @@
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
+import 'package:aiascs_mobile/app_state/language_state.dart';
 import 'package:aiascs_mobile/app_state/product_state.dart';
 import 'package:aiascs_mobile/app_state/scan_qr_code_state.dart';
 import 'package:aiascs_mobile/core/components/enter_token_button.dart';
 import 'package:aiascs_mobile/core/components/product_report_header.dart';
 import 'package:aiascs_mobile/core/components/spacer_component.dart';
+import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
 import 'package:aiascs_mobile/models/Product.dart';
 import 'package:aiascs_mobile/models/scan_product_profile.dart';
 import 'package:aiascs_mobile/modules/home/components/bottom_navigation_bar_options.dart';

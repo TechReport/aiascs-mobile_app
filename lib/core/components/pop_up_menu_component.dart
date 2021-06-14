@@ -8,7 +8,7 @@ class PopUpMenuComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-              children: ServicePopUpMenu.getDefaultServicePopUpMenus()
+              children: ServicePopUpMenu.getDefaultServicePopUpMenus(context)
                   .map((ServicePopUpMenu popUpMenu) => Container(
                           child: Visibility(                       
                         child: GestureDetector(
