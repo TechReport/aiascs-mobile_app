@@ -64,7 +64,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                             .isLoading
                         ? Text(" Loading ....")
                         : EnterTokenButton(
-                            title: "Show Report ",
+                            title:   Provider.of<LanguageState>(context, listen: false).currentLanguage == LanguageContant().english ?"Show Report ":"Onesha Repoti",
                             onPressButton: () => onViewProductScanReport(),
                             width: MediaQuery.of(context).size.width / 4 + 50,
                           )
@@ -132,7 +132,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                                       prefixIcon: Icon(Icons.qr_code_rounded),
                                       border: InputBorder.none,
                                       labelText:
-                                          'token here',
+                                        languageState.currentLanguage == LanguageContant() ?  'token here' : "weka token ",
                                     ))))),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -152,7 +152,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                                 scanQrCode.isLoading
                                     ? CircularProgressIndicator()
                                     : EnterTokenButton(
-                                        title: "Validate",
+                                        title:  languageState.currentLanguage == LanguageContant() ? "Validate":"Hakiki",
                                         onPressButton: () async {
                                           await onValidateToken(_searchController.text);
 

@@ -1,12 +1,14 @@
 import 'dart:io';
+import 'package:aiascs_mobile/app_state/language_state.dart';
 import 'package:aiascs_mobile/app_state/unAuthorizedProduct_State.dart';
 import 'package:aiascs_mobile/core/components/enter_token_button.dart';
+import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
+import 'package:aiascs_mobile/modules/services_module/product_module/product_invetory_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
 
 File _image;
 
@@ -32,7 +34,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
       password,
       confirmPassword,
       schoolName;
- //initialize scale factor for image zoom manipulation using matrix manipulation by change each pixel accordingly
+  //initialize scale factor for image zoom manipulation using matrix manipulation by change each pixel accordingly
   double _scale = 1.0;
   double _previousScale = 1.0;
   @override
@@ -41,278 +43,265 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
       retrieveLostData();
     }
 
-    return Consumer<UnAuthorizedProductState>(
-        builder: (BuildContext context, unAuthorizedProductState, child) {
-      return Scaffold(
-          body: SingleChildScrollView(
-        child: new Container(
-          margin: new EdgeInsets.only(left: 16.0, right: 16, bottom: 16),
-          child: new Form(
-            key: _key,
-            autovalidateMode: _validate,
-            child: new Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8.0, top: 32, right: 8, bottom: 8),
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap: () {
-                          if (_image == null) {
-                          } else {
-                           
-
-                          }
-                        },
-                        child: Container(
-                          height: MediaQuery.of(context).size.height / 4 + 100,
-                          width: MediaQuery.of(context).size.width,
-                          child: Material(
-                            elevation: 2,
-                            type: MaterialType.card,
-                            child: SizedBox(
-                              width: 170,
-                              height: 170,
-                              child: _image == null
-                                  ?GestureDetector(
-                                       onTap: _onCameraClick,
-                                    child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                              Icons.camera_alt,
-                              color: Color(0xFF264653),
-                            ),
-                                 Text("Tap to Capture or Select Photo",
-                                 style: TextStyle(color: Colors.red),
-                                 )   ],
-                                  ),
-                                  )
-                                  : Image.file(
-                                      _image,
-                                      fit: BoxFit.cover,
-                                    ),
+    return Consumer<LanguageState>(
+        builder: (BuildContext context, languageState, child) {
+      return Consumer<UnAuthorizedProductState>(
+          builder: (BuildContext context, unAuthorizedProductState, child) {
+        return Scaffold(
+            body: SingleChildScrollView(
+          child: new Container(
+            margin: new EdgeInsets.only(left: 16.0, right: 16, bottom: 16),
+            child: new Form(
+              key: _key,
+              autovalidateMode: _validate,
+              child: new Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 8.0, top: 32, right: 8, bottom: 8),
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            if (_image == null) {
+                            } else {}
+                          },
+                          child: Container(
+                            height:
+                                MediaQuery.of(context).size.height / 4 + 100,
+                            width: MediaQuery.of(context).size.width,
+                            child: Material(
+                              elevation: 2,
+                              type: MaterialType.card,
+                              child: SizedBox(
+                                width: 170,
+                                height: 170,
+                                child: _image == null
+                                    ? GestureDetector(
+                                        onTap: _onCameraClick,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.camera_alt,
+                                              color: Color(0xFF264653),
+                                            ),
+                                            Text(
+                                             languageState.currentLanguage == LanguageContant().english ?   "Tap to Capture or Select Photo" :"Bonyeza Hapa Kuchagua au Kupiga Picha",
+                                              style:
+                                                  TextStyle(color: Colors.red),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    : Image.file(
+                                        _image,
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        left: 80,
-                        right: 0,
-                        child: FloatingActionButton(
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.camera_alt,
-                              color: Color(0xFF264653),
-                            ),
-                            mini: true,
-                            onPressed: _onCameraClick),
-                      )
-                    ],
+                        _image != null
+                            ? Positioned(
+                                left: 80,
+                                right: 0,
+                                child: FloatingActionButton(
+                                    backgroundColor: Colors.white,
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      color: Color(0xFF264653),
+                                    ),
+                                    mini: true,
+                                    onPressed: _onCameraClick),
+                              )
+                            : Text("")
+                      ],
+                    ),
                   ),
-                ),
-              
-                ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: double.infinity),
-                    child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 16.0, right: 8.0, left: 8.0),
-                        child: TextFormField(
-                            controller: _productNameController,
-                            validator: (value) {},
-                            onSaved: (String val) {
-                              firstName = val;
-                            },
-                            textInputAction: TextInputAction.next,
-                            onFieldSubmitted: (_) =>
-                                FocusScope.of(context).nextFocus(),
-                            decoration: InputDecoration(
-                                contentPadding: new EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 16),
-                                fillColor: Colors.white,
-                                hintText: true
-                                    ? 'Enter Product Name'
-                                    : " Ingiiza Jina la Bidhaa",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                focusedBorder: OutlineInputBorder(
+                  ConstrainedBox(
+                      constraints: BoxConstraints(minWidth: double.infinity),
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 16.0, right: 8.0, left: 8.0),
+                          child: TextFormField(
+                              controller: _productNameController,
+                              validator: (value) {},
+                              onSaved: (String val) {
+                                firstName = val;
+                              },
+                              textInputAction: TextInputAction.next,
+                              onFieldSubmitted: (_) =>
+                                  FocusScope.of(context).nextFocus(),
+                              decoration: InputDecoration(
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 16),
+                                  fillColor: Colors.white,
+                                  hintText:  languageState.currentLanguage == LanguageContant().english ? 'Enter Product Name'
+                                      : " Ingiiza Jina la Bidhaa",
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF264653),
+                                          width: 2.0)),
+                                  border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
-                                    borderSide: BorderSide(
-                                        color: Color(0xFF264653), width: 2.0)),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                ))))),
-                ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: double.infinity),
-                    child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 16.0, right: 8.0, left: 8.0),
-                        child: TextFormField(
-                            controller: _companyNameController,
-                            validator: (value) {},
-                            onSaved: (String val) {
-                              lastName = val;
-                            },
-                            textInputAction: TextInputAction.next,
-                            onFieldSubmitted: (_) =>
-                                FocusScope.of(context).nextFocus(),
-                            decoration: InputDecoration(
-                                contentPadding: new EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 16),
-                                fillColor: Colors.white,
-                                hintText: true
-                                    ? 'Enter Company Name'
-                                    : "Ingiiza Jina la Kampuni",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                focusedBorder: OutlineInputBorder(
+                                  ))))),
+                  ConstrainedBox(
+                      constraints: BoxConstraints(minWidth: double.infinity),
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 16.0, right: 8.0, left: 8.0),
+                          child: TextFormField(
+                              controller: _companyNameController,
+                              validator: (value) {},
+                              onSaved: (String val) {
+                                lastName = val;
+                              },
+                              textInputAction: TextInputAction.next,
+                              onFieldSubmitted: (_) =>
+                                  FocusScope.of(context).nextFocus(),
+                              decoration: InputDecoration(
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 16),
+                                  fillColor: Colors.white,
+                                  hintText:  languageState.currentLanguage == LanguageContant().english 
+                                      ? 'Enter Company Name'
+                                      : "Ingiiza Jina la Kampuni",
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF264653),
+                                          width: 2.0)),
+                                  border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
-                                    borderSide: BorderSide(
-                                        color: Color(0xFF264653), width: 2.0)),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                ))))),
-                ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: double.infinity),
-                    child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 16.0, right: 8.0, left: 8.0),
-                        child: TextFormField(
-                            keyboardType: TextInputType.name,
-                            controller: _locationController,
-                            textInputAction: TextInputAction.next,
-                            onFieldSubmitted: (_) =>
-                                FocusScope.of(context).nextFocus(),
-                            validator: (value) {},
-                            onSaved: (String val) {
-                              mobile = val;
-                            },
-                            decoration: InputDecoration(
-                                contentPadding: new EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 16),
-                                fillColor: Colors.white,
-                                hintText: true ? 'Location' : "Eneo",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                focusedBorder: OutlineInputBorder(
+                                  ))))),
+                  ConstrainedBox(
+                      constraints: BoxConstraints(minWidth: double.infinity),
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 16.0, right: 8.0, left: 8.0),
+                          child: TextFormField(
+                              keyboardType: TextInputType.name,
+                              controller: _locationController,
+                              textInputAction: TextInputAction.next,
+                              onFieldSubmitted: (_) =>
+                                  FocusScope.of(context).nextFocus(),
+                              validator: (value) {},
+                              onSaved: (String val) {
+                                mobile = val;
+                              },
+                              decoration: InputDecoration(
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 16),
+                                  fillColor: Colors.white,
+                                  hintText:  languageState.currentLanguage == LanguageContant().english ?   'Location' : "Eneo",
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF264653),
+                                          width: 2.0)),
+                                  border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
-                                    borderSide: BorderSide(
-                                        color: Color(0xFF264653), width: 2.0)),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                ))))),
-                ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: double.infinity),
-                    child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 26.0, right: 8.0, left: 8.0),
-                        child: TextFormField(
-                            controller: _descriptionController,
-                            keyboardType: TextInputType.multiline,
-                            maxLines: 5,
-                            maxLength: 1000,
-                            textInputAction: TextInputAction.next,
-                            onFieldSubmitted: (_) =>
-                                FocusScope.of(context).nextFocus(),
-                            validator: (value) {},
-                            onSaved: (String val) {
-                              mobile = val;
-                            },
-                            decoration: InputDecoration(
-                                contentPadding: new EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 16),
-                                fillColor: Colors.white,
-                                hintText: true
-                                    ? 'Enter Description here'
-                                    : "Ingiiza Maelezo Hapa",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                focusedBorder: OutlineInputBorder(
+                                  ))))),
+                  ConstrainedBox(
+                      constraints: BoxConstraints(minWidth: double.infinity),
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 26.0, right: 8.0, left: 8.0),
+                          child: TextFormField(
+                              controller: _descriptionController,
+                              keyboardType: TextInputType.multiline,
+                              maxLines: 5,
+                              maxLength: 1000,
+                              textInputAction: TextInputAction.next,
+                              onFieldSubmitted: (_) =>
+                                  FocusScope.of(context).nextFocus(),
+                              validator: (value) {},
+                              onSaved: (String val) {
+                                mobile = val;
+                              },
+                              decoration: InputDecoration(
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 16),
+                                  fillColor: Colors.white,
+                                  hintText:  languageState.currentLanguage == LanguageContant().english  
+                                      ? 'Enter Description here'
+                                      : "Ingiiza Maelezo Hapa",
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF264653),
+                                          width: 2.0)),
+                                  border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
-                                    borderSide: BorderSide(
-                                        color: Color(0xFF264653), width: 2.0)),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                ))))),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(right: 40.0, left: 40.0, top: 40.0),
-                  child: ConstrainedBox(
-                    constraints:
-                        const BoxConstraints(minWidth: double.infinity),
-                    child: unAuthorizedProductState.isLoading
-                        ? CircularProgressIndicator()
-                        : 
-                            Container(
-                    margin: EdgeInsets.symmetric(
-                        vertical: MediaQuery.of(context).size.height / 27),
-                    height: MediaQuery.of(context).size.height / 12,
-                    child: Material(
-                      type: MaterialType.card,
-                      elevation: 0,
-                      child: EnterTokenButton(
-                        width: MediaQuery.of(context).size.width / 2,
-                        height: MediaQuery.of(context).size.height / 16,
-                        title: true ? "Submit" : "Hakiki QR",
-                        onPressButton: () => () async {
-                              if (_key.currentState.validate()) {
-                                _key.currentState.save();
-                                await unAuthorizedProductState.onPostProduct(
-                                    _photoController.text,
-                                    _companyNameController.text,
-                                    _descriptionController.text,
-                                    _productNameController.text);
-                              } else {
-                                setState(() {
-                                  _validate =
-                                      AutovalidateMode.onUserInteraction;
-                                });
-                              }
-                            },
-                      ),
-                    )),
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        // RaisedButton(
-                        //     color: Color(0xFF264653),
-                        //     child: Text(
-                        //       true ? 'Submit' : "Tuma",
-                        //       style: TextStyle(
-                        //           fontSize: 20, fontWeight: FontWeight.bold),
-                        //     ),
-                        //     textColor: Colors.white,
-                        //     splashColor: Colors.red,
-                        //     onPressed: () async {
-                        //       if (_key.currentState.validate()) {
-                        //         _key.currentState.save();
-                        //         await unAuthorizedProductState.onPostProduct(
-                        //             _photoController.text,
-                        //             _companyNameController.text,
-                        //             _descriptionController.text,
-                        //             _productNameController.text);
-                        //       } else {
-                        //         setState(() {
-                        //           _validate =
-                        //               AutovalidateMode.onUserInteraction;
-                        //         });
-                        //       }
-                        //     },
-                        //     padding: EdgeInsets.only(top: 12, bottom: 12),
-                        //     shape: RoundedRectangleBorder(
-                        //         borderRadius: BorderRadius.circular(25.0),
-                        //         side: BorderSide(color: Colors.grey)),
-                        //   ),
+                                  ))))),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        right: 40.0, left: 40.0, top: 40.0),
+                    child: ConstrainedBox(
+                      constraints:
+                          const BoxConstraints(minWidth: double.infinity),
+                      child: unAuthorizedProductState.isLoading
+                          ? CircularProgressIndicator()
+                          : Container(
+                              margin: EdgeInsets.symmetric(
+                                  vertical:
+                                      MediaQuery.of(context).size.height / 27),
+                              height: MediaQuery.of(context).size.height / 12,
+                              child: Material(
+                                type: MaterialType.card,
+                                elevation: 0,
+                                child: EnterTokenButton(
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  height:
+                                      MediaQuery.of(context).size.height / 16,
+                                  title: languageState.currentLanguage == LanguageContant().english ? "Submit" : "Kusanya",
+                                  onPressButton: () async {
+                                    if (_key.currentState.validate()) {
+                                      _key.currentState.save();
+                                      await unAuthorizedProductState
+                                          .onPostProduct(
+                                              _photoController.text,
+                                              _companyNameController.text,
+                                              _descriptionController.text,
+                                              _productNameController.text);
+                                    } else {
+                                      setState(() {
+                                        _validate =
+                                            AutovalidateMode.onUserInteraction;
+                                      });
+                                    }
+                                    setState(() {
+                                      _photoController.text = "";
+                                      _companyNameController.text = "";
+                                      _descriptionController.text = "";
+                                      _productNameController.text = "";
+                                      _locationController.text = " ";
+                                    });
+
+                                    Navigator.push(
+                                        context,
+                                        new MaterialPageRoute(
+                                            builder: (context) =>
+                                                new ProductInvetoryService()));
+                                  },
+                                ),
+                              )),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-      ));
+        ));
+      });
     });
   }
 
@@ -332,13 +321,13 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
   _onCameraClick() {
     final action = CupertinoActionSheet(
       message: Text(
-        true ? "Add profile picture" : "Weka Picha ya Bidhaa",
+        Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Add profile picture" : "Weka Picha ya Bidhaa",
         style: TextStyle(fontSize: 15.0),
       ),
       actions: <Widget>[
         CupertinoActionSheetAction(
           child: Text(
-              true ? "Choose from gallery" : "Chagua kutoka kwa picha zingine"),
+              Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Choose from gallery" : "Chagua kutoka kwa picha zingine"),
           isDefaultAction: false,
           onPressed: () async {
             Navigator.pop(context);
@@ -352,7 +341,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
           },
         ),
         CupertinoActionSheetAction(
-          child: Text(true ? "Take a picture" : "Piga picha"),
+          child: Text( Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Take a picture" : "Piga picha"),
           isDestructiveAction: false,
           onPressed: () async {
             Navigator.pop(context);
@@ -366,7 +355,7 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
         )
       ],
       cancelButton: CupertinoActionSheetAction(
-        child: Text(true ? "Cancel" : "Acha"),
+        child: Text( Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Cancel" : "Acha"),
         onPressed: () {
           Navigator.pop(context);
         },

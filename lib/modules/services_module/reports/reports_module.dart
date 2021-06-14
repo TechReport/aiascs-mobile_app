@@ -1,4 +1,6 @@
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
+import 'package:aiascs_mobile/app_state/language_state.dart';
+import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
 import 'package:aiascs_mobile/modules/home/components/bottom_navigation_bar_options.dart';
 import 'package:aiascs_mobile/modules/home/home.dart';
 import 'package:aiascs_mobile/modules/services_module/reports/All_Reports/AllReports.dart';
@@ -69,7 +71,7 @@ class _ReportModuleState extends State<ReportModule>
               icon: Icon(Icons.arrow_back_ios, color: Colors.white),
               onPressed: () {
                 Provider.of<AppBarTitleState>(context, listen: false)
-                    .setCurrentAppBarTitle("Home");
+                    .setCurrentAppBarTitle(Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ?"Home" :"Nyumbani");
                 Navigator.push(
                     context,
                     new MaterialPageRoute(
@@ -85,10 +87,10 @@ class _ReportModuleState extends State<ReportModule>
               indicatorColor: Colors.white,
               indicatorWeight: 3.0,
               tabs: [
-                Tab(text: "All"),
-                Tab(text: "Week 1"),
-                Tab(text: "Week 2"),
-                Tab(text: "Week 3"),
+                Tab(text:Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "All" :"Zote"),
+                Tab(text:Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Week 1" : "Wiki 1"),
+                Tab(text:Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Week 2" :"Wiki 3"),
+                Tab(text:Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Week 3" :"Wiki 3"),
               ],
             ),
           ),
@@ -98,11 +100,11 @@ class _ReportModuleState extends State<ReportModule>
                  AllReports(),
               Center(
                 child: Container(child: 
-                Text("No data for this week"),),
+                Text(Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ?"No data for this week" :"Hakuna Taarifa za hii wiki"),),
               ),            
               Center(
                 child: Container(child: 
-                Text("No data for this week"),),
+                Text(Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ?"No data for this week" :"Hakuna Taarifa za hii wiki"),),
               ),
             ],
           ),

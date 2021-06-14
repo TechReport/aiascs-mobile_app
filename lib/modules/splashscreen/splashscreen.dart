@@ -7,7 +7,6 @@ import 'package:aiascs_mobile/core/services/shared_preference/preference_provide
 import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
 import 'package:aiascs_mobile/modules/authentication/login/Login_Page.dart';
 import 'package:aiascs_mobile/modules/home/home.dart';
-// import 'package:aiascs_mobile/modules/splashscreen/Scan_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +19,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
     var _duration = new Duration(seconds: 7);
-   await Provider.of<LanguageState>(context, listen: false)
-        .setCurrentLanguage(language: LanguageContant().english);
           Provider.of<LanguageState>(context, listen: false).getCurrentLanguage();
     Provider.of<LoginState>(context, listen: false).checkAuth();
     return new Timer(_duration, navigationPage);
@@ -32,11 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (Provider.of<LoginState>(context, listen: false).isAuth) {
       Provider.of<UserState>(context, listen: false).setCurrentUser(
           await PreferenceProvider.getPreferenceValue("userId"));
-      //
-      // Navigator.push(
-      //     context,
-      //     new MaterialPageRoute(
-      //         builder: (context) => new  HomePage()));
+ 
       Navigator.push(
           context,
           new MaterialPageRoute(
@@ -45,6 +38,9 @@ class _SplashScreenState extends State<SplashScreen> {
                       Provider.of<AppBarTitleState>(context, listen: false)
                           .currentSelectedBottomBar)));
     } else {
+         await Provider.of<LanguageState>(context, listen: false)
+        .setCurrentLanguage(language: LanguageContant().english);
+             Provider.of<LanguageState>(context, listen: false).getCurrentLanguage();
       Navigator.push(context,
           new MaterialPageRoute(builder: (context) => new LoginPage()));
     }

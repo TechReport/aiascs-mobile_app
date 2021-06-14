@@ -1,7 +1,7 @@
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/app_state/language_state.dart';
 import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
-import 'package:aiascs_mobile/modules/home/home.dart';
+import 'package:aiascs_mobile/modules/splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -45,29 +45,25 @@ class AppUtil {
               ),
               Divider(),
               ListTile(
-                leading: new Icon(Icons.photo),
+                leading: Text("🇹🇿"),
                 title: new Text('Swahili'),
                 onTap: () async {
                   await Provider.of<LanguageState>(context, listen: false)
                       .setCurrentLanguage(language: LanguageContant().swahili);
 
                   Navigator.push(context,
-                      new MaterialPageRoute(builder: (context) => new Home(
-                        selectedIndex:  Provider.of<AppBarTitleState>(context, listen: false)
-            .currentSelectedBottomBar,
-                      )));
+                      new MaterialPageRoute(builder: (context) => new SplashScreen()));
                 },
               ),
               ListTile(
-                leading: new Icon(Icons.music_note),
+                leading: Text("🇺🇲"),
                 title: new Text('English'),
                 onTap: () async {
                   await Provider.of<LanguageState>(context, listen: false)
                       .setCurrentLanguage(language: LanguageContant().english);
 
                   Navigator.push(context,
-                      new MaterialPageRoute(builder: (context) => new Home(   selectedIndex:  Provider.of<AppBarTitleState>(context, listen: false)
-            .currentSelectedBottomBar,)));
+                      new MaterialPageRoute(builder: (context) => new  SplashScreen()));
                 },
               ),
             ],

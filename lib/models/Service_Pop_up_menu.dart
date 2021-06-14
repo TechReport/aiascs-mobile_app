@@ -1,6 +1,9 @@
 
 
+import 'package:aiascs_mobile/app_state/language_state.dart';
+import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ServicePopUpMenu {
   String id;
@@ -20,16 +23,17 @@ class ServicePopUpMenu {
 
 
  static List<ServicePopUpMenu>
-      getDefaultServicePopUpMenus() {
+      getDefaultServicePopUpMenus(BuildContext context) {
     return [
-      ServicePopUpMenu(id: 'logout', name: 'Logout'),
-      ServicePopUpMenu(id: 'password', name: 'Change Password'),
-      ServicePopUpMenu(id: 'sync', name: 'Sync'),
-      ServicePopUpMenu(id: 'language_setting', name: 'Language Settings'),
-      ServicePopUpMenu(id: 'settings', name: 'Settings'),
-      ServicePopUpMenu(id: 'report', name: 'Report'),
-      ServicePopUpMenu(id: 'profile', name: 'Profiles'),
-      ServicePopUpMenu(id: 'password', name: 'Change Password'),
+      ServicePopUpMenu(id: 'password', name: Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Change Password':"Baadili Nywila"),
+      ServicePopUpMenu(id: 'sync', name:Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Sync' :"Fananisha Taarifa"),
+      ServicePopUpMenu(id: 'language_setting', name: Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Change Language' :"Baadilisha Lugha"),
+      ServicePopUpMenu(id: 'settings', name: Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Settings' :"Marekibisho"),
+      ServicePopUpMenu(id: 'report', name: Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ?'Report':"Repoti"),
+      ServicePopUpMenu(id: 'profile', name:Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Profiles' :"Taarifa Binafsi"),
+      ServicePopUpMenu(id: 'logout', name:Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ?'Logout' :"Toka"),
+      ServicePopUpMenu(id: 'faq', name:Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ?'FAQ' :"Maswali yakujua"),
+
     ];
   }
 
