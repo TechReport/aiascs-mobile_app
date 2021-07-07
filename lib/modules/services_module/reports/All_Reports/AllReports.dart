@@ -28,23 +28,133 @@ class _AllReportsState extends State<AllReports> {
         builder: (BuildContext context, productState, child) {
       return Scaffold(
         body: SingleChildScrollView(
-                  child: Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ReportSelectinTopBar(
-                isClicked: isSelected,
+                isClicked: productState.isVisual,
                 onSelectGeneralReport: () {
                   setState(() {
-                    isSelected = true;
+                    productState.setVisualonReportTopBar(true);
                   });
                 },
                 onSelectVisualisation: () {
                   setState(() {
-                    isSelected = false;
+                    productState.setVisualonReportTopBar(false);
+
                   });
                 },
               ),
-              VisualisationGraph(
+             productState.isVisual ?
+             
+             Container(
+      height: MediaQuery.of(context).size.height / 3,
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.all(0),
+      child: Material(
+        color:  Color(0xFF264653),
+        elevation: 0,
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceAround,
+  children: [
+    Container(
+      padding: EdgeInsets.only(top: 10),
+      child: Column(
+        children: [
+          Text("Total Products",style: TextStyle(color: Colors.white,fontSize: 15),),
+          Text("1200",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)
+        ],
+      ),
+    ),
+       Container(
+      padding: EdgeInsets.only(top: 10),
+      child: Column(
+        children: [
+          Text("Fake Products",style: TextStyle(color: Colors.white,fontSize: 15),),
+          Text("300",style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),)
+        ],
+      ),
+    )
+  ],
+),
+Container(
+  color: Colors.transparent  ,
+        padding: EdgeInsets.only(top: 10),
+
+  width: MediaQuery.of(context).size.width,
+  height: MediaQuery.of(context).size.height/4,
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      Divider(),
+      Row(
+        children: [
+Expanded(
+  flex: 1,
+  child: Icon(Icons.unarchive_outlined,size: 20,color: Colors.white,),
+)
+,
+Expanded(
+  flex: 3,
+  child: Column(children: [
+  Text("UnAuthorized products",style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal),),
+  // Icon(Icons.linear_scale_sharp,size: 40,color: Colors.green,)
+],)),
+
+Expanded(
+  flex: 1,
+  child: Text("399",style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal),))
+      ],),
+      Divider(),
+          Row(children: [
+Expanded(
+  flex: 1,
+  child: Icon(Icons.signal_cellular_no_sim_sharp,size: 20,color: Colors.white,),
+)
+,
+Expanded(
+  flex: 3,
+  child: Column(children: [
+  Text("Fake products",style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal),),
+  // Icon(Icons.linear_scale_sharp,size: 40,color: Colors.green,)
+],)),
+
+Expanded(
+  flex: 1,
+  child: Text("500",style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal)))
+      ],),
+       Divider(),
+          Row(children: [
+Expanded(
+  flex: 1,
+  child: Icon(Icons.baby_changing_station_outlined,size: 20,color: Colors.white,),
+)
+,
+Expanded(
+  flex: 3,
+  child: Column(children: [
+  Text("Genuine products",style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal)),
+  // Icon(Icons.linear_scale_sharp,size: 40,color: Colors.green,)
+],)),
+
+Expanded(
+  flex: 1,
+  child: Text("100",style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal)))
+      ],)
+    ],
+  ),
+)
+
+          ],
+        ) 
+      ),
+    )
+             
+             : VisualisationGraph(
                 genuine: genuine,
                 fake: fake,
                 others: others,
@@ -59,7 +169,7 @@ class _AllReportsState extends State<AllReports> {
                       fontSize: 17),
                 ),
               ),
-             VisualisationAnallysingReport()
+              VisualisationAnallysingReport()
             ],
           ),
         ),
