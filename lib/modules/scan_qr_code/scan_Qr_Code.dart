@@ -216,8 +216,30 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                                                                     title:
                                                                         "Show Report ",
                                                                     onPressButton:
-                                                                        () =>
-                                                                            onViewProductScanReport(),
+                                                                        () {
+                                                                            print(
+                                                                            "amd tesstigy   "+scanQrCode
+                                                                              .currentProduct
+                                                                              .isRevoked);
+                                                                      if (scanQrCode
+                                                                              .currentProduct
+                                                                              .isRevoked ==
+                                                                          null ||scanQrCode
+                                                                              .currentProduct
+                                                                              .isRevoked.isEmpty || scanQrCode
+                                                                              .currentProduct
+                                                                              .isRevoked.length < 1) {
+                                                                        print(
+                                                                            "amd tesstigy");
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                        return AppUtil.showToastMessage(
+                                                                            message:
+                                                                                "Nothing to Revoke");
+                                                                      } else {
+                                                                        return onViewProductScanReport();
+                                                                      }
+                                                                    },
                                                                     width: MediaQuery.of(context).size.width /
                                                                             4 +
                                                                         50,
@@ -237,8 +259,6 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                 ))),
             body: ListView(
               children: [
-                                             
-
                 Container(
                   color: Colors.white,
                   padding: EdgeInsets.all(10),
