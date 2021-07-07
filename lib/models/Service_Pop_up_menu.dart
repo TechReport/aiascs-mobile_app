@@ -25,14 +25,16 @@ class ServicePopUpMenu {
  static List<ServicePopUpMenu>
       getDefaultServicePopUpMenus(BuildContext context) {
     return [
-      ServicePopUpMenu(id: 'password', name: Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Change Password':"Baadili Nywila"),
-      ServicePopUpMenu(id: 'sync', name:Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Sync' :"Fananisha Taarifa"),
+     
       ServicePopUpMenu(id: 'language_setting', name: Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Change Language' :"Baadilisha Lugha"),
+            ServicePopUpMenu(id: 'faq', name:Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ?'FAQ' :"Maswali yakujua"),
+
       ServicePopUpMenu(id: 'settings', name: Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Settings' :"Marekibisho"),
       ServicePopUpMenu(id: 'report', name: Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ?'Report':"Repoti"),
       ServicePopUpMenu(id: 'profile', name:Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Profiles' :"Taarifa Binafsi"),
-      ServicePopUpMenu(id: 'logout', name:Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ?'Logout' :"Toka"),
-      ServicePopUpMenu(id: 'faq', name:Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ?'FAQ' :"Maswali yakujua"),
+ ServicePopUpMenu(id: 'password', name: Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Change Password':"Baadili Nywila"),
+      ServicePopUpMenu(id: 'sync', name:Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ? 'Sync' :"Fananisha Taarifa"),
+           ServicePopUpMenu(id: 'logout', name:Provider.of<LanguageState>(context,listen: false).currentLanguage  == LanguageContant().english ?'Logout' :"Toka"),
 
     ];
   }
