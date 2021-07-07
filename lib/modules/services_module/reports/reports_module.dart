@@ -25,6 +25,8 @@ class _ReportModuleState extends State<ReportModule>
     with SingleTickerProviderStateMixin {
   int _selectedindex;
   TabController tabController;
+  DateTime filterDate;
+  // CalendarController _controller;
 
   @override
   void initState() {
@@ -32,6 +34,7 @@ class _ReportModuleState extends State<ReportModule>
     _selectedindex = Provider.of<AppBarTitleState>(context, listen: false)
         .currentSelectedBottomBar;
     tabController = new TabController(length: 3, vsync: this, initialIndex: 0);
+    // _controller = CalendarController();
   }
 
   @override
@@ -62,7 +65,90 @@ class _ReportModuleState extends State<ReportModule>
                     Icons.calendar_today,
                     color: Colors.white,
                   ),
-                  onPressed: () {                    
+                  onPressed: () {
+                    showDialog(
+                        barrierDismissible: true,
+                        builder: (context) => new AlertDialog(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                new Text(Provider.of<LanguageState>(context,
+                                                listen: false)
+                                            .currentLanguage ==
+                                        LanguageContant().english
+                                    ? "Add Description "
+                                    : "Ongeza Maelezo "),
+                                Icon(
+                                  Icons.mark_email_read_sharp,
+                                  size: 60,
+                                  color: Colors.greenAccent,
+                                )
+                              ],
+                            ),
+                            content: Container(
+                              height:
+                                  MediaQuery.of(context).size.height / 4 + 10,
+                              width: MediaQuery.of(context).size.width,
+                              child: GestureDetector(
+                                onTap: () {},
+                                child: TableCalendar(
+                                  
+                                  calendarFormat: CalendarFormat.month,
+                                  calendarStyle: CalendarStyle(
+                                      // todayColor: Colors.blue,
+                                      // selectedColor:
+                                      //     Theme.of(context).primaryColor,
+                                      todayTextStyle: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22.0,
+                                          color: Colors.white)),
+                                  headerStyle: HeaderStyle(
+                                    formatButtonDecoration: BoxDecoration(
+                                      color: Colors.brown,
+                                      borderRadius: BorderRadius.circular(22.0),
+                                    ),
+                                    formatButtonTextStyle:
+                                        TextStyle(color: Colors.white),
+                                    formatButtonShowsNext: false,
+                                  ),
+                                  startingDayOfWeek: StartingDayOfWeek.monday,
+                                  onDaySelected: (date, events) {
+                                    print(date.toUtc());
+                                  },
+                                  calendarBuilders: CalendarBuilders(
+                                    selectedBuilder:
+                                        (context, date, events) => Container(
+                                            margin: const EdgeInsets.all(5.0),
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0)),
+                                            child: Text(
+                                              date.day.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                    todayBuilder: (context, date, events) =>
+                                        Container(
+                                            margin: const EdgeInsets.all(5.0),
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                                color: Colors.blue,
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0)),
+                                            child: Text(
+                                              date.day.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                  ), firstDay: null, focusedDay: null, lastDay: null,
+                                  // calendarController: _controller,
+                                ),
+                              ),
+                            )),
+                        context: context);
                   })
             ],
             elevation: 0,
