@@ -31,6 +31,10 @@ class _LoginPageState extends State<LoginPage> {
   final _loginFormKey = GlobalKey();
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
+  String dropdownValue = 'Gender';
+  String districtname = 'District';
+  String regionname = 'Region';
+  String wardname = 'Ward';
 
   void toLogin(BuildContext context, GlobalKey loginFormKeyStatus) async {
     if (loginFormKeyStatus.currentState.mounted) {
@@ -38,10 +42,12 @@ class _LoginPageState extends State<LoginPage> {
           .login(_emailController.text, _passwordController.text);
     }
     Navigator.push(
-        context, new MaterialPageRoute(builder: (context) => new Home(
-          selectedIndex: Provider.of<AppBarTitleState>(context,listen: false).currentSelectedBottomBar
-        )));
-  
+        context,
+        new MaterialPageRoute(
+            builder: (context) => new Home(
+                selectedIndex:
+                    Provider.of<AppBarTitleState>(context, listen: false)
+                        .currentSelectedBottomBar)));
   }
 
   Widget _entryField(String title, {bool isPassword = false}) {
