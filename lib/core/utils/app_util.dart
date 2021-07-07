@@ -8,12 +8,14 @@ import 'package:provider/provider.dart';
 
 class AppUtil {
   static showToastMessage(
-      {String message, ToastGravity position = ToastGravity.BOTTOM}) {
+      {String message, ToastGravity position = ToastGravity.CENTER}) {
     Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
         gravity: position,
-        backgroundColor: Color(0xFF656565));
+        textColor: Colors.red,
+        fontSize: 15,
+        backgroundColor: Colors.white);
   }
 
   static onShowLanguageProfile(BuildContext context) {
