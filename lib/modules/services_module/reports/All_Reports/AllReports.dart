@@ -11,7 +11,6 @@ class AllReports extends StatefulWidget {
 }
 
 class _AllReportsState extends State<AllReports> {
-  bool isSelected = false;
   double fake, genuine, others;
 
   @override

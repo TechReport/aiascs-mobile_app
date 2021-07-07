@@ -3,6 +3,7 @@ import 'package:aiascs_mobile/app_state/language_state.dart';
 import 'package:aiascs_mobile/app_state/product_state.dart';
 import 'package:aiascs_mobile/app_state/scan_qr_code_state.dart';
 import 'package:aiascs_mobile/core/components/enter_token_button.dart';
+import 'package:aiascs_mobile/core/components/location_pop_form.dart';
 import 'package:aiascs_mobile/core/components/spacer_component.dart';
 import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
 import 'package:aiascs_mobile/models/Product.dart';
@@ -21,6 +22,12 @@ class ScanProductReport extends StatefulWidget {
 
 class _ScanProductReportState extends State<ScanProductReport> {
   int _selectedindex = 0;
+  GlobalKey<FormState> _key = new GlobalKey();
+  AutovalidateMode _validate = AutovalidateMode.disabled;
+  String email = '', password = '';
+  TextEditingController _confirmPasswordController =
+      new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
 
   @override
   void initState() {
@@ -79,7 +86,10 @@ class _ScanProductReportState extends State<ScanProductReport> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
-                     languageState.currentLanguage == LanguageContant().english ?     "GENUINE " :"NI ORIGINAL",
+                          languageState.currentLanguage ==
+                                  LanguageContant().english
+                              ? "GENUINE "
+                              : "NI ORIGINAL",
                           style: TextStyle(
                             color: Colors.greenAccent,
                             fontWeight: FontWeight.bold,
@@ -97,7 +107,10 @@ class _ScanProductReportState extends State<ScanProductReport> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
-                         languageState.currentLanguage== LanguageContant().english ?  "FAKE " : "NI FEKI",
+                          languageState.currentLanguage ==
+                                  LanguageContant().english
+                              ? "FAKE "
+                              : "NI FEKI",
                           style: TextStyle(
                             color: Colors.red,
                             fontWeight: FontWeight.bold,
@@ -183,23 +196,157 @@ class _ScanProductReportState extends State<ScanProductReport> {
                         width: MediaQuery.of(context).size.width / 2,
                         height: MediaQuery.of(context).size.height / 16,
                         title: product.isRevoked == "false"
-                            ? 
-                            languageState.currentLanguage== LanguageContant().english ?
-                            "Revoke Product" : "Iweke Kuwa Feki"
-                            :  languageState.currentLanguage== LanguageContant().english ? "View Full Report" :
-                            "Onesha Repoti Nzima",
+                            ? languageState.currentLanguage ==
+                                    LanguageContant().english
+                                ? "Revoke Product"
+                                : "Iweke Kuwa Feki"
+                            : languageState.currentLanguage ==
+                                    LanguageContant().english
+                                ? "View Full Report"
+                                : "Onesha Repoti Nzima",
                         onPressButton: () async {
                           scanQrCode.clear();
                           if (product.isRevoked == 'false') {
-                            if (await scanQrCode.revokeProduct(product.id)) {
-                              Navigator.push(
-                                  context,
-                                  new MaterialPageRoute(
-                                      builder: (context) => new Home(
-                                          // product: product,
-                                          // isReport: true,
-                                          )));
-                            }
+                            showDialog(
+                                barrierDismissible: true,
+                                builder: (context) => new AlertDialog(
+                                    title: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        new Text(Provider.of<LanguageState>(
+                                                        context,
+                                                        listen: false)
+                                                    .currentLanguage ==
+                                                LanguageContant().english
+                                            ? "Add Description "
+                                            : "Ongeza Maelezo "),
+                                        Icon(
+                                          Icons.mark_email_read_sharp,
+                                          size: 60,
+                                          color: Colors.greenAccent,
+                                        )
+                                      ],
+                                    ),
+                                    content: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                                  4 +
+                                              10,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Column(children: [
+                                        Form(
+                                          key: _key,
+                                          autovalidateMode: _validate,
+                                          child: ConstrainedBox(
+                                            constraints: BoxConstraints(
+                                                minWidth: double.infinity),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(0),
+                                              child: TextFormField(
+                                                  controller:
+                                                      _passwordController,
+                                                  textAlignVertical:
+                                                      TextAlignVertical.center,
+                                                  textInputAction:
+                                                      TextInputAction.next,
+                                                  obscureText: false,
+                                                  enableSuggestions: true,
+                                                  maxLines: 7,
+                                                  // ignore: missing_return
+                                                  validator: (value) {
+                                                    if (value.length < 1) {
+                                                      return languageState
+                                                                  .currentLanguage ==
+                                                              LanguageContant()
+                                                                  .english
+                                                          ? "Value is not correct or similar to password above"
+                                                          : "Taarifa hazifanani na nywila ulizoingiza hapo juu";
+                                                    }
+                                                  },
+                                                  onSaved: (String val) {
+                                                    email = val;
+                                                  },
+                                                  onFieldSubmitted: (_) =>
+                                                      FocusScope.of(context)
+                                                          .nextFocus(),
+                                                  style:
+                                                      TextStyle(fontSize: 13.0),
+                                                  keyboardType:
+                                                      TextInputType.text,
+                                                  cursorColor:
+                                                      Color(0xFF264653),
+                                                  decoration: InputDecoration(
+                                                      contentPadding:
+                                                          new EdgeInsets.only(
+                                                              left: 2,
+                                                              right: 0,
+                                                              top: 10),
+                                                      fillColor: Colors.white,
+                                                      hintText: languageState
+                                                                  .currentLanguage ==
+                                                              LanguageContant()
+                                                                  .english
+                                                          ? 'Enter New Password'
+                                                          : "Ingiiza Nywila",
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.circular(2.0),
+                                                          borderSide: BorderSide(color: Colors.grey, width: 2.0)),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(2.0),
+                                                      ))),
+                                            ),
+                                          ),
+                                        ),
+                                        LocationPopUpForm(),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Provider.of<ScanQrCodeState>(
+                                                        context,
+                                                        listen: false)
+                                                    .isLoading
+                                                ? Text(" Loading ....")
+                                                : EnterTokenButton(
+                                                    title: Provider.of<LanguageState>(
+                                                                    context,
+                                                                    listen:
+                                                                        false)
+                                                                .currentLanguage ==
+                                                            LanguageContant()
+                                                                .english
+                                                        ? "Complete "
+                                                        : "Maliza",
+                                                    onPressButton: () async {
+                                                      if (await scanQrCode
+                                                          .revokeProduct(
+                                                              product.id)) {
+                                                        Navigator.push(
+                                                            context,
+                                                            new MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    new Home(
+                                                                        // product: product,
+                                                                        // isReport: true,
+                                                                        )));
+                                                      }
+                                                    },
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                    .size
+                                                                    .width /
+                                                                4 +
+                                                            50,
+                                                  )
+                                          ],
+                                        )
+                                      ]),
+                                    )),
+                                context: context);
                           } else {
                             Provider.of<AppBarTitleState>(context,
                                     listen: false)
