@@ -26,7 +26,7 @@ class ScanQrCodeState extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     } else {
-      _isLoading = true;
+      _isLoading = false;
       notifyListeners();
     }
   }
