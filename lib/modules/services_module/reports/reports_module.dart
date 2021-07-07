@@ -159,7 +159,12 @@ class _ReportModuleState extends State<ReportModule>
               icon: Icon(Icons.arrow_back_ios, color: Colors.white),
               onPressed: () {
                 Provider.of<AppBarTitleState>(context, listen: false)
-                    .setCurrentAppBarTitle(Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ?"Home" :"Nyumbani");
+                    .setCurrentAppBarTitle(
+                        Provider.of<LanguageState>(context, listen: false)
+                                    .currentLanguage ==
+                                LanguageContant().english
+                            ? "Home"
+                            : "Nyumbani");
                 Navigator.push(
                     context,
                     new MaterialPageRoute(
@@ -175,24 +180,54 @@ class _ReportModuleState extends State<ReportModule>
               indicatorColor: Colors.white,
               indicatorWeight: 3.0,
               tabs: [
-                Tab(text:Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "All" :"Zote"),
-                Tab(text:Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Week 1" : "Wiki 1"),
-                Tab(text:Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Week 2" :"Wiki 3"),
-                Tab(text:Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Week 3" :"Wiki 3"),
+                Tab(
+                    text: Provider.of<LanguageState>(context, listen: false)
+                                .currentLanguage ==
+                            LanguageContant().english
+                        ? "All"
+                        : "Zote"),
+                Tab(
+                    text: Provider.of<LanguageState>(context, listen: false)
+                                .currentLanguage ==
+                            LanguageContant().english
+                        ? "Week 1"
+                        : "Wiki 1"),
+                Tab(
+                    text: Provider.of<LanguageState>(context, listen: false)
+                                .currentLanguage ==
+                            LanguageContant().english
+                        ? "Week 2"
+                        : "Wiki 3"),
+                Tab(
+                    text: Provider.of<LanguageState>(context, listen: false)
+                                .currentLanguage ==
+                            LanguageContant().english
+                        ? "Week 3"
+                        : "Wiki 3"),
               ],
             ),
           ),
           body: TabBarView(
             children: [
               AllReports(),
-                 AllReports(),
+              AllReports(),
               Center(
-                child: Container(child: 
-                Text(Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ?"No data for this week" :"Hakuna Taarifa za hii wiki"),),
-              ),            
+                child: Container(
+                  child: Text(Provider.of<LanguageState>(context, listen: false)
+                              .currentLanguage ==
+                          LanguageContant().english
+                      ? "No data for this week"
+                      : "Hakuna Taarifa za hii wiki"),
+                ),
+              ),
               Center(
-                child: Container(child: 
-                Text(Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ?"No data for this week" :"Hakuna Taarifa za hii wiki"),),
+                child: Container(
+                  child: Text(Provider.of<LanguageState>(context, listen: false)
+                              .currentLanguage ==
+                          LanguageContant().english
+                      ? "No data for this week"
+                      : "Hakuna Taarifa za hii wiki"),
+                ),
               ),
             ],
           ),
