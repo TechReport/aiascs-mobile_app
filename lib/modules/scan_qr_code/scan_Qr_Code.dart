@@ -21,9 +21,13 @@ class _ScanQrCodeState extends State<ScanQrCode> {
   String result = '';
   Future<void> onValidateToken(String tokenValue) async {
     print("on search token validate");
-    await Provider.of<ScanQrCodeState>(context, listen: false)
-        .scanQrCode(qrInfo: tokenValue);
-
+    if (tokenValue.isNotEmpty && tokenValue.length > 7 || tokenValue != null) {
+      await Provider.of<ScanQrCodeState>(context, listen: false)
+          .scanQrCode(qrInfo: tokenValue);
+    } else {
+      //
+      return AppUtil.showToastMessage(message: "Enter Valid Product TOKEN");
+    }
 // Provider.of<ScanQrCodeState>(context, listen: false).setIsLoading(false);
   }
 
@@ -37,11 +41,12 @@ class _ScanQrCodeState extends State<ScanQrCode> {
     // await Permission.camera.request();
     String cameraScanResult = await scanner.scan();
     print("searchScanResult");
-    print(cameraScanResult);
-     await Provider.of<ScanQrCodeState>(context, listen: false)
-        .scanQrCode2(qrInfo: cameraScanResult);
-    // Provider.of<ScanQrCodeState>(context, listen: false).isLoading
-     return  showDialog(
+    if (cameraScanResult != null ||
+        cameraScanResult.isNotEmpty && cameraScanResult.length > 7) {
+      await Provider.of<ScanQrCodeState>(context, listen: false)
+          .scanQrCode2(qrInfo: cameraScanResult);
+      // Provider.of<ScanQrCodeState>(context, listen: false).isLoading
+      return showDialog(
           barrierDismissible: false,
           builder: (context) => new AlertDialog(
                 title: new Text(
@@ -64,28 +69,45 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                             .isLoading
                         ? Text(" Loading ....")
                         : EnterTokenButton(
-                            title:   Provider.of<LanguageState>(context, listen: false).currentLanguage == LanguageContant().english ?"Show Report ":"Onesha Repoti",
-                            onPressButton: () => onViewProductScanReport(),
+                            title: Provider.of<LanguageState>(context,
+                                            listen: false)
+                                        .currentLanguage ==
+                                    LanguageContant().english
+                                ? "Show Report "
+                                : "Onesha Repoti",
+                            onPressButton: () {
+                              if (Provider.of<ScanQrCodeState>(context,
+                                          listen: false)
+                                      .currentProduct
+                                      .isRevoked ==
+                                  null) {
+                                return AppUtil.showToastMessage(
+                                    message: "Nothing to Revoke");
+                              } else {
+                                return onViewProductScanReport();
+                              }
+                            },
                             width: MediaQuery.of(context).size.width / 4 + 50,
                           )
                   ],
                 ),
               ),
           context: context);
+    }
 // Provider.of<ScanQrCodeState>(context, listen: false).setIsLoading(false);
-    
+
     if (QrCodeValidate.validateQrcode(cameraScanResult)) {
       print("the authenticated messsage is" + cameraScanResult);
     } else {}
     //  Provider.of<ScanQrCodeState>(context, listen: false).setIsLoading(false);
   }
 
-  TextEditingController _searchController;
+  TextEditingController _searchController = new TextEditingController();
 //cc8bb08d-f246-4124-8fa2-7c1b2407b39a
   @override
   void initState() {
     super.initState();
-    //  _searchController.text = "cc8bb08d-f246-4124-8fa2-7c1b2407b39a";
+    _searchController.text = "2101-00-003K";
   }
 
   @override
