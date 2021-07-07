@@ -277,22 +277,26 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                         CircleAvatar(
                           backgroundColor: Color(0xFFF8F4FF),
                           radius: MediaQuery.of(context).size.height / 8,
-                          child: scanQrCode.isQRLoading ? CircularProgressIndicator(
-                            backgroundColor:  Color(0xFF264653),
-                          ):Icon(
-                            Icons.qr_code_scanner,
-                            size: 130,
-                            color: Colors.grey[400],
-                          ),
+                          child: scanQrCode.isQRLoading
+                              ? CircularProgressIndicator(
+                                  backgroundColor: Color(0xFF264653),
+                                )
+                              : Icon(
+                                  Icons.qr_code_scanner,
+                                  size: 130,
+                                  color: Colors.grey[400],
+                                ),
                         ),
                         SpacerComponent(
                             height: MediaQuery.of(context).size.height / 30),
                         Expanded(
-                          child: Text(
-                           languageState.currentLanguage == LanguageContant().english ?    "This QR code is very safe share to any others" : "QR code hii ni salama tumia na wengine"),
+                          child: Text(languageState.currentLanguage ==
+                                  LanguageContant().english
+                              ? "This QR code is very safe share to any others"
+                              : "QR code hii ni salama tumia na wengine"),
                         )
                       ],
-                    ),                                                                                                                   
+                    ),
                   ),
                 ),
                 Container(
@@ -305,7 +309,10 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                       child: EnterTokenButton(
                         width: MediaQuery.of(context).size.width / 2,
                         height: MediaQuery.of(context).size.height / 16,
-                        title:languageState.currentLanguage == LanguageContant().english ? "Scan Code" : "Hakiki QR",
+                        title: languageState.currentLanguage ==
+                                LanguageContant().english
+                            ? "Scan Code"
+                            : "Hakiki QR",
                         onPressButton: () => onStartScanQrCoe(),
                       ),
                     )),
