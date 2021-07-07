@@ -3,6 +3,7 @@ import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/app_state/language_state.dart';
 import 'package:aiascs_mobile/app_state/searching_state.dart';
 import 'package:aiascs_mobile/core/components/pop_up_menu_component.dart';
+import 'package:aiascs_mobile/core/utils/Faq.dart';
 import 'package:aiascs_mobile/core/utils/app_util.dart';
 import 'package:aiascs_mobile/modules/authentication/change_password/Change_Password.dart';
 import 'package:aiascs_mobile/modules/authentication/login/Login_Page.dart';
@@ -91,6 +92,12 @@ class _HomeState extends State<Home> {
             new MaterialPageRoute(builder: (context) => new ChangePassword()));
 
         break;
+        case "faq":
+        Navigator.push(context,
+            new MaterialPageRoute(builder: (context) => new FAQ()));
+
+        break;
+        //FAQ
       default:
         print(response);
     }
