@@ -154,7 +154,10 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                                       prefixIcon: Icon(Icons.qr_code_rounded),
                                       border: InputBorder.none,
                                       labelText:
-                                        languageState.currentLanguage == LanguageContant() ?  'token here' : "weka token ",
+                                          languageState.currentLanguage ==
+                                                  LanguageContant().english
+                                              ? 'token here'
+                                              : "weka token ",
                                     ))))),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -174,9 +177,13 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                                 scanQrCode.isLoading
                                     ? CircularProgressIndicator()
                                     : EnterTokenButton(
-                                        title:  languageState.currentLanguage == LanguageContant() ? "Validate":"Hakiki",
+                                        title: languageState.currentLanguage ==
+                                                LanguageContant().english
+                                            ? "Validate"
+                                            : "Hakiki",
                                         onPressButton: () async {
-                                          await onValidateToken(_searchController.text);
+                                          await onValidateToken(
+                                              _searchController.text);
 
                                           showDialog(
                                               barrierDismissible: false,
@@ -198,6 +205,8 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                                                                         .mark_email_read_sharp,
                                                                     size: 60,
                                                                     color: Colors
+
+                                                                    
                                                                         .greenAccent,
                                                                   ),
                                                             scanQrCode.isLoading
