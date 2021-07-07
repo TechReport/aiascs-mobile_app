@@ -4,10 +4,12 @@ import 'package:aiascs_mobile/app_state/Login_state.dart';
 import 'package:aiascs_mobile/app_state/User_state.dart';
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
 import 'package:aiascs_mobile/app_state/language_state.dart';
+import 'package:aiascs_mobile/app_state/location_state.dart';
 import 'package:aiascs_mobile/app_state/product_state.dart';
 import 'package:aiascs_mobile/app_state/scan_qr_code_state.dart';
 import 'package:aiascs_mobile/app_state/searching_state.dart';
 import 'package:aiascs_mobile/app_state/unAuthorizedProduct_State.dart';
+import 'package:aiascs_mobile/core/components/location_pop_form.dart';
 import 'package:aiascs_mobile/modules/splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,8 +36,7 @@ class App extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => UnAuthorizedProductState()),
           ChangeNotifierProvider(create: (_) => LanguageState()),             
           ChangeNotifierProvider(create: (_) => SearchingState()),             
-
-          //
+          ChangeNotifierProvider(create: (_) => LocationState()), 
         ],
         child:
     MaterialApp(
