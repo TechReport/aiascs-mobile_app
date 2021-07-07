@@ -75,7 +75,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-
   Widget _title(BuildContext context) {
     return RichText(
       textAlign: TextAlign.center,
@@ -101,9 +100,18 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _passwordController.text = "TBS";
+    _emailController.text = "test@tbs.com";
+  }
+
+  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Consumer<LoginState>(builder: (BuildContext context, loginState, child) {
+    return Consumer<LoginState>(
+        builder: (BuildContext context, loginState, child) {
       return Scaffold(
           body: Container(
         height: height,
@@ -128,28 +136,195 @@ class _LoginPageState extends State<LoginPage> {
                         _emailPasswordWidget(),
                         SizedBox(height: 20),
                         GestureDetector(
-                          child:loginState.isLoading ? CircularProgressIndicator(
-                            backgroundColor: Color(0xFF264653),
-                          ) : SubmitButton(),
-                          onTap: ()async {
-                         
-                           await   loginState.setLogin(_emailController.text,
+                          child: loginState.isLoading
+                              ? CircularProgressIndicator(
+                                  backgroundColor: Color(0xFF264653),
+                                )
+                              : SubmitButton(),
+                          onTap: () async {
+                            //             showDialog(
+                            //                 barrierDismissible: true,
+                            //                 builder: (context) => new AlertDialog(
+                            //                     title: Row(
+                            //                       mainAxisAlignment:
+                            //                           MainAxisAlignment.center,
+                            //                       children: [
+                            //                         new Text(Provider.of<LanguageState>(
+                            //                                         context,
+                            //                                         listen: false)
+                            //                                     .currentLanguage ==
+                            //                                 LanguageContant().english
+                            //                             ? "Add Description "
+                            //                             : "Ongeza Maelezo "),
+                            //                         Icon(
+                            //                           Icons.mark_email_read_sharp,
+                            //                           size: 60,
+                            //                           color: Colors.greenAccent,
+                            //                         )
+                            //                       ],
+                            //                     ),
+                            //                     content: Container(
+                            //                       height:
+                            //                           MediaQuery.of(context).size.height /
+                            //                                   2+
+                            //                               100,
+                            //                       width: MediaQuery.of(context).size.width,
+                            //                       child: Column(children: [
+
+                            //                         Row(
+                            //                           mainAxisAlignment:
+                            //                               MainAxisAlignment.spaceAround,
+                            //                           children: [
+                            //                             Provider.of<ScanQrCodeState>(
+                            //                                         context,
+                            //                                         listen: false)
+                            //                                     .isLoading
+                            //                                 ? Text(" Loading ....")
+                            //                                 : EnterTokenButton(
+                            //                                     title: Provider.of<LanguageState>(
+                            //                                                     context,
+                            //                                                     listen:
+                            //                                                         false)
+                            //                                                 .currentLanguage ==
+                            //                                             LanguageContant()
+                            //                                                 .english
+                            //                                         ? "Complete "
+                            //                                         : "Maliza",
+                            //                                     onPressButton: () async {
+
+                            //                                     },
+                            //                                     width:
+                            //                                         MediaQuery.of(context)
+                            //                                                     .size
+                            //                                                     .width /
+                            //                                                 4 +
+                            //                                             50,
+                            //                                   )
+                            //                           ],
+                            //                         ),
+                            //                         Padding(
+                            //   padding: const EdgeInsets.all(10.0),
+                            //   child: DropDownStrip(
+                            //     dropdownitem: regionname,
+                            //     onChange: (newValue) async {
+                            //       setState(() {
+                            //         regionname = newValue;
+                            //       });
+                            //       regionname = newValue;
+                            //       await Provider.of<LocationState>(context, listen: false).getSelectedRegion(regionname);
+                            //     },
+                            //     item: Provider.of<LocationState>(context, listen: false).regionListString,
+                            //   ),
+                            // ),Padding(
+                            //   padding: const EdgeInsets.all(10.0),
+                            //   child: DropDownStrip(
+                            //     dropdownitem: districtname,
+                            //     onChange: (newValue) {
+                            //       setState(() async {
+                            //         districtname = newValue;
+                            //         await Provider.of<LocationState>(context, listen: false).getSelectedDistrict(districtname);
+                            //       });
+                            //     },
+                            //     item: Provider.of<LocationState>(context, listen: false).districtListString,
+                            //   ),
+                            // ),
+                            //  Padding(
+                            //   padding: const EdgeInsets.all(10.0),
+                            //   child: DropDownStrip(
+                            //     dropdownitem: wardname,
+                            //     onChange: (newValue) {
+                            //       setState(() {
+                            //         wardname = newValue;
+                            //       });
+                            //     },
+                            //     item: Provider.of<LocationState>(context, listen: false).wardListString,
+                            //   ),
+                            // ),
+                            //     Form(
+                            //                           child: ConstrainedBox(
+                            //                             constraints: BoxConstraints(
+                            //                                 minWidth: double.infinity),
+                            //                             child: Padding(
+                            //                               padding: const EdgeInsets.all(0),
+                            //                               child: TextFormField(
+                            //                                   controller:
+                            //                                       _passwordController,
+                            //                                   textAlignVertical:
+                            //                                       TextAlignVertical.center,
+                            //                                   textInputAction:
+                            //                                       TextInputAction.next,
+                            //                                   obscureText: false,
+                            //                                   enableSuggestions: true,
+                            //                                   maxLines: 7,
+                            //                                   // ignore: missing_return
+                            //                                   validator: (value) {
+                            //                                     if (value.length < 1) {
+                            //                                       return  "Taarifa hazifanani na nywila ulizoingiza hapo juu";
+                            //                                     }
+                            //                                   },
+                            //                                   onSaved: (String val) {
+                            //                                     // email = val;
+                            //                                   },
+                            //                                   onFieldSubmitted: (_) =>
+                            //                                       FocusScope.of(context)
+                            //                                           .nextFocus(),
+                            //                                   style:
+                            //                                       TextStyle(fontSize: 13.0),
+                            //                                   keyboardType:
+                            //                                       TextInputType.text,
+                            //                                   cursorColor:
+                            //                                       Color(0xFF264653),
+                            //                                   decoration: InputDecoration(
+                            //                                       contentPadding:
+                            //                                           new EdgeInsets.only(
+                            //                                               left: 2,
+                            //                                               right: 0,
+                            //                                               top: 10),
+                            //                                       fillColor: Colors.white,
+                            //                                       hintText: "Ingiiza Nywila",
+                            //                                       focusedBorder: OutlineInputBorder(
+                            //                                           borderRadius:
+                            //                                               BorderRadius.circular(2.0),
+                            //                                           borderSide: BorderSide(color: Colors.grey, width: 2.0)),
+                            //                                       border: OutlineInputBorder(
+                            //                                         borderRadius:
+                            //                                             BorderRadius
+                            //                                                 .circular(2.0),
+                            //                                       ))),
+                            //                             ),
+                            //                           ),
+                            //                         ),
+                            //                       ]),
+                            //                     )),
+                            //                 context: context);
+                            if (_emailController.text.isEmpty ||
+                                _passwordController.text.isEmpty ||
+                                !_emailController.text.contains("@")) {
+                              return AppUtil.showToastMessage(
+                                  message: "Enter Valid Login Credentials");
+                            } else {
+                              await loginState.setLogin(_emailController.text,
                                   _passwordController.text);
-                        
-                         if(loginState.isLogin)
-                         {
-                            await  Provider.of<UserState>(context, listen: false).setCurrentUser(await PreferenceProvider.getPreferenceValue("userId"));
-                              Navigator.push(
-                                context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new Home(selectedIndex: 1,)));
-                         }
+
+                              if (loginState.isLogin) {
+                                await Provider.of<UserState>(context,
+                                        listen: false)
+                                    .setCurrentUser(await PreferenceProvider
+                                        .getPreferenceValue("userId"));
+                                Navigator.push(
+                                    context,
+                                    new MaterialPageRoute(
+                                        builder: (context) => new Home(
+                                              selectedIndex: 1,
+                                            )));
+                              }
+                            }
                           },
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           alignment: Alignment.centerRight,
-                          child: Text('Forgot Password ?',
+                          child: Text('',
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w500)),
                         ),
