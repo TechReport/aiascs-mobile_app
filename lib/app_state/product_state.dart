@@ -16,12 +16,14 @@ class ProductState extends UnAuthorizedProductState {
   double _countFakeProduct = 0;
   double _countAllProduct = 0;
   double _countGenuineProduct = 0;
+  bool _isvisual;
 
   List<Product> get productList => _productLists ?? [];
   bool get isProductLoading => _isLoading ?? false;
   double get countFakeProduct => _countFakeProduct ?? 0;
   double get countAllProductProduct => _countAllProduct ?? 0;
   double get countGenuineProduct => _countGenuineProduct ?? 0;
+  bool get isVisual => _isvisual ?? false;
 
   void getProductList() async {
     _isLoading = true;
@@ -44,6 +46,11 @@ class ProductState extends UnAuthorizedProductState {
     }
     _countFakeProduct = fake.length.toDouble();
     _countGenuineProduct = genuine.length.toDouble();
+    notifyListeners();
+  }
+
+  void setVisualonReportTopBar(bool value) {
+    _isvisual = value;
     notifyListeners();
   }
 
