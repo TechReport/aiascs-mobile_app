@@ -19,11 +19,18 @@ class HttpService {
   };
 
   final String basicUrl = "https://secret-ridge-42311.herokuapp.com";
+   final String locationAPI = "https://tanzaniatx.herokuapp.com";
+
 
   Future<http.Response> httpGet(String url, {String token = ""}) async {
     var httpUrl = Uri.parse(basicUrl + url);
     headers["Authorization"] = "Bearer " + token;
     http.Response response = await http.get(httpUrl, headers: headers);
+    return response;
+  }
+  Future<http.Response> getThirdHttp(String secondaryUrl) async {
+    var url = Uri.parse(locationAPI + secondaryUrl);
+    http.Response response = await http.get(url, headers: headers);
     return response;
   }
 

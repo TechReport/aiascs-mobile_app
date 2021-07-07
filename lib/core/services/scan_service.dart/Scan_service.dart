@@ -11,25 +11,30 @@ import 'package:http/http.dart';
 // Name: Danford Kija David
 // Email: kijadanford@gmail.com,
 // phoneNo: +255620419226
-//  
+//
 // => "GROWING WITH AGILE"
 //
 
 class ScanService {
   Future<Product> scan({String productTokenID}) async {
+    print(productTokenID);
     final String scanUrl = "/api/v1/products/productToken/$productTokenID";
     String token = await PreferenceProvider.getPreferenceValue("token");
-
+    print("in scan token");
     Response response =
         await HttpService().httpGet(scanUrl.trim(), token: token);
     if (response.statusCode == 200) {
+      print("in scan status code");
+      print(response.body);
       var responseData = json.decode(response.body);
 
       Product product = Product.fromJson(responseData);
       onSaveProductToOffline(product);
       return product;
     }
-    print(response.body);
+    print("in scan status aout of status code");
+    print(response.statusCode);
+
     return null;
   }
 
