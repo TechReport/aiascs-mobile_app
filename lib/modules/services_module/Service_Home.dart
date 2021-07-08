@@ -1,7 +1,9 @@
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
+import 'package:aiascs_mobile/app_state/feedback_state.dart';
 import 'package:aiascs_mobile/app_state/language_state.dart';
 import 'package:aiascs_mobile/app_state/product_state.dart';
 import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
+import 'package:aiascs_mobile/core/utils/profile.dart';
 import 'package:aiascs_mobile/models/transaction_service_card_model.dart';
 import 'package:aiascs_mobile/modules/services_module/feedback/feedback.dart';
 import 'package:aiascs_mobile/modules/services_module/product_module/product_invetory_service.dart';
@@ -81,8 +83,16 @@ class _ServiceHomeState extends State<ServiceHome> {
 
   void onNotificatin() {
     Provider.of<AppBarTitleState>(context, listen: false)
-        .setCurrentAppBarTitle("Report");
-    print("on Notification");
+        .setCurrentAppBarTitle("Farmers Feedbacks");
+    Provider.of<ProductState>(context, listen: false).clearState();
+
+    Provider.of<ProductState>(context, listen: false).getProductList();
+    Navigator.push(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => new ProfileUser()));
+
+    //
   }
 
   void onChainStatus() {
@@ -108,7 +118,6 @@ class _ServiceHomeState extends State<ServiceHome> {
     Provider.of<AppBarTitleState>(context, listen: false)
         .setCurrentAppBarTitle("Report");
     Provider.of<ProductState>(context, listen: false).clearState();
-
     Provider.of<ProductState>(context, listen: false).getProductList();
     Navigator.push(
         context,
@@ -184,13 +193,13 @@ class _ServiceHomeState extends State<ServiceHome> {
                       List<TransactionServiceCardModel> cartDetails =
                           TransactionServiceCardModel.defaultData();
                       if (cartDetails[transactionCardPosition].title ==
-                          "Notification") {
+                          "Feeds") {
                         return GestureDetector(
                           onTap: () => onNotificatin(),
                           child: Badge(
                             elevation: 3,
                             badgeContent: Text(
-                              "3",
+                              Provider.of<FeedbackState>(context,listen: false).feedbackCount.toString(),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),

@@ -18,7 +18,7 @@ class TransactionServiceCardModel {
           title: "ChainStatus", iconPath: Icons.check_outlined,id: "chainstatus"),
       TransactionServiceCardModel(title: "Add", iconPath: Icons.add,id: "add"),
       TransactionServiceCardModel(
-          title: "Notification", iconPath: Icons.notifications_active,id: "notification"),
+          title: "Feeds", iconPath: Icons.notifications_active,id: "notification"),
     ];
   }
 

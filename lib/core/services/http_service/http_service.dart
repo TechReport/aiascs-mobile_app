@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:aiascs_mobile/models/User.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 import 'package:dio/dio.dart';
@@ -67,6 +68,19 @@ class HttpService {
     var res = await request.send().then((response) {
       print(response.statusCode);
     });
+  }
+
+
+      Future<http.Response> httpPostFeedback(User user,String data,
+      {String token = ""}) async {
+    var httpUrl = Uri.parse("https://secret-ridge-42311.herokuapp.com/api/v1/feedback/verify");
+    http.Response response =
+        await http.post(httpUrl, headers: headers, body: json.encode({
+        "message": data,
+        "fromID": user.id
+      }));
+
+    return response;
   }
 
   Future<Map<String,dynamic>> postData(Map<String, dynamic> body, String filePath, String url,

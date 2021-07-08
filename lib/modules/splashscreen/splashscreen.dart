@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:aiascs_mobile/app_state/Login_state.dart';
 import 'package:aiascs_mobile/app_state/User_state.dart';
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
+import 'package:aiascs_mobile/app_state/feedback_state.dart';
 import 'package:aiascs_mobile/app_state/language_state.dart';
 import 'package:aiascs_mobile/core/services/shared_preference/preference_provider.dart';
 import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
@@ -19,7 +20,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
     var _duration = new Duration(seconds: 7);
-          Provider.of<LanguageState>(context, listen: false).getCurrentLanguage();
+     Provider.of<FeedbackState>(context, listen: false).onGetFeedbacksFromServer();
     Provider.of<LoginState>(context, listen: false).checkAuth();
     return new Timer(_duration, navigationPage);
   }
