@@ -1,4 +1,5 @@
 import 'package:aiascs_mobile/core/services/location/location_service.dart';
+import 'package:aiascs_mobile/models/location/Location_model.dart';
 import 'package:aiascs_mobile/models/location/district.dart';
 import 'package:aiascs_mobile/models/location/region.dart';
 import 'package:aiascs_mobile/models/location/ward.dart';
@@ -8,11 +9,13 @@ class LocationState extends ChangeNotifier {
   List<Region> _regionList;
   List<String> _regionListString;
   Region _currentRegion;
+  LocationModel _locationModel;
 
   List<Region> get regionLists => _regionList ?? [];
   Region get currentRegion => _currentRegion;
   List<String> get regionListString =>
       _regionListString ?? ['Region', 'Loading..'];
+  LocationModel get currentlocationModel => _locationModel;
 
   Future onGetRegions() async {
     _regionList = await LocationServices().GetRegion();
@@ -32,6 +35,12 @@ class LocationState extends ChangeNotifier {
       notifyListeners();
     });
     _regionListString = _data;
+  }
+
+  void setLocations(String regionName, String wardName, String districtName) {
+    LocationModel locationModel = new LocationModel(region: regionName, ward: wardName, district: districtName);
+    _locationModel = locationModel;
+    notifyListeners();
   }
 
   Future getSelectedRegion(String thisRegion) {
@@ -136,4 +145,3 @@ class LocationState extends ChangeNotifier {
   //   }
   // }
 }
-

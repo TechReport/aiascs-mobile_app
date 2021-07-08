@@ -153,8 +153,9 @@ class _ProductAuthorizedProfileState extends State<ProductAuthorizedProfile> {
                   ),
                   SpacerComponent(
                       height: MediaQuery.of(context).size.height / 53),
-                  widget.isReport
-                      ? scanQrCode.isLoading
+                  // widget.isReport
+                  //     ? 
+                      scanQrCode.isLoading
                           ? CircularProgressIndicator()
                           : EnterTokenButton(
                               width: MediaQuery.of(context).size.width / 2,
@@ -166,18 +167,18 @@ class _ProductAuthorizedProfileState extends State<ProductAuthorizedProfile> {
                                     .revokeProduct(widget.product.id);
                               },
                             )
-                      : productState.isProductLoading
-                          ? CircularProgressIndicator()
-                          : EnterTokenButton(
-                              width: MediaQuery.of(context).size.width / 2,
-                              height: MediaQuery.of(context).size.height / 16,
-                              title:languageState.currentLanguage == LanguageContant().english  ? "Revoke Product" :"Batilisha Bidhaa",
-                              onPressButton: () async {
-                                scanQrCode.clear();
-                                await scanQrCode
-                                    .revokeProduct(widget.product.id);
-                              },
-                            )
+                      // : productState.isProductLoading
+                      //     ? CircularProgressIndicator()
+                      //     : EnterTokenButton(
+                      //         width: MediaQuery.of(context).size.width / 2,
+                      //         height: MediaQuery.of(context).size.height / 16,
+                      //         title:languageState.currentLanguage == LanguageContant().english  ? "Revoke Product" :"Batilisha Bidhaa",
+                      //         onPressButton: () async {
+                      //           scanQrCode.clear();
+                      //           await scanQrCode
+                      //               .revokeProduct(widget.product.id);
+                      //         },
+                      //       )
                 ],
               ),
               bottomNavigationBar: BottomNavigationBar(

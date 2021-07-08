@@ -1,7 +1,7 @@
 import 'package:aiascs_mobile/app_state/unAuthorizedProduct_State.dart';
 import 'package:aiascs_mobile/core/services/scan_service.dart/Scan_service.dart';
 import 'package:aiascs_mobile/models/Product.dart';
-import 'package:flutter/foundation.dart';
+
 //
 // Name: Danford Kija David
 // Email: kijadanford@gmail.com,

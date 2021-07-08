@@ -63,8 +63,9 @@ class ScanService {
     Response response =
         await HttpService().httpGet(scanUrl.trim(), token: token);
     if (response.statusCode == 200) {
+      print("on revoke");
       var responseData = json.decode(response.body);
-
+      print(responseData);
       Product product = Product.fromJson(responseData);
       onSaveProductToOffline(product);
       return product;

@@ -7,13 +7,14 @@ class ScanQrCodeState extends ChangeNotifier {
   bool _isLoading;
   Product _currentProduct;
   bool _isQRLoading;
+  bool _isRevoked;
 
-  
 //
 // selector
   bool get isLoading => _isLoading ?? false;
   Product get currentProduct => _currentProduct;
   bool get isQRLoading => _isQRLoading ?? false;
+  bool get isRevoked => _isRevoked ?? false;
 
 // reducers
 
@@ -30,7 +31,8 @@ class ScanQrCodeState extends ChangeNotifier {
       notifyListeners();
     }
   }
-Future scanQrCode2({String qrInfo}) async {
+
+  Future scanQrCode2({String qrInfo}) async {
     _isQRLoading = true;
     notifyListeners();
     Product product = await ScanService().scan(productTokenID: qrInfo);
@@ -43,19 +45,22 @@ Future scanQrCode2({String qrInfo}) async {
       notifyListeners();
     }
   }
-  Future<bool> revokeProduct(String productId) async {
+
+  Future<void> revokeProduct(String productId) async {
     _isLoading = true;
     notifyListeners();
     Product product = await ScanService().onRevokeProduct(productId);
     if (product != null) {
       _currentProduct = product;
       _isLoading = false;
+      _isRevoked = true;
       notifyListeners();
-      return true;
+    
     } else {
-      _isLoading = true;
+      _isLoading = false;
+      _isRevoked = true;
       notifyListeners();
-      return false;
+    
     }
   }
 

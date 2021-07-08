@@ -1,4 +1,5 @@
 import 'package:aiascs_mobile/app_state/product_state.dart';
+import 'package:aiascs_mobile/app_state/unAuthorizedProduct_State.dart';
 import 'package:aiascs_mobile/modules/services_module/component/Visualisation_analysing_report.dart';
 import 'package:aiascs_mobile/modules/services_module/component/report_selection_top_bar.dart';
 import 'package:aiascs_mobile/modules/services_module/reports/components/Visualisation_graph.dart';
@@ -26,7 +27,9 @@ class _AllReportsState extends State<AllReports> {
   Widget build(BuildContext context) {
     return Consumer<ProductState>(
         builder: (BuildContext context, productState, child) {
-      return Scaffold(
+      return Consumer<UnAuthorizedProductState>(
+          builder: (BuildContext context, unAuthorizedState, child) {
+        return Scaffold(
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +69,9 @@ Row(
       child: Column(
         children: [
           Text("Total Products",style: TextStyle(color: Colors.white,fontSize: 15),),
-          Text("1200",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)
+          Text(
+            (productState.countFakeProduct+productState.countGenuineProduct+unAuthorizedState.listUnAuthProduct.length).toString()
+            ,style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)
         ],
       ),
     ),
@@ -75,7 +80,10 @@ Row(
       child: Column(
         children: [
           Text("Fake Products",style: TextStyle(color: Colors.white,fontSize: 15),),
-          Text("300",style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),)
+          Text(
+            
+                  (productState.countFakeProduct+unAuthorizedState.listUnAuthProduct.length).toString()
+            ,style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),)
         ],
       ),
     )
@@ -107,7 +115,7 @@ Expanded(
 
 Expanded(
   flex: 1,
-  child: Text("399",style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal),))
+  child: Text(unAuthorizedState.listUnAuthProduct.length.toString() ,style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal),))
       ],),
       Divider(),
           Row(children: [
@@ -125,7 +133,7 @@ Expanded(
 
 Expanded(
   flex: 1,
-  child: Text("500",style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal)))
+  child: Text((productState.countFakeProduct + unAuthorizedState.listUnAuthProduct.length).toString(),style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal)))
       ],),
        Divider(),
           Row(children: [
@@ -143,7 +151,7 @@ Expanded(
 
 Expanded(
   flex: 1,
-  child: Text("100",style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal)))
+  child: Text(productState.countGenuineProduct.toString(),style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.normal)))
       ],)
     ],
   ),
@@ -174,6 +182,7 @@ Expanded(
           ),
         ),
       );
+      });
     });
   }
 }
