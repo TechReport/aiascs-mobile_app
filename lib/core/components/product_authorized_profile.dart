@@ -74,9 +74,10 @@ class _ProductAuthorizedProfileState extends State<ProductAuthorizedProfile> {
                   ),
                   onPressed: () {
                     Provider.of<AppBarTitleState>(context, listen: false)
-                        .setCurrentAppBarTitle(
-                      languageState.currentLanguage == LanguageContant().english  ?
-                          "Report" :"Repoti");
+                        .setCurrentAppBarTitle(languageState.currentLanguage ==
+                                LanguageContant().english
+                            ? "Report"
+                            : "Repoti");
                     Navigator.pop(context);
                   },
                 ),
@@ -154,31 +155,64 @@ class _ProductAuthorizedProfileState extends State<ProductAuthorizedProfile> {
                   SpacerComponent(
                       height: MediaQuery.of(context).size.height / 53),
                   // widget.isReport
-                  //     ? 
-                      scanQrCode.isLoading
-                          ? CircularProgressIndicator()
-                          : EnterTokenButton(
-                              width: MediaQuery.of(context).size.width / 2,
-                              height: MediaQuery.of(context).size.height / 16,
-                              title:languageState.currentLanguage == LanguageContant().english  ? "Revoke Product" :"Batilisha Bidhaa",
-                              onPressButton: () async {
-                                scanQrCode.clear();
-                                await scanQrCode
-                                    .revokeProduct(widget.product.id);
-                              },
-                            )
-                      // : productState.isProductLoading
-                      //     ? CircularProgressIndicator()
-                      //     : EnterTokenButton(
-                      //         width: MediaQuery.of(context).size.width / 2,
-                      //         height: MediaQuery.of(context).size.height / 16,
-                      //         title:languageState.currentLanguage == LanguageContant().english  ? "Revoke Product" :"Batilisha Bidhaa",
-                      //         onPressButton: () async {
-                      //           scanQrCode.clear();
-                      //           await scanQrCode
-                      //               .revokeProduct(widget.product.id);
-                      //         },
-                      //       )
+                  //     ?
+                  scanQrCode.isLoading
+                      ? CircularProgressIndicator()
+                      : EnterTokenButton(
+                          width: MediaQuery.of(context).size.width / 2,
+                          height: MediaQuery.of(context).size.height / 16,
+                          title: widget.product.isRevoked == "false"
+                              ? languageState.currentLanguage ==
+                                      LanguageContant().english
+                                  ? "Revoke Product"
+                                  : "Batilisha Bidhaa"
+                              : languageState.currentLanguage ==
+                                      LanguageContant().english
+                                  ? "Other Products"
+                                  : "Bidhaa Zingine",
+                          onPressButton: () async {
+                            scanQrCode.onSetCurrentProduct(widget.product);
+                            scanQrCode.clear();
+                            if (widget.product.isRevoked == "false") {
+                              await scanQrCode.revokeProduct(widget.product.id);
+                              if (scanQrCode.isRevoked) {
+                                print("in revokes condition");
+                                Provider.of<AppBarTitleState>(context,
+                                        listen: false)
+                                    .setCurrentAppBarTitle(
+                                        Provider.of<LanguageState>(context,
+                                                        listen: false)
+                                                    .currentLanguage ==
+                                                LanguageContant().english
+                                            ? "Report"
+                                            : "Repoti");
+                                Provider.of<ProductState>(context,
+                                        listen: false)
+                                    .clearState();
+
+                                Provider.of<ProductState>(context,
+                                        listen: false)
+                                    .getProductList();
+                                Navigator.pop(context);
+                              } else {
+                                print("else revoke fail");
+                                Navigator.pop(context);
+                              }
+                            } else {}
+                          },
+                        )
+                  // : productState.isProductLoading
+                  //     ? CircularProgressIndicator()
+                  //     : EnterTokenButton(
+                  //         width: MediaQuery.of(context).size.width / 2,
+                  //         height: MediaQuery.of(context).size.height / 16,
+                  //         title:languageState.currentLanguage == LanguageContant().english  ? "Revoke Product" :"Batilisha Bidhaa",
+                  //         onPressButton: () async {
+                  //           scanQrCode.clear();
+                  //           await scanQrCode
+                  //               .revokeProduct(widget.product.id);
+                  //         },
+                  //       )
                 ],
               ),
               bottomNavigationBar: BottomNavigationBar(

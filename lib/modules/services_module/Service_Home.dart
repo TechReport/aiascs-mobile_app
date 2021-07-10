@@ -127,6 +127,12 @@ class _ServiceHomeState extends State<ServiceHome> {
     print("on monitor");
   }
 
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+      Provider.of<FeedbackState>(context, listen: false).onGetFeedbacksFromServer();
+  }
   @override
   Widget build(BuildContext context) {
     return Consumer<LanguageState>(
@@ -182,10 +188,12 @@ class _ServiceHomeState extends State<ServiceHome> {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 3 - 20,
                 child: GridView.builder(
+                  padding: EdgeInsets.symmetric(horizontal: 2),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         //maxCrossAxisExtent: 200,
-                        crossAxisCount: 4,
-                        crossAxisSpacing: 20,
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 45,
+                  
                         mainAxisSpacing: 20),
                     itemCount: TransactionServiceCardModel.defaultData().length,
                     itemBuilder:
@@ -207,6 +215,7 @@ class _ServiceHomeState extends State<ServiceHome> {
                             animationDuration: Duration(microseconds: 30),
                             badgeColor: Colors.yellow,
                             child: Container(
+                              
                               alignment: Alignment.center,
                               child: Column(
                                 mainAxisAlignment:
@@ -227,6 +236,7 @@ class _ServiceHomeState extends State<ServiceHome> {
                                 ],
                               ),
                               decoration: BoxDecoration(
+                                
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12)),
                             ),
@@ -237,6 +247,7 @@ class _ServiceHomeState extends State<ServiceHome> {
                         onTap: () => onTransaction(
                             cartDetails[transactionCardPosition].id),
                         child: Container(
+                          margin: EdgeInsets.only(left: 8),
                           alignment: Alignment.center,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,

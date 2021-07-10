@@ -19,6 +19,7 @@ class _ProfileUserState extends State<ProfileUser> {
   @override
   void initState() {
     super.initState();
+      Provider.of<FeedbackState>(context, listen: false).onGetFeedbacksFromServer();
   }
 
   @override
@@ -81,25 +82,38 @@ class _ProfileUserState extends State<ProfileUser> {
               child: Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                  height: 150,
+                  height: 126,
                   width: 350,
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ListTile(
-                            leading: const Icon(Icons.flight_land),
-                            title: Text(count.toString(),
+                            leading: const Icon(Icons.people,size: 30,),
+                            title: Text( "Feedback & Verification No:"+ count.toString(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            subtitle: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text( "Messages",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 )),
-                            subtitle: Text(feedbackModel.message,
+                                 Text(feedbackModel.message,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,
                                   fontWeight: FontWeight.normal,
-                                )),
+                                ))
+                              ],
+                            ),
+                            
+                           
                             onTap: () => print("ListTile"))
                       ])),
             );

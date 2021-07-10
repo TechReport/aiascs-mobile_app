@@ -1,6 +1,7 @@
 import 'package:aiascs_mobile/app_state/Login_state.dart';
 import 'package:aiascs_mobile/app_state/User_state.dart';
 import 'package:aiascs_mobile/app_state/app_bar_titile.dart';
+import 'package:aiascs_mobile/app_state/feedback_state.dart';
 import 'package:aiascs_mobile/core/services/auth/Login_service.dart';
 import 'package:aiascs_mobile/core/services/shared_preference/preference_provider.dart';
 import 'package:aiascs_mobile/core/utils/app_util.dart';
@@ -34,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
       Provider.of<LoginService>(context, listen: false)
           .login(_emailController.text, _passwordController.text);
     }
+      Provider.of<FeedbackState>(context, listen: false).onGetFeedbacksFromServer();
     Navigator.push(
         context,
         new MaterialPageRoute(

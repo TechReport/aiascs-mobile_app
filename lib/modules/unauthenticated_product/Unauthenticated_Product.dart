@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:aiascs_mobile/app_state/language_state.dart';
 import 'package:aiascs_mobile/app_state/unAuthorizedProduct_State.dart';
 import 'package:aiascs_mobile/core/components/enter_token_button.dart';
+import 'package:aiascs_mobile/core/utils/app_util.dart';
 import 'package:aiascs_mobile/core/utils/constant/Language_Contant.dart';
 import 'package:aiascs_mobile/modules/services_module/product_module/product_invetory_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -89,7 +90,10 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                                               color: Color(0xFF264653),
                                             ),
                                             Text(
-                                             languageState.currentLanguage == LanguageContant().english ?   "Tap to Capture or Select Photo" :"Bonyeza Hapa Kuchagua au Kupiga Picha",
+                                              languageState.currentLanguage ==
+                                                      LanguageContant().english
+                                                  ? "Tap to Capture or Select Photo"
+                                                  : "Bonyeza Hapa Kuchagua au Kupiga Picha",
                                               style:
                                                   TextStyle(color: Colors.red),
                                             )
@@ -139,7 +143,9 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                                   contentPadding: new EdgeInsets.symmetric(
                                       vertical: 8, horizontal: 16),
                                   fillColor: Colors.white,
-                                  hintText:  languageState.currentLanguage == LanguageContant().english ? 'Enter Product Name'
+                                  hintText: languageState.currentLanguage ==
+                                          LanguageContant().english
+                                      ? 'Enter Product Name'
                                       : " Ingiiza Jina la Bidhaa",
                                   hintStyle: TextStyle(color: Colors.grey),
                                   focusedBorder: OutlineInputBorder(
@@ -168,7 +174,8 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                                   contentPadding: new EdgeInsets.symmetric(
                                       vertical: 8, horizontal: 16),
                                   fillColor: Colors.white,
-                                  hintText:  languageState.currentLanguage == LanguageContant().english 
+                                  hintText: languageState.currentLanguage ==
+                                          LanguageContant().english
                                       ? 'Enter Company Name'
                                       : "Ingiiza Jina la Kampuni",
                                   hintStyle: TextStyle(color: Colors.grey),
@@ -180,35 +187,38 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
                                   ))))),
-                  ConstrainedBox(
-                      constraints: BoxConstraints(minWidth: double.infinity),
-                      child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 16.0, right: 8.0, left: 8.0),
-                          child: TextFormField(
-                              keyboardType: TextInputType.name,
-                              controller: _locationController,
-                              textInputAction: TextInputAction.next,
-                              onFieldSubmitted: (_) =>
-                                  FocusScope.of(context).nextFocus(),
-                              validator: (value) {},
-                              onSaved: (String val) {
-                                mobile = val;
-                              },
-                              decoration: InputDecoration(
-                                  contentPadding: new EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 16),
-                                  fillColor: Colors.white,
-                                  hintText:  languageState.currentLanguage == LanguageContant().english ?   'Location' : "Eneo",
-                                  hintStyle: TextStyle(color: Colors.grey),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(25.0),
-                                      borderSide: BorderSide(
-                                          color: Color(0xFF264653),
-                                          width: 2.0)),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25.0),
-                                  ))))),
+                  // ConstrainedBox(
+                  //     constraints: BoxConstraints(minWidth: double.infinity),
+                  //     child: Padding(
+                  //         padding: const EdgeInsets.only(
+                  //             top: 16.0, right: 8.0, left: 8.0),
+                  //         child: TextFormField(
+                  //             keyboardType: TextInputType.name,
+                  //             controller: _locationController,
+                  //             textInputAction: TextInputAction.next,
+                  //             onFieldSubmitted: (_) =>
+                  //                 FocusScope.of(context).nextFocus(),
+                  //             validator: (value) {},
+                  //             onSaved: (String val) {
+                  //               mobile = val;
+                  //             },
+                  //             decoration: InputDecoration(
+                  //                 contentPadding: new EdgeInsets.symmetric(
+                  //                     vertical: 8, horizontal: 16),
+                  //                 fillColor: Colors.white,
+                  //                 hintText: languageState.currentLanguage ==
+                  //                         LanguageContant().english
+                  //                     ? 'Location'
+                  //                     : "Eneo",
+                  //                 hintStyle: TextStyle(color: Colors.grey),
+                  //                 focusedBorder: OutlineInputBorder(
+                  //                     borderRadius: BorderRadius.circular(25.0),
+                  //                     borderSide: BorderSide(
+                  //                         color: Color(0xFF264653),
+                  //                         width: 2.0)),
+                  //                 border: OutlineInputBorder(
+                  //                   borderRadius: BorderRadius.circular(25.0),
+                  //                 ))))),
                   ConstrainedBox(
                       constraints: BoxConstraints(minWidth: double.infinity),
                       child: Padding(
@@ -230,7 +240,8 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                                   contentPadding: new EdgeInsets.symmetric(
                                       vertical: 8, horizontal: 16),
                                   fillColor: Colors.white,
-                                  hintText:  languageState.currentLanguage == LanguageContant().english  
+                                  hintText: languageState.currentLanguage ==
+                                          LanguageContant().english
                                       ? 'Enter Description here'
                                       : "Ingiiza Maelezo Hapa",
                                   hintStyle: TextStyle(color: Colors.grey),
@@ -262,9 +273,18 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                                   width: MediaQuery.of(context).size.width / 2,
                                   height:
                                       MediaQuery.of(context).size.height / 16,
-                                  title: languageState.currentLanguage == LanguageContant().english ? "Submit" : "Kusanya",
+                                  title: languageState.currentLanguage ==
+                                          LanguageContant().english
+                                      ? "Submit"
+                                      : "Kusanya",
                                   onPressButton: () async {
-                                    if (_key.currentState.validate()) {
+                                    if (_photoController.text.isNotEmpty ||
+                                        _companyNameController
+                                            .text.isNotEmpty ||
+                                        _descriptionController
+                                            .text.isNotEmpty ||
+                                        _productNameController
+                                            .text.isNotEmpty) {
                                       _key.currentState.save();
                                       await unAuthorizedProductState
                                           .onPostProduct(
@@ -272,11 +292,15 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                                               _companyNameController.text,
                                               _descriptionController.text,
                                               _productNameController.text);
+                                      Navigator.push(
+                                          context,
+                                          new MaterialPageRoute(
+                                              builder: (context) =>
+                                                  new ProductInvetoryService()));
                                     } else {
-                                      setState(() {
-                                        _validate =
-                                            AutovalidateMode.onUserInteraction;
-                                      });
+                                      return AppUtil.showToastMessage(
+                                          message:
+                                              "Form Empty are not allowed");
                                     }
                                     setState(() {
                                       _photoController.text = "";
@@ -285,12 +309,6 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
                                       _productNameController.text = "";
                                       _locationController.text = " ";
                                     });
-
-                                    Navigator.push(
-                                        context,
-                                        new MaterialPageRoute(
-                                            builder: (context) =>
-                                                new ProductInvetoryService()));
                                   },
                                 ),
                               )),
@@ -321,13 +339,19 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
   _onCameraClick() {
     final action = CupertinoActionSheet(
       message: Text(
-        Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Add profile picture" : "Weka Picha ya Bidhaa",
+        Provider.of<LanguageState>(context, listen: false).currentLanguage ==
+                LanguageContant().english
+            ? "Add profile picture"
+            : "Weka Picha ya Bidhaa",
         style: TextStyle(fontSize: 15.0),
       ),
       actions: <Widget>[
         CupertinoActionSheetAction(
-          child: Text(
-              Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Choose from gallery" : "Chagua kutoka kwa picha zingine"),
+          child: Text(Provider.of<LanguageState>(context, listen: false)
+                      .currentLanguage ==
+                  LanguageContant().english
+              ? "Choose from gallery"
+              : "Chagua kutoka kwa picha zingine"),
           isDefaultAction: false,
           onPressed: () async {
             Navigator.pop(context);
@@ -341,7 +365,11 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
           },
         ),
         CupertinoActionSheetAction(
-          child: Text( Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Take a picture" : "Piga picha"),
+          child: Text(Provider.of<LanguageState>(context, listen: false)
+                      .currentLanguage ==
+                  LanguageContant().english
+              ? "Take a picture"
+              : "Piga picha"),
           isDestructiveAction: false,
           onPressed: () async {
             Navigator.pop(context);
@@ -355,7 +383,11 @@ class _UnAuthenticatedProductState extends State<UnAuthenticatedProduct> {
         )
       ],
       cancelButton: CupertinoActionSheetAction(
-        child: Text( Provider.of<LanguageState>(context,listen: false).currentLanguage == LanguageContant().english ? "Cancel" : "Acha"),
+        child: Text(Provider.of<LanguageState>(context, listen: false)
+                    .currentLanguage ==
+                LanguageContant().english
+            ? "Cancel"
+            : "Acha"),
         onPressed: () {
           Navigator.pop(context);
         },

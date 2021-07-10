@@ -11,8 +11,8 @@ VisualisationGraph({this.genuine = 0,this.fake = 0,this.others = 1 });
     Map<String, double> dataMap = {"Genuine": genuine, "Fake": fake, "Others": others};
 
     List<Color> colorList = [
-      Colors.red,
       Colors.green,
+      Colors.red,
       Colors.blue,
       Colors.grey
     ];

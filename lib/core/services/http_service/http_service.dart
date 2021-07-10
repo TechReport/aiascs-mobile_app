@@ -20,8 +20,7 @@ class HttpService {
   };
 
   final String basicUrl = "https://secret-ridge-42311.herokuapp.com";
-   final String locationAPI = "https://tanzaniatx.herokuapp.com";
-
+  final String locationAPI = "https://tanzaniatx.herokuapp.com";
 
   Future<http.Response> httpGet(String url, {String token = ""}) async {
     var httpUrl = Uri.parse(basicUrl + url);
@@ -29,6 +28,7 @@ class HttpService {
     http.Response response = await http.get(httpUrl, headers: headers);
     return response;
   }
+
   Future<http.Response> getThirdHttp(String secondaryUrl) async {
     var url = Uri.parse(locationAPI + secondaryUrl);
     http.Response response = await http.get(url, headers: headers);
@@ -70,20 +70,19 @@ class HttpService {
     });
   }
 
-
-      Future<http.Response> httpPostFeedback(User user,String data,
+  Future<http.Response> httpPostFeedback(User user, String data,
       {String token = ""}) async {
-    var httpUrl = Uri.parse("https://secret-ridge-42311.herokuapp.com/api/v1/feedback/verify");
-    http.Response response =
-        await http.post(httpUrl, headers: headers, body: json.encode({
-        "message": data,
-        "fromID": user.id
-      }));
-
+    var httpUrl = Uri.parse(
+        "https://secret-ridge-42311.herokuapp.com/api/v1/feedback/verify");
+    http.Response response = await http.post(httpUrl,
+        headers: headers,
+        body: json.encode({"message": data, "fromID": user.id}));
+   
     return response;
   }
 
-  Future<Map<String,dynamic>> postData(Map<String, dynamic> body, String filePath, String url,
+  Future<Map<String, dynamic>> postData(
+      Map<String, dynamic> body, String filePath, String url,
       {String token = ""}) async {
     var dio = Dio();
     var httpUrl = basicUrl + url;

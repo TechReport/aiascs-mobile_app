@@ -54,7 +54,7 @@ class ScanService {
 
 // on delete user after logout by user id
 
-  Future<Product> onRevokeProduct(String productId) async {
+  Future<bool> onRevokeProduct(String productId) async {
     final String scanUrl = "/api/v1/products/revoke/$productId";
     String token = await PreferenceProvider.getPreferenceValue("token");
     // Map<String, dynamic> postData = {
@@ -62,15 +62,15 @@ class ScanService {
     // };
     Response response =
         await HttpService().httpGet(scanUrl.trim(), token: token);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       print("on revoke");
-      var responseData = json.decode(response.body);
-      print(responseData);
-      Product product = Product.fromJson(responseData);
-      onSaveProductToOffline(product);
-      return product;
+      // print(response.body);
+      // var responseData = json.decode(response.body);
+      // print(responseData);
+      
+      return true;
     }
-    print(response.body);
-    return null;
+    print(response.statusCode);
+    return false;
   }
 }

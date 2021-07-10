@@ -20,7 +20,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
     var _duration = new Duration(seconds: 7);
-     Provider.of<FeedbackState>(context, listen: false).onGetFeedbacksFromServer();
     Provider.of<LoginState>(context, listen: false).checkAuth();
     return new Timer(_duration, navigationPage);
   }
@@ -30,7 +29,8 @@ class _SplashScreenState extends State<SplashScreen> {
     if (Provider.of<LoginState>(context, listen: false).isAuth) {
       Provider.of<UserState>(context, listen: false).setCurrentUser(
           await PreferenceProvider.getPreferenceValue("userId"));
- 
+          Provider.of<LanguageState>(context, listen: false).getCurrentLanguage();
+   Provider.of<FeedbackState>(context, listen: false).onGetFeedbacksFromServer();
       Navigator.push(
           context,
           new MaterialPageRoute(

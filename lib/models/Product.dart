@@ -23,6 +23,9 @@ class Product {
       this.companyEmail});
 
   factory Product.fromJson(Map<String, dynamic> json) {
+
+
+    
     return Product(
         id: json['_id'],
         isRevoked: json['isRevoked'].toString(),

@@ -43,194 +43,14 @@ class _ScanQrCodeState extends State<ScanQrCode> {
 
   Future<void> onValidateToken(String tokenValue) async {
     print("on search token validate");
+                                           Provider.of<ScanQrCodeState>(context,
+                                          listen: false).onvalidateLoader(false);
 
     if (tokenValue.isNotEmpty && tokenValue.length > 7 || tokenValue != null) {
-      showDialog(
-          barrierDismissible: true,
-          builder: (context) => new AlertDialog(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  new Text(Provider.of<LanguageState>(context, listen: false)
-                              .currentLanguage ==
-                          LanguageContant().english
-                      ? "Add Location "
-                      : "Ongeza Sehemu "),
-                  Icon(
-                    Icons.mark_email_read_sharp,
-                    size: 60,
-                    color: Colors.greenAccent,
-                  )
-                ],
-              ),
-              content: Container(
-                height: MediaQuery.of(context).size.height / 2,
-                width: MediaQuery.of(context).size.width,
-                child: Column(children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: DropDownStrip(
-                      dropdownitem: regionname,
-                      onChange: (newValue) async {
-                        setState(() {
-                          regionname = newValue;
-                        });
-                        regionname = newValue;
-                        await Provider.of<LocationState>(context, listen: false)
-                            .getSelectedRegion(regionname);
-                      },
-                      item: Provider.of<LocationState>(context, listen: false)
-                          .regionListString,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: DropDownStrip(
-                      dropdownitem: districtname,
-                      onChange: (newValue) async {
-                        setState(() {
-                          districtname = newValue;
-                        });
-                        await Provider.of<LocationState>(context, listen: false)
-                            .getSelectedDistrict(districtname);
-                      },
-                      item: Provider.of<LocationState>(context, listen: false)
-                          .districtListString,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: DropDownStrip(
-                      dropdownitem: wardname,
-                      onChange: (newValue) {
-                        setState(() {
-                          wardname = newValue;
-                        });
-                      },
-                      item: Provider.of<LocationState>(context, listen: false)
-                          .wardListString,
-                    ),
-                  ),
-                  Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Provider.of<ScanQrCodeState>(context, listen: false)
-                              .isLoading
-                          ? Text(" Loading ....")
-                          : EnterTokenButton(
-                              title: Provider.of<LanguageState>(context,
-                                              listen: false)
-                                          .currentLanguage ==
-                                      LanguageContant().english
-                                  ? "Complete "
-                                  : "Maliza",
-                              onPressButton: () async {
-                                //
-                                if (districtname.isNotEmpty &&
-                                    districtname != null &&
-                                    wardname.isNotEmpty &&
-                                    wardname != null &&
-                                    regionname.isNotEmpty &&
-                                    regionname != null &&
-                                    regionname != "Region" &&
-                                    wardname != "Ward" &&
-                                    districtname != "District") {
-                                  //setLocations
-                                  Provider.of<LocationState>(context,
-                                          listen: false)
-                                      .setLocations(
-                                          regionname, wardname, districtname);
-
-                                  await Provider.of<ScanQrCodeState>(context,
-                                          listen: false)
-                                      .scanQrCode(qrInfo: tokenValue);
-
-                                  Navigator.pop(context);
-                                  // Provider.of<ScanQrCodeState>(context, listen: false).isLoading
-                                  return showDialog(
-                                      barrierDismissible: false,
-                                      builder: (context) => new AlertDialog(
-                                            title: new Text(
-                                                Provider.of<ScanQrCodeState>(
-                                                            context,
-                                                            listen: false)
-                                                        .isLoading
-                                                    ? "Verifying"
-                                                    : "Finish Verification"),
-                                            content: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Provider.of<ScanQrCodeState>(
-                                                            context,
-                                                            listen: false)
-                                                        .isLoading
-                                                    ? CircularProgressIndicator()
-                                                    : Icon(
-                                                        Icons
-                                                            .mark_email_read_sharp,
-                                                        size: 60,
-                                                        color:
-                                                            Colors.greenAccent,
-                                                      ),
-                                                Provider.of<ScanQrCodeState>(
-                                                            context,
-                                                            listen: false)
-                                                        .isLoading
-                                                    ? Text(" Loading ....")
-                                                    : EnterTokenButton(
-                                                        title: Provider.of<LanguageState>(
-                                                                        context,
-                                                                        listen:
-                                                                            false)
-                                                                    .currentLanguage ==
-                                                                LanguageContant()
-                                                                    .english
-                                                            ? "Show Report "
-                                                            : "Onesha Repoti",
-                                                        onPressButton: () {
-                                                          if (Provider.of<ScanQrCodeState>(
-                                                                      context,
-                                                                      listen:
-                                                                          false)
-                                                                  .currentProduct
-                                                                  .isRevoked ==
-                                                              null) {
-                                                            return AppUtil
-                                                                .showToastMessage(
-                                                                    message:
-                                                                        "Nothing to Revoke");
-                                                          } else {
-                                                            return onViewProductScanReport();
-                                                          }
-                                                        },
-                                                        width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                4 +
-                                                            50,
-                                                      )
-                                              ],
-                                            ),
-                                          ),
-                                      context: context);
-                                } else {
-                                  Navigator.pop(context);
-                                  return AppUtil.showToastMessage(
-                                      message: "Location Details is Required");
-                                }
-                              },
-                              width: MediaQuery.of(context).size.width / 4 + 50,
-                            )
-                    ],
-                  ),
-                ]),
-              )),
-          context: context);
+      Consumer<ScanQrCodeState>(builder: (BuildContext context,scanQrcodeState,child){});
     } else {
-      //
+      Provider.of<ScanQrCodeState>(context,
+                                          listen: false).onvalidateLoader(false);
       return AppUtil.showToastMessage(message: "Enter Valid Product TOKEN");
     }
 // Provider.of<ScanQrCodeState>(context, listen: false).setIsLoading(false);
@@ -512,7 +332,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                                 Container(
                                   width: 50,
                                 ),
-                                scanQrCode.isLoading
+                                scanQrCode.isValidate
                                     ? CircularProgressIndicator()
                                     : EnterTokenButton(
                                         title: languageState.currentLanguage ==
@@ -520,6 +340,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                                             ? "Validate"
                                             : "Hakiki",
                                         onPressButton: () async {
+                                          scanQrCode.onvalidateLoader(true);
                                           await onValidateToken(
                                               _searchController.text);
 

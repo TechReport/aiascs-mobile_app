@@ -40,14 +40,18 @@ class _ScanProductReportState extends State<ScanProductReport> {
   @override
   void initState() {
     super.initState();
-    Provider.of<AppBarTitleState>(context, listen: false)
-        .setCurrentSelectedBottomBarIndex(1);
-    _selectedindex = Provider.of<AppBarTitleState>(context, listen: false)
-        .currentSelectedBottomBar;
+    // Provider.of<AppBarTitleState>(context, listen: false)
+    //     .setCurrentSelectedBottomBarIndex(1);
+    // _selectedindex = Provider.of<AppBarTitleState>(context, listen: false)
+    //     .currentSelectedBottomBar;
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<AppBarTitleState>(context, listen: false)
+        .setCurrentSelectedBottomBarIndex(1);
+    _selectedindex = Provider.of<AppBarTitleState>(context, listen: false)
+        .currentSelectedBottomBar;
     // ignore: non_constant_identifier_names
     void _update_page(int value) {
       setState(() {
@@ -214,16 +218,37 @@ class _ScanProductReportState extends State<ScanProductReport> {
                                 : "Onesha Repoti Nzima",
                         onPressButton: () async {
                           scanQrCode.clear();
+                          print("test for fake");
                           if (product.isRevoked == 'false') {
                             await scanQrCode.revokeProduct(product.id);
                             if (scanQrCode.isRevoked) {
-                              Navigator.push(
-                                  context,
-                                  new MaterialPageRoute(
-                                      builder: (context) => new Home(
-                                          // product: product,
-                                          // isReport: true,
-                                          )));
+                              print("in revokes condition");
+                              Provider.of<AppBarTitleState>(context,
+                                    listen: false)
+                                .setCurrentAppBarTitle(
+                                    Provider.of<LanguageState>(context,
+                                                    listen: false)
+                                                .currentLanguage ==
+                                            LanguageContant().english
+                                        ? "Report"
+                                        : "Repoti");
+                            Provider.of<ProductState>(context, listen: false)
+                                .clearState();
+
+                            Provider.of<ProductState>(context, listen: false)
+                                .getProductList();
+                            Navigator.push(
+                                context,
+                                new MaterialPageRoute(
+                                    builder: (context) =>
+                                        new ProductInvetoryService()));
+                            } else {
+                              print("else revoke fail");
+                               Navigator.push(
+                                context,
+                                new MaterialPageRoute(
+                                    builder: (context) =>
+                                        new ProductInvetoryService()));
                             }
 //                              showDialog(
 //                                             barrierDismissible: true,
